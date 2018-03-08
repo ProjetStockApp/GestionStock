@@ -53,13 +53,13 @@ namespace StockApp.Controllers
             var UserID = User.Identity.GetUserId();
             var userNom = from u in db.AspNetUsers
                           where u.Id == UserID
-                          select u.NomComplet.First();
+                          select u.NomComplet;
 
-            //var Nom = userNom.First();
+           var utilisateur = userNom.FirstOrDefault();
 
 
 
-            ViewBag.nom = userNom;
+           ViewBag.nom = utilisateur;
 
             //ViewBag.Id_livraison = new SelectList(db.TB_livraison, "Id_livraison", "Code_fiche");
             return View();

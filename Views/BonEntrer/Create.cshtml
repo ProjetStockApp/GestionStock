@@ -28,20 +28,20 @@ Layout = "~/Views/Shared/_Layout.cshtml";
 
                 <div class="panel panel-default">
                     <div class="panel-body">
-                        @*@if (Model != null)
+                        @if (Model != null)
                         {
 
                             <input type="hidden" id="SalesId" name="SalesId" value="@Model.Id_bon_entrestock" />
                         }
 
-                        @foreach (var query in ViewBag.nom)
+                        @*@foreach (var query in ViewBag.nom)
                         {
 
-                            <input type="hidden" id="User" name="User" value="@query">
+                            <input type="text" id="User" name="User" value="@query">
 
                         }*@
 
-                        @* <input type="hidden" id="User" name="User" value="@ViewBag.nom">*@
+                         <input type="hidden" id="User" name="User" value="@ViewBag.nom">
 
                         <div class="form-horizontal">
 
@@ -49,9 +49,9 @@ Layout = "~/Views/Shared/_Layout.cshtml";
                             <div class="form-group">
                                 @Html.LabelFor(model => model.Date_entre,"Date d'entrer", new { @class = "control-label col-md-2" })
                                 <div class="col-md-10">
-                                    @* @Html.TextBoxFor(model => model.Date_entre, new { @class = "form-control", @id = "dateEntrer", placeholder = @DateTime.Now })*@
+                                     @Html.TextBoxFor(model => model.Date_entre, new { @class = "form-control", @id = "dateEntrer", placeholder = @DateTime.Now })
                                         
-                                    <div class="input-group">
+                                    @*<div class="input-group">
                                         <span class="input-group-addon">
                                             <i class="glyphicon glyphicon-calendar"></i>
                                         </span>
@@ -59,7 +59,7 @@ Layout = "~/Views/Shared/_Layout.cshtml";
                                         <input class="form-control" placeholder="@DateTime.Now" name="Date_entre" id="Date_entre">
 
                                                                                       
-                                    </div>
+                                    </div>*@
 
                                     @Html.ValidationMessageFor(model => model.Date_entre)
                                 </div>
@@ -509,7 +509,7 @@ function Add() {
 
 // ===================== Script Date ==================\\
 $(document).ready(function () {
-    $("#Date_entre").datepicker({
+    $("#dateEntrer").datepicker({
 
     });
 });
