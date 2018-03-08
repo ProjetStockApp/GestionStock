@@ -1,0 +1,70 @@
+﻿@model StockApp.Models.TB_livraison
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2 class="text-info text-center">Details de la fiche livraison <strong> @Model.Code_fiche</strong></h2>
+
+<div>
+    @*<h4>TB_livraison</h4>*@
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Code_fiche)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Code_fiche)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Date)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Date)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Image_fiche)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Image_fiche)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Description)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Description)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DateCreer)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DateCreer)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CreerPar)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CreerPar)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    <a href="@Url.Action("Edit", new { id = Model.Id_livraison })" class="btn btn-primary btn-sm">
+        <span class="glyphicon glyphicon-edit"></span> Modifier
+    </a>
+    <a href="@Url.Action("Index")" class="btn btn-info btn-sm">
+        <span class="glyphicon glyphicon-arrow-left"></span> Retourner a la liste
+    </a>

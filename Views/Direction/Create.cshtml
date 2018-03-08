@@ -1,0 +1,69 @@
+﻿@model StockApp.Models.TB_direction
+
+@{
+    ViewBag.Title = "Create";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2 class="text-info text-center">Ajouter une direction</h2>
+
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        
+        <hr />
+        @Html.ValidationSummary(true)
+
+        <div class="form-group">
+
+            @*@foreach (var query in ViewBag.nom)
+            {
+
+                <input type="hidden" id="CreerPar" name="CreerPar" value="@query">
+
+
+            }*@
+
+            <label class="control-label col-md-2"> Nom Direction</label>
+            <div class="col-md-10">
+                @Html.TextBoxFor(model => model.Nom_direction,new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.Nom_direction)
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="control-label col-md-2">Descrition</label>
+            <div class="col-md-10">
+                @Html.TextAreaFor(model => model.Description, new { @class = "form-control", rows = 4 })
+                @Html.ValidationMessageFor(model => model.Description)
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <button type="submit" class="btn btn-primary btn-sm">
+                    <span class="glyphicon glyphicon-save"></span> Ajouter
+                </button>
+
+                <button type="reset" class="btn btn-primary btn-sm">
+                    <span class="glyphicon glyphicon-erase"></span> Reinitialiser
+                </button>
+
+            </div>
+        </div>
+    </div>
+}
+
+<div>
+    <a href="@Url.Action("Index")" class="btn btn-info">
+        <span class="glyphicon glyphicon-arrow-left"></span> Retourner a la liste
+    </a>
+
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

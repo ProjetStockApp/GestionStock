@@ -1,0 +1,73 @@
+﻿@model StockApp.Models.TB_lot_entrestock
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2 class="text-info">Details du produit <strong>@Model.TB_articles.Nom_articles</strong> </h2>
+
+<div>
+
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            Date Entrer stock
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Date_entrer)
+        </dd>
+
+        <dt>
+            Quantite
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Quantite)
+        </dd>
+
+        <dt>
+            Nom articles
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TB_articles.Nom_articles)
+        </dd>
+
+        <dt>
+            Description
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TB_bonEntre.Description)
+        </dd>
+
+        <dt>
+            Quantite en stock
+        </dt>
+
+        <dd>
+            @if (ViewBag.sumQte <= ViewBag._QteAlerte)
+            {
+                <strong class="text-danger">@ViewBag.sumQte</strong>
+            }
+            else
+            {
+                <strong>@ViewBag.sumQte</strong>
+            }
+
+            @*<strong>@ViewBag._QteAlerte</strong>*@
+        </dd>
+
+    </dl>
+</div>
+<p>
+    <a href="@Url.Action("Edit", new { id = Model.Id_lot_entrestock })" class="btn btn-primary">
+        <span class="glyphicon glyphicon-edit"></span> Editer
+    </a> |
+    <a href="/LotEntrer/Index/?id=@(Model.Id_bon_entrestock)" class="btn btn-info " data-toggle="tooltip" data-placement="top"
+       title="Retour">
+        <span class="glyphicon glyphicon-arrow-left"></span> Retournez
+    </a>
+</p>

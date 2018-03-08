@@ -1,0 +1,567 @@
+﻿@model StockApp.Models.TB_bonEntre
+
+@{
+ViewBag.Title = "Create";
+Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<h2 class="text-info text-center">Entrer les produits en stock</h2>
+
+@using (Html.BeginForm())
+{
+@Html.AntiForgeryToken()
+
+       
+<hr />
+@Html.ValidationSummary(true)
+  
+<div class="container">
+    <br />
+    <div class="panel panel-default">
+
+        <div class="panel-heading"></div>
+        <div class="panel-body">
+
+            <fieldset class="info">
+                <legend>  Determiner la fiche</legend>
+
+                <div class="panel panel-default">
+                    <div class="panel-body">
+                        @*@if (Model != null)
+                        {
+
+                            <input type="hidden" id="SalesId" name="SalesId" value="@Model.Id_bon_entrestock" />
+                        }
+
+                        @foreach (var query in ViewBag.nom)
+                        {
+
+                            <input type="hidden" id="User" name="User" value="@query">
+
+                        }*@
+
+                        @* <input type="hidden" id="User" name="User" value="@ViewBag.nom">*@
+
+                        <div class="form-horizontal">
+
+                            <input type="hidden" id="DateCreer" name="DateCreer" value="@DateTime.Now">
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.Date_entre,"Date d'entrer", new { @class = "control-label col-md-2" })
+                                <div class="col-md-10">
+                                    @* @Html.TextBoxFor(model => model.Date_entre, new { @class = "form-control", @id = "dateEntrer", placeholder = @DateTime.Now })*@
+                                        
+                                    <div class="input-group">
+                                        <span class="input-group-addon">
+                                            <i class="glyphicon glyphicon-calendar"></i>
+                                        </span>
+
+                                        <input class="form-control" placeholder="@DateTime.Now" name="Date_entre" id="Date_entre">
+
+                                                                                      
+                                    </div>
+
+                                    @Html.ValidationMessageFor(model => model.Date_entre)
+                                </div>
+
+                                @*<div class="input-group">          
+                                <span class="input-group-addon"></span>          
+                                <input type="text" class="form-control" placeholder="Twitterhandle">       
+                                </div><br>*@ 
+
+                            </div>
+
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.Description, new { @class = "control-label col-md-2" })
+                                <div class="col-md-10">
+                                    @Html.TextAreaFor(model => model.Description, new { @class = "form-control", rows = 4 })
+                                    @Html.ValidationMessageFor(model => model.Description)
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.Id_livraison, "Code fiche livraison", new { @class = "control-label col-md-2" })
+                                <div class="col-md-10">
+                                    @Html.DropDownList("Id_livraison",
+                                    new SelectList(ViewBag.Livraison as System.Collections.IEnumerable, "Id_livraison", "Code_fiche"),
+                                        "-- Select Livraison --", new { @id = "ldLivraison", @class = "pc form-control" })
+                                </div>
+                            </div>
+
+
+                        </div>
+                    </div>
+                </div>
+
+            </fieldset>
+
+            <div class="clearfix"></div>
+        </div>
+
+        @*</div>*@
+        @*</div>*@
+
+
+
+
+
+
+        @*<div class="container">*@
+        @*<br/>*@
+        @*<div class="panel panel-default">*@
+
+        @*<div class="panel-heading">Fieldset Exemple</div>*@
+        <div class="panel-body">
+
+            <fieldset class="">
+                <legend class="bg-info">  Ajouter les produits</legend>
+
+                <div class="panel panel-default">
+                    <div class="panel-body">
+                        <table class="table table-bordered" id="tbdetail">
+
+                            <tr class="text-center">
+                                <th>Categorie</th>
+                                <th>Articles</th>
+                                <th>Quantite</th>
+                                <th>Action</th>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div class="form-group">
+                                        <div class="col-md-10">
+                                            @Html.DropDownList("Id_categorie",
+                                            new SelectList(ViewBag.Categorie as System.Collections.IEnumerable, "Id_categorie", "Nom_categorie"),
+"-- Select Categorie --", new { @id = "ldCategorie", @name = "ldCategorie", @class = "pc form-control", @disabled = "disabled" })
+                                            <span class="error">choisi categorie</span>
+                                        </div>
+                                    </div>
+                                </td>
+
+                                <td>
+
+                                    <div class="form-group">
+                                        <div class="col-md-10">
+                                            @Html.DropDownList("Id_articles",
+            new SelectList(ViewBag.Articles as System.Collections.IEnumerable, "Id_articles", "Nom_articles"),
+"-- Select Article --", new { @id = "ldArticle", @name = "ldArticle", @class = "product form-control", @disabled = "disabled" })
+                                            <span class="error">choisi un article</span>
+                                        </div>
+                                    </div>
+                                </td>
+
+                                <td>
+                                    <div class="form-group">
+                                        <div class="col-md-10">
+                                            <input type="number" id="Quantite" class="form-control" disabled="disabled" name="Quantite" />
+                                            <span class="error">Valeur quantite manque</span>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td class="divdate">
+                                    <div class="form-group">
+                                        <div class="col-md-10">
+                                            <input type="text" value="@DateTime.Now" id="Date" class="form-control" name="Date" />
+                                            <style>
+                                                .divdate {
+                                                    /*visibility: hidden;*/
+                                                    display: none;
+                                                }
+                                            </style>
+                                            <script>
+                                                //$("#Date").datepicker({ dateFormat: "dd/mm/yy" }).datepicker("setDate", new Date());
+                                            </script>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="form-group">
+                                        <div class="col-md-6">
+                                            <input type="button" value="Ajouter" onclick="Add()" class="btn btn-primary" />
+
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+
+
+                        </table>
+                        @*<input type="button" value="Supprimer la ligne selectioner" class="btn btn-primary" id="del" />*@
+                        <p>
+                            <div class="row">
+                                <div class="col-md-8">
+                                    <button class="btn btn-danger " id="deleteRow" type="button">
+                                    <span class="glyphicon glyphicon-trash"></span> Supprimer la ligne selectioner</button>
+                                </div>
+                            </div>
+                        </p>
+                            
+                        @*<div id="div1"></div>
+                        <div id="div2"></div>*@
+                        <table class="tbl  table-bordered table-responsive" id="tbdetail1">
+
+                            <thead>
+
+                                <tr>
+                                    <th width="5">Code</th>
+                                    <th>Nom Article</th>
+                                    <th>Quantite</th>
+                                    <th>Date</th>
+
+                                </tr>
+                            </thead>
+
+                            <tbody>
+                                @if (Model != null)
+                                {
+                                    foreach (var item in Model.TB_lot_entrestock)
+                                    {
+                                        <tr>
+                                            <td width="5px">
+
+                                                @Html.DisplayTextFor(i => item.Id_articles)
+
+                                            </td>
+
+                                            <td>
+
+                                                @Html.DisplayTextFor(i => item.TB_articles.Nom_articles)
+
+                                            </td>
+
+                                            <td>
+                                                @Html.DisplayTextFor(i => item.Quantite)
+                                            </td>
+                                            <td>
+                                                @Html.DisplayTextFor(i => item.Date_entrer)
+                                            </td>
+
+                                        </tr>
+                                    }
+                                }
+
+                            </tbody>
+
+                        </table>
+                        <br />
+                        <button class="btn btn-primary " value="Enregistrer" onclick="BonEntrer_save()" type="button"><span class="glyphicon glyphicon-saved"></span> Enregistrer</button>
+                        <a href="/BonEntrer/Index" class="btn btn-info" id="sucess" data-toggle="tooltip" data-placement="top"
+                            title="Telecharger">
+                            <span class="glyphicon glyphicon-arrow-left"></span> Retourner a la liste
+                        </a>
+                        <button class="btnDelete btn btn-danger " id="btnDelete" value="Annuler" type="button"><span class=" glyphicon glyphicon-remove-circle"></span> Annuler</button>
+                            
+    
+@*<input type="button" value="Enregistrer" class="btn btn-primary" onclick="Sales_save()" />
+                            <input type="button" value="Annuler" class="btn btn-primary" id="delete" />*@
+                    </div>
+                </div>
+
+            </fieldset>
+
+        </div>
+
+    </div>
+</div>
+
+    
+    
+
+}
+
+@section Scripts {
+@Scripts.Render("~/bundles/jqueryval")
+
+<script type="text/javascript">
+
+// ===================== Script save ==================\\
+
+//This function is used for sending data(JSON Data) to SalesController
+function BonEntrer_save() {
+    // Step 1: Read View Data and Create JSON Object
+
+    // Creating lot_entrer Json Object
+    // var lot_entrer = { "Id_bon_entrestock": "", "Id_articles": "", "Quantite": "", "Date_entrer": "" };
+    var lot_entrer = { "Id_bon_entrestock": "", "Id_articles": "", "Quantite": "", "Date_entrer": "" };
+
+    // Creating bon_entrer Json Object
+    //var bon_entrer = { "Id_bon_entrestock": "", "Date_entre": "", "Description": "", "Id_livraison": "","DateCreer":"","CreerPar":"", "TB_lot_entrestock": [] };
+    var bon_entrer = { "Id_bon_entrestock": "", "Date_entre": "", "Description": "", "Id_livraison": "", "DateCreer": "", "CreerPar": "", "TB_lot_entrestock": [] };
+    // Set Bon_entrer Value
+    bon_entrer.Id_bon_entrestock = $("#Id_bon_entrestock").val();
+    bon_entrer.Date_entre = $("#dateEntrer").val();
+    bon_entrer.Description = $("#Description").val();
+    bon_entrer.Id_livraison = $("#ldLivraison").val();
+    bon_entrer.DateCreer = $("#Date").val();
+    bon_entrer.CreerPar = $("#User").val();
+
+
+    // Getting Table Data from where we will fetch lot entrer Record
+    var oTable = $('.tbl').dataTable().fnGetData();
+
+
+
+    for (var i = 0; i < oTable.length; i++) {
+
+        // IF This view is for edit then it will read SalesId from Hidden field
+        //if ($('h2').text() == "Edit") {
+        //    lot_entrer.SalesId = $('#SalesId').val();
+        //}
+        //else {
+        //    lot_entrer.SalesId = 0;
+        //}
+
+        // Set lot_entrer individual Value
+        lot_entrer.Id_articles = oTable[i][0];
+        lot_entrer.Quantite = oTable[i][2];
+        lot_entrer.Date_entrer = oTable[i][3];
+        // adding to bon_entrer.lot_entrer List Item
+        bon_entrer.TB_lot_entrestock.push(lot_entrer);
+        lot_entrer = { "Id_articles": "", "Quantite": "", "Date_entrer": "" };
+
+
+    }
+    // Step 1: Ends Here
+
+
+    // Set 2: Ajax Post
+    // Here i have used ajax post for saving/updating information
+    $.ajax({
+        url: '../BonEntrer/Save',
+        data: JSON.stringify(bon_entrer),
+        type: 'POST',
+        contentType: 'application/json;',
+        dataType: 'json',
+        success: function (result) {
+
+            if (result.Success == "1") {
+                window.location.href = "../BonEntrer/Index";
+
+            }
+            else {
+                alert(result.ex);
+            }
+        }
+
+    });
+
+
+}
+
+// ===================== Script Delete ==================\\
+function DeleteRow() {
+        
+    // Here I have used DataTables.TableTools plugin for getting selected row items
+    var oTT = TableTools.fnGetInstance('.tbl'); // Get Table instance
+    var sRow = oTT.fnGetSelected(); // Get Selected Item From Table
+
+
+    // Set deleted row item to editable text boxes
+    $('#ldArticle').val($.trim(sRow[0].cells[0].innerHTML.toString()));
+    $('#Quantite').val(jQuery.trim(sRow[0].cells[1].innerHTML.toString()));
+    $('#Total').val($.trim(sRow[0].cells[2].innerHTML.toString()));
+
+
+    $('.tbl').dataTable().fnDeleteRow(sRow[0]);
+
+
+}
+
+// ===================== Script Annulation ==================\\
+
+$('#btnDelete').click(function () {
+
+    window.location.href = "/BonEntrer/Index";
+});
+
+// ===================== Script Add ==================\\
+
+$(document).ready(function () {
+    var table = $('.tbl').DataTable(
+
+        {
+                "searching": false,
+                "lengthChange": false,
+
+            "language": {
+                                       
+                "sProcessing": "Traitement en cours...",
+                "sSearch": "Rechercher&nbsp;:",
+                "sLengthMenu": "Afficher _MENU_ &eacute;l&eacute;ments par page",
+                "sInfo": "Affichage de l'&eacute;l&eacute;ment _START_ &agrave; _END_ sur _TOTAL_ &eacute;l&eacute;ments",
+                "sInfoEmpty": "Affichage de l'&eacute;l&eacute;ment 0 &agrave; 0 sur 0 &eacute;l&eacute;ment",
+                "sInfoFiltered": "(filtr&eacute; de _MAX_ &eacute;l&eacute;ments au total)",
+                "sInfoPostFix": "",
+                "sLoadingRecords": "Chargement en cours...",
+                "sZeroRecords": "Aucun &eacute;l&eacute;ment &agrave; afficher",
+                "sEmptyTable": "Aucune donn&eacute;e disponible dans le tableau",
+
+                "oPaginate": {
+                    "sFirst": "Premier",
+                    "sPrevious": "Pr&eacute;c&eacute;dent",
+                    "sNext": "Suivant",
+                    "sLast": "Dernier"
+                },
+                "oAria": {
+                    "sSortAscending": ": activer pour trier la colonne par ordre croissant",
+                    "sSortDescending": ": activer pour trier la colonne par ordre d&eacute;croissant"
+                }
+            }
+
+            //"language": {
+            //    "sProcessing": "Traitement en cours ...",
+            //    "sLengthMenu":"",// "Afficher _MENU_ lignes",
+            //    "sZeroRecords": "Aucun résultat trouvé",
+            //    "sEmptyTable": "Aucune donnée disponible",
+            //    //"sInfo": "Lignes _START_ à _END_ sur _TOTAL_",
+            //    "sInfo": "Nbre d'enregistrement:  _TOTAL_",
+            //    "sInfoEmpty": "Aucune ligne a affichée",
+            //    "sInfoFiltered":"(Filtrer un maximum de_MAX_)",
+            //    "sInfoPostFix": "",
+            //    "sSearch": "Rechercher:",
+            //    "sUrl": "",
+            //    "sInfoThousands": ",",
+            //    "sLoadingRecords": "Chargement...",
+            //    "oPaginate": {
+            //        "sFirst": "Premier", "sLast": "Dernier", "sNext": "Suivant", "sPrevious": "Précédent"
+            //    },
+            //    "oAria": {
+            //        "sSortAscending": ": Trier par ordre croissant", "sSortDescending": ": Trier par ordre décroissant"
+            //    }
+            //}
+
+        //    "searching": false,
+        //    "paging": true,
+        //    //"info": false,
+        //    "lengthChange": false,
+        //    "language": {
+        //        "sInfo": "Nbre d'enregistrement:  _TOTAL_",
+        //        "sZeroRecords": "Aucun résultat trouvé",
+        //        "sEmptyTable": "Aucune donnée disponible",
+        //        //    //"sInfo": "Lignes _START_ à _END_ sur _TOTAL_",
+        //        //    "sInfo": "Nbre d'enregistrement:  _TOTAL_",
+        //        "sInfoEmpty": "Aucune ligne a affichée",
+        //    }
+        });
+
+    $('.tbl tbody').on('click', 'tr', function () {
+        if ($(this).hasClass('selected')) {
+            $(this).removeClass('selected');
+
+        }
+        else {
+            table.$('tr.selected').removeClass('selected');
+            $(this).addClass('selected');
+
+        }
+    });
+    $('#deleteRow').click(function () {
+        table.row('.selected').remove().draw(false);
+    });
+});
+
+// this function is used to add item to list table
+function Add() {
+    //
+    // Adding item to table
+    var isAllValid = true;
+    if ($('#ldArticle').val() == "0") {
+        isAllValid = false;
+        $('#ldArticle').siblings('span.error').css('visibility', 'visible');
+    }
+    else {
+        $('#ldArticle').siblings('span.error').css('visibility', 'hidden');
+    }
+
+    if ($('#ldCategorie').val() == "0") {
+        isAllValid = false;
+        $('#ldCategorie').siblings('span.error').css('visibility', 'visible');
+    }
+    else {
+        $('#ldCategorie').siblings('span.error').css('visibility', 'hidden');
+    }
+
+
+
+    if (($('#Quantite').val().trim() == '')) { //&& (parseInt($('#quantity').val()) || 0))) {
+        isAllValid = false;
+        $('#Quantite').siblings('span.error').css('visibility', 'visible');
+    }
+    else {
+        $('#Quantite').siblings('span.error').css('visibility', 'hidden');
+    }
+
+    if (isAllValid) {
+
+        $('.tbl').dataTable().fnAddData([$('#ldArticle').val(), $('.product option:selected').text(), $('#Quantite').val(), $('#Date').val()]);
+        // $('.tbl').dataTable().fnAddData([$('.product option:selected').text()]);
+
+        // $('.product option:selected').text(),
+
+
+        // Making Editable text empty
+        //$('#ldArticle').val("")
+        $('#Quantite').val("")
+        //  $('#total').val("")
+    }
+
+}
+
+// ===================== Script Date ==================\\
+$(document).ready(function () {
+    $("#Date_entre").datepicker({
+
+    });
+});
+
+// ================== Script cascading Dropdown ===============\\
+$(document).ready(function () {
+
+    $("[id$=ldCategorie]").change(function () {
+        var CategorieID = $(this).val();
+        var select = $("#ldArticle");
+        var Quantite = $("#Quantite");
+        if (CategorieID != "") {
+            $.getJSON("../BonEntrer/LoadArticles", { CategorieID: CategorieID },
+                function (ArticlesData) {
+                    select.removeAttr('disabled');
+                    Quantite.removeAttr('disabled')
+                    select.empty();
+                    select.append($('<option/>', { value: 0, text: "-- Select Article --" }));
+                    $.each(ArticlesData, function (index, itemData) {
+                        select.append($('<option/>',
+                    {
+                        value: itemData.Value,
+                        text: itemData.Text
+                    }));
+                    });
+                });
+        }
+        else {
+            select.attr('disabled', 'disabled');
+            select.val(0);
+            var State = $("#ddlCity");
+            State.attr('disabled', 'disabled');
+            State.val(0);
+            Quantite.attr('disabled', 'disabled')
+        }
+    });
+
+    $('#ldLivraison').change(function () {
+        var SelectedDD = $(this).val();
+        if (SelectedDD != "") {
+            $("#ldCategorie").removeAttr("disabled");
+        }
+        else {
+            $("#ldCategorie").removeAttr("disabled");
+            $("#ldCategorie").attr('disabled', 'disabled');
+        }
+    });
+  
+});
+
+    
+
+</script>
+
+}

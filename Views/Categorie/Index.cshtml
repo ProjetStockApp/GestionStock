@@ -1,0 +1,122 @@
+﻿@model IEnumerable<StockApp.Models.TB_categorie>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2 class="text-info text-center">Liste Categorie des articles</h2>
+
+<br />
+
+<p>
+    <div class="row">
+        <div class="col-md-8">
+            <a href="@Url.Action("Create")" class="btn btn-primary">
+                <span class="glyphicon glyphicon-plus-sign"></span> Nouvelle Categorie
+            </a>
+        </div>
+    </div>
+</p>
+
+<br />
+<table class="table" id="datatable">
+    <thead>
+        <tr>
+            <th>
+                Nom categorie
+            </th>
+            <th>
+                Description
+            </th>
+            <th>
+                Date Creer
+            </th>
+            <th>
+                CreerPar
+            </th>
+            <th>
+                Action |
+                <a href="@Url.Action("Create")" class="btn btn-primary btn-sm" data-toggle="tooltip" data-placement="top" title="Ajouter">
+                    <span class="glyphicon glyphicon-plus"></span>
+                </a>
+            </th>
+        </tr>
+    </thead>
+    @foreach (var item in Model)
+    {
+        <tbody>
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Nom_categorie)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Description)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DateCreer)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CreerPar)
+                </td>
+                <td>
+                    <a href="@Url.Action("Edit", new { id=item.Id_categorie})" class="btn btn-primary btn-sm" data-toggle="tooltip" data-placement="top"
+                       title="Editer">
+                        <span class="glyphicon glyphicon-edit"></span>
+                    </a>
+                    <a href="@Url.Action("Details", new { id = item.Id_categorie})" class="btn btn-info btn-sm" data-toggle="tooltip" data-placement="top"
+                       title="Afficher">
+                        <span class="glyphicon glyphicon-info-sign"></span>
+                    </a>
+                    <a href="@Url.Action("Delete", new { id = item.Id_categorie})" class="btn btn-danger btn-sm" data-toggle="tooltip" data-placement="top"
+                       title="supprimer">
+                        <span class="glyphicon glyphicon-trash"></span>
+                    </a>
+                </td>
+            </tr>
+        </tbody>
+    }
+
+</table>
+@section Scripts
+{
+
+    <script type="text/javascript">
+        $(function () {
+            $('[data-toggle="tooltip"]').tooltip()
+        })
+
+        $(document).ready(function () {
+
+            $('#datatable').DataTable({
+                "aLengthMenu": [[10, 15, 30, 60, 100, -1], [10, 15, 30, 60, 100, "All"]],
+                //"sPaginationType": "full_numbers",
+                "language": {
+                    "sProcessing": "Traitement en cours...",
+                    "sSearch": "Rechercher&nbsp;:",
+                    "sLengthMenu": "Afficher _MENU_ &eacute;l&eacute;ments par page",
+                    "sInfo": "Affichage de l'&eacute;l&eacute;ment _START_ &agrave; _END_ sur _TOTAL_ &eacute;l&eacute;ments",
+                    "sInfoEmpty": "Affichage de l'&eacute;l&eacute;ment 0 &agrave; 0 sur 0 &eacute;l&eacute;ment",
+                    "sInfoFiltered": "(filtr&eacute; de _MAX_ &eacute;l&eacute;ments au total)",
+                    "sInfoPostFix": "",
+                    "sLoadingRecords": "Chargement en cours...",
+                    "sZeroRecords": "Aucun &eacute;l&eacute;ment &agrave; afficher",
+                    "sEmptyTable": "Aucune donn&eacute;e disponible dans le tableau",
+
+                    "oPaginate": {
+                        "sFirst": "Premier",
+                        "sPrevious": "Pr&eacute;c&eacute;dent",
+                        "sNext": "Suivant",
+                        "sLast": "Dernier"
+                    },
+                    "oAria": {
+                        "sSortAscending": ": activer pour trier la colonne par ordre croissant",
+                        "sSortDescending": ": activer pour trier la colonne par ordre d&eacute;croissant"
+                    }
+                }
+
+            });
+        });
+    </script>
+
+}

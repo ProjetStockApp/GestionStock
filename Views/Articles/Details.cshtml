@@ -1,0 +1,79 @@
+﻿@model StockApp.Models.TB_articles
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h3 class="text-info text-center">Details de l'article <strong>@Model.Nom_articles</strong></h3>
+
+<div>
+
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            Nom Article
+            @* @Html.DisplayNameFor(model => model.Nom_articles)*@
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Nom_articles)
+        </dd>
+
+        <dt>
+            Qte Alerte
+            @* @Html.DisplayNameFor(model => model.Qte_alerte)*@
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Qte_alerte)
+        </dd>
+
+        <dt>
+            Description
+            @* @Html.DisplayNameFor(model => model.Description)*@
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Description)
+        </dd>
+
+        <dt>
+            Nom Categorie
+            @*@Html.DisplayNameFor(model => model.Id_categorie)*@
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TB_categorie.Nom_categorie)
+        </dd>
+
+        <dt>
+            Date Creer
+            @*@Html.DisplayNameFor(model => model.DateCreer)*@
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DateCreer)
+        </dd>
+
+        <dt>
+            Creer Par
+            @*@Html.DisplayNameFor(model => model.CreerPar)*@
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CreerPar)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    <a href="@Url.Action("Edit", new { id = Model.Id_articles})" class="btn btn-primary btn-sm">
+        <span class="glyphicon glyphicon-edit"></span> Modifier
+    </a>
+    @*@Html.ActionLink("Modifier", "Edit", new { id = Model.Id_categorie }, new { @class = "btn btn-primary" }) |*@
+    @*@Html.ActionLink("Retourner a la liste", "Index", null, new { @class = "btn btn-primary btn-sm" })*@
+    <a href="@Url.Action("Index")" class="btn btn-info btn-sm">
+        <span class="glyphicon glyphicon-arrow-left"></span> Retourner a la liste
+    </a>
+</p>

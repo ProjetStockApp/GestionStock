@@ -1,0 +1,74 @@
+﻿@model StockApp.Models.TB_bonEntre
+
+@{
+    ViewBag.Title = "Delete";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2 class="text-info text-center">Supression</h2>
+
+<h4 class="text-danger">Voulez vous vraiment suprimer ces articles</h4>
+<div>
+    @*<h4>TB_bonEntre</h4>*@
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            Date Entrer
+            @*@Html.DisplayNameFor(model => model.Date_entre)*@
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Date_entre)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Description)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Description)
+        </dd>
+
+        <dt>
+            Date Creer
+            @*@Html.DisplayNameFor(model => model.DateCreer)*@
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DateCreer)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CreerPar)
+        </dt>
+
+        <dd>
+            Creer Par
+            @*@Html.DisplayFor(model => model.CreerPar)*@
+        </dd>
+
+        <dt>
+            Code fiche livraison
+            @*@Html.DisplayNameFor(model => model.TB_livraison.Code_fiche)*@
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TB_livraison.Code_fiche)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <button type="submit" value="Suprimer" class="btn btn-danger">
+                <span class="glyphicon glyphicon-trash"></span> Suprimer
+            </button> | 
+
+            <a href="@Url.Action("Index")" class="btn btn-info">
+                <span class="glyphicon glyphicon-arrow-left"></span> Retournez
+            </a>
+        </div>
+    }
+</div>

@@ -1,0 +1,99 @@
+﻿@model StockApp.Models.TB_livraison
+
+@{
+    ViewBag.Title = "Create";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<h2 class="text-info text-center">Ajouter une nouvelle fiche de livraison</h2>
+
+
+@using (Html.BeginForm("Create", "Livraison", null, FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+       <hr />
+        @Html.ValidationSummary(true)
+
+        <div class="form-group">
+            @*@foreach (var query in ViewBag.nom)
+            {
+
+                <input type="hidden" id="CreerPar" name="CreerPar" value="@query">
+
+
+            }*@
+
+            <label class="control-label col-md-2">Code de la fiche</label>
+            <div class="col-md-10">
+                @Html.TextBoxFor(model => model.Code_fiche,new { @class = " form-control" })
+                @Html.ValidationMessageFor(model => model.Code_fiche)
+            </div>
+        </div>
+
+
+        <div class="form-group">
+            <label class="control-label col-md-2">Date Livraison</label>
+            <div class="col-md-10">
+                @Html.TextBoxFor(model => model.Date, new { @class = "form-control", @id = "date-picker", @placeholder ="--- Chosissez la date ---" })
+                @Html.ValidationMessageFor(model => model.Date)
+            </div>
+           
+        </div>
+
+
+        <div class="form-group">
+
+            <label class="control-label col-md-2">Fiche livraison</label>
+
+            <div class="col-md-10">
+                <input type="file" name="file" multiple="multiple" class="form-control btn-info" />
+                @Html.ValidationMessageFor(model => model.Image_fiche)
+            </div>
+        </div>
+
+
+        <div class="form-group">
+            <label class="control-label col-md-2">Description</label>
+            <div class="col-md-10">
+                @Html.TextAreaFor(model => model.Description, new { @class = "form-control", rows = 4 })
+                @Html.ValidationMessageFor(model => model.Description)
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <button type="submit" class="btn btn-primary btn-sm">
+                    <span class="glyphicon glyphicon-save"></span> Ajouter
+                </button>
+                @*<input type="submit" value="Ajouter" class="btn btn-primary" />*@
+                <button type="reset" class="btn btn-primary btn-sm">
+                    <span class="glyphicon glyphicon-erase"></span> Reinitialiser
+                </button>
+
+            </div>
+        </div>
+    </div>
+}
+
+<div>
+    <a href="@Url.Action("Index")" class="btn btn-info ">
+        <span class="glyphicon glyphicon-arrow-left"></span> Retourne a la liste
+    </a>
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $("#date-picker").datepicker({
+           
+        });
+    });
+
+</script>
+
+}

@@ -1,0 +1,512 @@
+﻿@model StockApp.Models.TB_bonRequisition
+@using Microsoft.AspNet.Identity
+
+@{
+    ViewBag.Title = "Create";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2 class="text-info text-center">Creer une requisition</h2>
+
+
+@using (Html.BeginForm()) 
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        @*<h4>TB_bonRequisition</h4>*@
+        @*<hr />*@
+        @Html.ValidationSummary(true)
+
+
+        <div class="container">
+            <br />
+            <div class="panel panel-default">
+
+                @*<div class="panel-heading">jj</div>*@
+                <div class="panel-body">
+
+                    <fieldset class="info">
+                        <legend class=" bg-info"> Decrire votre requisition</legend>
+
+
+                        <div class="panel panel-default">
+                            <div class="panel-body">
+                                @if (Model != null)
+                                {
+
+                                    <input type="hidden" id="SalesId" name="SalesId" value="@Model.Id_bon_requisition" />
+
+                                }
+
+
+                                @*@foreach (var query in ViewBag.nom)
+                                    {
+
+                                        <input type="hidden" id="User" name="User" value="@query">
+
+                                    }*@
+
+                                <div class="form-horizontal">
+
+                                    <input type="hidden" id="DateCreer" name="DateCreer" value="">
+                                    <div class="form-group">
+                                        @Html.LabelFor(model => model.Date_requisition, "Date Requisition", new { @class = "control-label col-md-2" })
+                                        <div class="col-md-10">
+                                            @Html.TextBoxFor(model => model.Date_requisition,new { @class = "form-control dateReq", @id = "dateReq", @Value = @DateTime.Now.ToShortDateString() })
+                                            @Html.ValidationMessageFor(model => model.Date_requisition)
+                                        </div>
+
+                                    </div>
+
+                                    <div class="form-group">
+                                        @Html.LabelFor(model => model.Description, new { @class = "control-label col-md-2" })
+                                        <div class="col-md-10">
+                                            @Html.TextAreaFor(model => model.Description, new { @class = "form-control", rows = 4 })
+                                            @Html.ValidationMessageFor(model => model.Description)
+                                        </div>
+                                    </div>
+
+
+
+                                    <div class="form-group">
+                                        @*@Html.LabelFor(model => model.UserId, "UserId", new { @class = "control-label col-md-2" })*@
+                                        <div class="col-md-10">
+                                            <input type="hidden" id="UserId" name="UserId" value="@User.Identity.GetUserId()">
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </fieldset>
+
+                    <div class="clearfix"></div>
+                </div>
+
+                @*</div>*@
+                @*</div>*@
+
+
+                @*<div class="container">*@
+                @*<br/>*@
+                @*<div class="panel panel-default">*@
+
+                @*<div class="panel-heading">Fieldset Exemple</div>*@
+                <div class="panel-body">
+
+                    <fieldset class="">
+                        <legend class="bg-info">  Ajouter les produits</legend>
+
+                        <div class="panel panel-default">
+                            <div class="panel-body">
+                                <table class="table table-responsive table-bordered" id="tbdetail">
+
+                                    <tr class="text-center">
+                                        <th>Categorie</th>
+                                        <th>Articles</th>
+                                        <th>Quantite</th>
+                                        @*<th>Date</th>*@
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <div class="form-group">
+                                                <div class="col-md-10">
+                                                    @Html.DropDownList("Id_categorie",
+      new SelectList(ViewBag.Categorie as System.Collections.IEnumerable, "Id_categorie", "Nom_categorie"),
+"-- Select Categorie --", new { @id = "ldCategorie", @name = "ldCategorie", @class = "pc form-control" })
+                                                    <span class="error">choisi categorie</span>
+                                                </div>
+                                            </div>
+                                        </td>
+
+                                        <td>
+
+                                            <div class="form-group">
+                                                <div class="col-md-10">
+                                                    @Html.DropDownList("Id_articles",
+               new SelectList(ViewBag.Articles as System.Collections.IEnumerable, "Id_articles", "Nom_articles"),
+"-- Select Article --", new { @id = "ldArticle", @name = "ldArticle", @class = "product form-control", @disabled = "disabled" })
+                                                    <span class="error">choisi un article</span>
+                                                </div>
+                                            </div>
+                                        </td>
+
+                                        <td>
+                                            <div class="form-group">
+                                                <div class="col-md-10">
+                                                    <input type="number" id="Quantite" class="form-control" disabled="disabled" name="Quantite" />
+                                                    <span class="error">Valeur quantite manque</span>
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td class="divdate">
+                                            <div class="form-group">
+                                                <div class="col-md-10">
+                                                    <input type="text" value="@DateTime.Now" id="Date" class="form-control" name="Date" />
+                                                    <style>
+                                                        .divdate {
+                                                            /*visibility: hidden;*/
+                                                            display: none;
+                                                        }
+                                                    </style>
+                                                    <script>
+                                                        //$("#Date").datepicker({ dateFormat: "dd/mm/yy" }).datepicker("setDate", new Date());
+                                                    </script>
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="form-group">
+                                                <div class="col-md-6">
+                                                    <input type="button" value="Ajouter" onclick="Add()" class="btn btn-primary" />
+
+                                                </div>
+                                            </div>
+                                        </td>
+                                    </tr>
+
+
+
+
+                                </table>
+                                @*<input type="button" value="Supprimer la ligne selectioner" class="btn btn-primary" id="del" />*@
+                                <button class="btn btn-danger " id="deleteRow" type="button"><span class="glyphicon glyphicon-trash"></span> Supprimer la ligne selectioner</button>
+                                <div id="div1"></div>
+                                <div id="div2"></div>
+                                <br />
+                                <table class="tbl table-bordered" id="tbl1">
+
+                                    <thead>
+
+                                        <tr>
+                                            <th width="5">Code</th>
+                                            <th>Nom Article</th>
+                                            <th>Quantite</th>
+                                            <th>Date</th>
+
+                                        </tr>
+                                    </thead>
+
+                                    <tbody>
+                                        @if (Model != null)
+                                        {
+
+                                            foreach (var item in Model.TB_detail_requisition)
+                                            {
+                                                <tr>
+                                                    <td width="5px">
+
+                                                        @Html.DisplayTextFor(i => item.Id_articles)
+
+                                                    </td>
+
+                                                    <td>
+
+                                                        @Html.DisplayTextFor(i => item.TB_articles.Nom_articles)
+
+                                                    </td>
+
+                                                    <td>
+                                                        @Html.DisplayTextFor(i => item.Quantite)
+                                                    </td>
+                                                    <td>
+                                                        @Html.DisplayTextFor(i => item.Date_requisition)
+                                                    </td>
+
+                                                </tr>
+                                            }
+                                        }
+
+                                    </tbody>
+
+                                </table>
+                                <br />
+                                <button class="btn btn-primary " value="Enregistrer" onclick="BonEntrer_save()" type="button"><span class="glyphicon glyphicon-saved"></span> Enregistrer</button>
+
+                                <a href="/BonRequisition/Index" class="btn btn-info" id="sucess" data-toggle="tooltip" data-placement="top"
+                                   title="Telecharger">
+                                    <span class="glyphicon glyphicon-arrow-left"></span> Retournez
+                                </a>
+                                <button class="btnDelete btn btn-danger " id="btnDelete" value="Annuler" type="button"><span class=" glyphicon glyphicon-remove-circle"></span> Annuler</button>
+                                @*<input type="button" value="Enregistrer" class="btn btn-primary" onclick="Sales_save()" />
+                                    <input type="button" value="Annuler" class="btn btn-primary" id="delete" />*@
+                            </div>
+                        </div>
+
+                    </fieldset>
+
+                    <div class="clearfix">
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+       
+    </div>
+}
+
+            @section Scripts {
+                @Scripts.Render("~/bundles/jqueryval")
+
+                <script type="text/javascript">
+
+                    // ===================== Script Date ==================\\
+                    $(document).ready(function () {
+                        $("#dateReq").datepicker({
+
+                        });
+                    });
+
+                    //--------------- fin Script Date -----------------\\
+
+
+                    //===================== Script DataTable =================\\
+
+                    $(document).ready(function () {
+                        var table = $('.tbl').DataTable(
+
+                            {
+                                "searching": false,
+                                "lengthChange": false,
+
+                                "language": {
+
+                                    "sProcessing": "Traitement en cours...",
+                                    "sSearch": "Rechercher&nbsp;:",
+                                    "sLengthMenu": "Afficher _MENU_ &eacute;l&eacute;ments par page",
+                                    "sInfo": "Affichage de l'&eacute;l&eacute;ment _START_ &agrave; _END_ sur _TOTAL_ &eacute;l&eacute;ments",
+                                    "sInfoEmpty": "Affichage de l'&eacute;l&eacute;ment 0 &agrave; 0 sur 0 &eacute;l&eacute;ment",
+                                    "sInfoFiltered": "(filtr&eacute; de _MAX_ &eacute;l&eacute;ments au total)",
+                                    "sInfoPostFix": "",
+                                    "sLoadingRecords": "Chargement en cours...",
+                                    "sZeroRecords": "Aucun &eacute;l&eacute;ment &agrave; afficher",
+                                    "sEmptyTable": "Aucune donn&eacute;e disponible dans le tableau",
+
+                                    "oPaginate": {
+                                        "sFirst": "Premier",
+                                        "sPrevious": "Pr&eacute;c&eacute;dent",
+                                        "sNext": "Suivant",
+                                        "sLast": "Dernier"
+                                    },
+                                    "oAria": {
+                                        "sSortAscending": ": activer pour trier la colonne par ordre croissant",
+                                        "sSortDescending": ": activer pour trier la colonne par ordre d&eacute;croissant"
+                                    }
+                                }
+
+                                
+                            });
+
+                        $('.tbl tbody').on('click', 'tr', function () {
+                            if ($(this).hasClass('selected')) {
+                                $(this).removeClass('selected');
+
+                            }
+                            else {
+                                table.$('tr.selected').removeClass('selected');
+                                $(this).addClass('selected');
+
+                            }
+                        });
+                        $('#deleteRow').click(function () {
+                            table.row('.selected').remove().draw(false);
+                        });
+                    });
+
+                    // -------------- fin Script Datatable ---------------\\
+
+                    //=================== Script  save =================\\
+
+                    //This function is used for sending data(JSON Data) to SalesController
+                    function BonEntrer_save() {
+                        // Step 1: Read View Data and Create JSON Object
+
+                        // Creating lot_entrer Json Object
+
+                        var lot_entrer = { "Id_bon_requisition": "", "Id_articles": "", "Quantite": "", "Date_requisition": "" };
+
+
+                        // Creating bon_entrer Json Object
+                        var bon_entrer = { "Id_bon_requisition": "", "Date_requisition": "", "Description": "", "UserId": "", "DateCreer": "", "CreerPar": "", "IsSoumettre": "", "Validate": "", "TB_detail_requisition": [] };
+                        // Set Bon_entrer Value
+                        bon_entrer.Id_bon_requisition = $("#Id_bon_requisition").val();
+                        bon_entrer.Date_requisition = $("#dateReq").val();
+                        bon_entrer.Description = $("#Description").val();
+                        bon_entrer.UserId = $("#UserId").val();
+                        bon_entrer.DateCreer = $("#Date").val();
+                        bon_entrer.CreerPar = $("#User").val();
+                        bon_entrer.IsSoumettre = ("NON");
+                        bon_entrer.Validate = ("0");
+
+                        // Getting Table Data from where we will fetch lot entrer Record
+                        var oTable = $('.tbl').dataTable().fnGetData();
+
+
+
+                        for (var i = 0; i < oTable.length; i++) {
+
+                           
+                            // Set detail_requisition individual Value
+                            lot_entrer.Id_articles = oTable[i][0];
+                            lot_entrer.Quantite = oTable[i][2];
+                            lot_entrer.Date_requisition = oTable[i][3];
+                            // adding to bon_Requisdition. detail_requisition List Item
+                            bon_entrer.TB_detail_requisition.push(lot_entrer);
+                            lot_entrer = { "Id_articles": "", "Quantite": "", "Date_requisition": "" };
+
+
+                        }
+                        // Step 1: Ends Here
+
+
+                        // Set 2: Ajax Post
+                        // Here i have used ajax post for saving/updating information
+                        $.ajax({
+                            url: '../BonRequisition/Save',
+                            data: JSON.stringify(bon_entrer),
+                            type: 'POST',
+                            contentType: 'application/json;',
+                            dataType: 'json',
+                            success: function (result) {
+
+                                if (result.Success == "1") {
+                                    window.location.href = "../BonRequisition/Index";
+
+                                }
+                                else {
+                                    alert(result.ex);
+                                }
+                            }
+
+                        });
+
+
+                    }
+
+                    // ============= fin script save ===============\\
+
+
+                    //========================script Add =============\\
+
+
+                    function Add() {
+                        // 
+                        // Adding item to table
+                        var isAllValid = true;
+                        if ($('#ldArticle').val() == "0") {
+                            isAllValid = false;
+                            $('#ldArticle').siblings('span.error').css('visibility', 'visible');
+                        }
+                        else {
+                            $('#ldArticle').siblings('span.error').css('visibility', 'hidden');
+                        }
+
+                        if ($('#ldCategorie').val() == "0") {
+                            isAllValid = false;
+                            $('#ldCategorie').siblings('span.error').css('visibility', 'visible');
+                        }
+                        else {
+                            $('#ldCategorie').siblings('span.error').css('visibility', 'hidden');
+                        }
+
+
+
+                        if (($('#Quantite').val().trim() == '')) { //&& (parseInt($('#quantity').val()) || 0))) {
+                            isAllValid = false;
+                            $('#Quantite').siblings('span.error').css('visibility', 'visible');
+                        }
+                        else {
+                            $('#Quantite').siblings('span.error').css('visibility', 'hidden');
+                        }
+
+                        if (isAllValid) {
+
+                            $('.tbl').dataTable().fnAddData([$('#ldArticle').val(), $('.product option:selected').text(), $('#Quantite').val(), $('#Date').val()]);
+                            // $('.tbl').dataTable().fnAddData([$('.product option:selected').text()]);
+
+                            // $('.product option:selected').text(),
+
+
+                            // Making Editable text empty
+                            //$('#ldArticle').val("")
+                            $('#Quantite').val("")
+                            //  $('#total').val("")
+                        }
+
+                    }
+                    $('#btnDelete').click(function () {
+
+                        window.location.href = "/BonEntrer/Index";
+                    });
+
+                    // ==================== fin script Add =====================\\
+
+
+                    //=================== Script Load Dropdown list ============\\\
+                    $(document).ready(function () {
+
+                        $("[id$=ldCategorie]").change(function () {
+                            var CategorieID = $(this).val();
+                            var select = $("#ldArticle");
+                            var Quantite = $("#Quantite");
+                            if (CategorieID != "") {
+                                $.getJSON("../BonRequisition/LoadArticles", { CategorieID: CategorieID },
+                                  function (ArticlesData) {
+                                      select.removeAttr('disabled');
+                                      Quantite.removeAttr('disabled')
+                                      select.empty();
+                                      select.append($('<option/>', { value: 0, text: "-- Select Article --" }));
+                                      $.each(ArticlesData, function (index, itemData) {
+                                          select.append($('<option/>',
+                                        {
+                                            value: itemData.Value,
+                                            text: itemData.Text
+                                        }));
+                                      });
+                                  });
+                            }
+                            else {
+                                select.attr('disabled', 'disabled');
+                                select.val(0);
+                                var State = $("#ddlCity");
+                                State.attr('disabled', 'disabled');
+                                State.val(0);
+                                Quantite.attr('disabled', 'disabled')
+                            }
+                        });
+
+                        $("#ldLivraison").change(function () {
+                            var LivraisonID = $(this).val();
+                            var select = $("#ldCategorie");
+                            if (LivraisonID != 0) {
+                                $.getJSON("../BonRequisition/Loadcategorie", { LivraisonID: LivraisonID },
+                                 function (CategoriesData) {
+                                     select.removeAttr('disabled');
+                                     select.empty();
+                                     select.append($('<option/>', { value: 0, text: "-- Select Categorie --" }));
+                                     $.each(CategoriesData, function (index, itemData) {
+                                         select.append($('<option/>',
+                                            {
+                                                value: itemData.Value,
+                                                text: itemData.Text
+                                            }));
+                                     });
+                                 });
+                            }
+
+
+                            else {
+
+
+                                select.attr('disabled', 'disabled');
+                                select.val(0);
+                            }
+
+                        });
+                    });
+                    //=================== fin Script Load Dropdown list ============\\\
+                </script>
+            }

@@ -1,0 +1,49 @@
+﻿@model Microsoft.AspNet.Identity.EntityFramework.IdentityRole
+@{
+    ViewBag.Title = "Create";
+}
+
+
+
+@using (Html.BeginForm())
+{
+    <div class="form-horizontal">
+        <h3><strong>Creer Role</strong> </h3>
+        <hr />
+        @Html.ValidationSummary(true)
+
+        <div class="form-group">
+
+            <label class="control-label col-md-2"> Nom Role</label>
+            <div class="col-md-10">
+                @Html.TextBoxFor(model => model.Name,new { @class = "form-control" })
+                
+            </div>
+        </div>
+
+        
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <button type="submit" class="btn btn-primary btn-sm">
+                    <span class="glyphicon glyphicon-save"></span> Enregistrer
+                </button>
+               
+                <button type="reset" class="btn btn-primary btn-sm">
+                    <span class="glyphicon glyphicon-erase"></span> Reinitialiser
+                </button>
+
+            </div>
+        </div>
+    </div>
+}
+
+<div>
+    <a href="@Url.Action("Index")" class="btn btn-info">
+        <span class="glyphicon glyphicon-arrow-left"></span> Retourner a la liste
+    </a>
+
+</div>
+    
+    
+

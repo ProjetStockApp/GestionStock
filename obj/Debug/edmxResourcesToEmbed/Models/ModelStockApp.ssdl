@@ -1,0 +1,469 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="stockfaesdbModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="__MigrationHistory">
+    <Key>
+      <PropertyRef Name="MigrationId" />
+      <PropertyRef Name="ContextKey" />
+    </Key>
+    <Property Name="MigrationId" Type="nvarchar" MaxLength="150" Nullable="false" />
+    <Property Name="ContextKey" Type="nvarchar" MaxLength="300" Nullable="false" />
+    <Property Name="Model" Type="varbinary(max)" Nullable="false" />
+    <Property Name="ProductVersion" Type="nvarchar" MaxLength="32" Nullable="false" />
+  </EntityType>
+  <EntityType Name="AspNetRoles">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
+  </EntityType>
+  <EntityType Name="AspNetUserClaims">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ClaimType" Type="nvarchar(max)" />
+    <Property Name="ClaimValue" Type="nvarchar(max)" />
+    <Property Name="User_Id" Type="nvarchar" MaxLength="128" Nullable="false" />
+  </EntityType>
+  <EntityType Name="AspNetUserLogins">
+    <Key>
+      <PropertyRef Name="UserId" />
+      <PropertyRef Name="LoginProvider" />
+      <PropertyRef Name="ProviderKey" />
+    </Key>
+    <Property Name="UserId" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="LoginProvider" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="ProviderKey" Type="nvarchar" MaxLength="128" Nullable="false" />
+  </EntityType>
+  <EntityType Name="AspNetUserRoles">
+    <Key>
+      <PropertyRef Name="UserId" />
+      <PropertyRef Name="RoleId" />
+    </Key>
+    <Property Name="UserId" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="RoleId" Type="nvarchar" MaxLength="128" Nullable="false" />
+  </EntityType>
+  <EntityType Name="AspNetUsers">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="UserName" Type="nvarchar(max)" />
+    <Property Name="NomComplet" Type="nvarchar(max)" />
+    <Property Name="Id_direction" Type="int" />
+    <Property Name="PasswordHash" Type="nvarchar(max)" />
+    <Property Name="SecurityStamp" Type="nvarchar(max)" />
+    <Property Name="Discriminator" Type="nvarchar" MaxLength="128" Nullable="false" />
+  </EntityType>
+  <EntityType Name="FileDetail">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="FileName" Type="varchar(max)" />
+    <Property Name="Extension" Type="varchar(max)" />
+    <Property Name="Idlivraison" Type="int" />
+  </EntityType>
+  <EntityType Name="sysdiagrams">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="principal_id" Type="int" Nullable="false" />
+    <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="version" Type="int" />
+    <Property Name="definition" Type="varbinary(max)" />
+  </EntityType>
+  <EntityType Name="TB_articles">
+    <Key>
+      <PropertyRef Name="Id_articles" />
+    </Key>
+    <Property Name="Id_articles" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Nom_articles" Type="varchar" MaxLength="100" />
+    <Property Name="Qte_alerte" Type="int" />
+    <Property Name="Description" Type="varchar(max)" />
+    <Property Name="Id_categorie" Type="int" />
+    <Property Name="DateCreer" Type="datetime" />
+    <Property Name="CreerPar" Type="varchar" MaxLength="100" />
+  </EntityType>
+  <EntityType Name="TB_bonEntre">
+    <Key>
+      <PropertyRef Name="Id_bon_entrestock" />
+    </Key>
+    <Property Name="Id_bon_entrestock" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Date_entre" Type="date" />
+    <Property Name="Description" Type="varchar(max)" />
+    <Property Name="Id_livraison" Type="int" />
+    <Property Name="DateCreer" Type="datetime" />
+    <Property Name="CreerPar" Type="varchar" MaxLength="100" />
+  </EntityType>
+  <EntityType Name="TB_bonRequisition">
+    <Key>
+      <PropertyRef Name="Id_bon_requisition" />
+    </Key>
+    <Property Name="Id_bon_requisition" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Description" Type="varchar(max)" />
+    <Property Name="UserId" Type="nvarchar" MaxLength="128" />
+    <Property Name="Date_requisition" Type="date" />
+    <Property Name="DateCreer" Type="datetime" />
+    <Property Name="CreerPar" Type="varchar" MaxLength="100" />
+    <Property Name="IsSoumettre" Type="nvarchar" MaxLength="50" />
+    <Property Name="Validate" Type="nvarchar" MaxLength="5" />
+    <Property Name="Date_aprouver" Type="datetime" />
+    <Property Name="Date_validation" Type="datetime" />
+    <Property Name="Administrateur" Type="nvarchar" MaxLength="100" />
+    <Property Name="Directeur" Type="nvarchar" MaxLength="100" />
+  </EntityType>
+  <EntityType Name="TB_bonSortie_stock">
+    <Key>
+      <PropertyRef Name="Id_bon_sortiestock" />
+    </Key>
+    <Property Name="Id_bon_sortiestock" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Description" Type="varchar(max)" />
+    <Property Name="Id_employe" Type="int" />
+    <Property Name="Date_sortie" Type="date" />
+    <Property Name="DateCreer" Type="datetime" />
+    <Property Name="CreerPar" Type="varchar" MaxLength="100" />
+  </EntityType>
+  <EntityType Name="TB_categorie">
+    <Key>
+      <PropertyRef Name="Id_categorie" />
+    </Key>
+    <Property Name="Id_categorie" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Nom_categorie" Type="varchar" MaxLength="100" />
+    <Property Name="Description" Type="varchar(max)" />
+    <Property Name="DateCreer" Type="datetime" />
+    <Property Name="CreerPar" Type="varchar" MaxLength="100" />
+  </EntityType>
+  <EntityType Name="TB_detail_requisition">
+    <Key>
+      <PropertyRef Name="Id_details_requisition" />
+    </Key>
+    <Property Name="Id_details_requisition" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Id_bon_requisition" Type="int" />
+    <Property Name="Id_articles" Type="int" />
+    <Property Name="Quantite" Type="int" />
+    <Property Name="Date_requisition" Type="datetime" />
+  </EntityType>
+  <EntityType Name="TB_detail_sortie">
+    <Key>
+      <PropertyRef Name="Id_details_sortie" />
+    </Key>
+    <Property Name="Id_details_sortie" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Id_bonsortie" Type="int" />
+    <Property Name="Id_lot_entrestock" Type="int" />
+    <Property Name="Quantite" Type="int" />
+  </EntityType>
+  <EntityType Name="TB_direction">
+    <Key>
+      <PropertyRef Name="Id_direction" />
+    </Key>
+    <Property Name="Id_direction" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Nom_direction" Type="varchar" MaxLength="100" />
+    <Property Name="Description" Type="varchar(max)" />
+    <Property Name="DateCreer" Type="datetime" />
+    <Property Name="CreerPar" Type="nvarchar" MaxLength="100" />
+  </EntityType>
+  <EntityType Name="TB_employe">
+    <Key>
+      <PropertyRef Name="Id_employe" />
+    </Key>
+    <Property Name="Id_employe" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Nom" Type="varchar" MaxLength="100" />
+    <Property Name="Prenom" Type="varchar" MaxLength="100" />
+    <Property Name="Email" Type="varchar" MaxLength="100" />
+    <Property Name="Telephone" Type="varchar" MaxLength="50" />
+    <Property Name="Description" Type="nvarchar(max)" />
+    <Property Name="Id_direction" Type="int" />
+    <Property Name="DateCreer" Type="datetime" />
+    <Property Name="CreerPar" Type="varchar" MaxLength="100" />
+  </EntityType>
+  <EntityType Name="TB_livraison">
+    <Key>
+      <PropertyRef Name="Id_livraison" />
+    </Key>
+    <Property Name="Id_livraison" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Code_fiche" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="Date" Type="date" />
+    <Property Name="Image_fiche" Type="varchar(max)" />
+    <Property Name="Description" Type="varchar(max)" />
+    <Property Name="DateCreer" Type="datetime" />
+    <Property Name="CreerPar" Type="varchar" MaxLength="100" />
+    <Property Name="ImageUrl" Type="varchar(max)" />
+  </EntityType>
+  <EntityType Name="TB_lot_entrestock">
+    <Key>
+      <PropertyRef Name="Id_lot_entrestock" />
+    </Key>
+    <Property Name="Id_lot_entrestock" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Date_entrer" Type="datetime" />
+    <Property Name="Id_articles" Type="int" />
+    <Property Name="Id_bon_entrestock" Type="int" />
+    <Property Name="Quantite" Type="int" />
+    <Property Name="Total" Type="bigint" />
+  </EntityType>
+  <EntityType Name="TB_mouvement_stock">
+    <Key>
+      <PropertyRef Name="Id_mouvement" />
+    </Key>
+    <Property Name="Id_mouvement" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="DateCreer" Type="datetime" />
+    <Property Name="Type_mouvement" Type="int" />
+    <Property Name="Quantite" Type="int" />
+    <Property Name="CreerPar" Type="varchar" MaxLength="100" />
+    <Property Name="Id_article" Type="int" />
+  </EntityType>
+  <EntityType Name="TB_stock">
+    <Key>
+      <PropertyRef Name="Id_stock" />
+    </Key>
+    <Property Name="Id_stock" Type="int" Nullable="false" />
+    <Property Name="Stock_initial" Type="int" />
+    <Property Name="Qte_entre" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Qte_sortie" Type="int" />
+    <Property Name="Qte_reste" Type="int" />
+    <Property Name="Id_articles" Type="int" />
+    <Property Name="DateCreer" Type="datetime" />
+    <Property Name="CreerPar" Type="varchar" MaxLength="100" />
+  </EntityType>
+  <Association Name="FK_AspNetUsers_TB_direction">
+    <End Role="TB_direction" Type="Self.TB_direction" Multiplicity="0..1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TB_direction">
+        <PropertyRef Name="Id_direction" />
+      </Principal>
+      <Dependent Role="AspNetUsers">
+        <PropertyRef Name="Id_direction" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_User_Id">
+    <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="AspNetUserClaims" Type="Self.AspNetUserClaims" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AspNetUsers">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="AspNetUserClaims">
+        <PropertyRef Name="User_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId">
+    <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="AspNetUserLogins" Type="Self.AspNetUserLogins" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AspNetUsers">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="AspNetUserLogins">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_dbo_AspNetUserRoles_dbo_AspNetRoles_RoleId">
+    <End Role="AspNetRoles" Type="Self.AspNetRoles" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="AspNetUserRoles" Type="Self.AspNetUserRoles" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AspNetRoles">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="AspNetUserRoles">
+        <PropertyRef Name="RoleId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_dbo_AspNetUserRoles_dbo_AspNetUsers_UserId">
+    <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="AspNetUserRoles" Type="Self.AspNetUserRoles" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AspNetUsers">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="AspNetUserRoles">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TB_articles_TB_categorie">
+    <End Role="TB_categorie" Type="Self.TB_categorie" Multiplicity="0..1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="TB_articles" Type="Self.TB_articles" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TB_categorie">
+        <PropertyRef Name="Id_categorie" />
+      </Principal>
+      <Dependent Role="TB_articles">
+        <PropertyRef Name="Id_categorie" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TB_bonEntre_TB_livraison">
+    <End Role="TB_livraison" Type="Self.TB_livraison" Multiplicity="0..1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="TB_bonEntre" Type="Self.TB_bonEntre" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TB_livraison">
+        <PropertyRef Name="Id_livraison" />
+      </Principal>
+      <Dependent Role="TB_bonEntre">
+        <PropertyRef Name="Id_livraison" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TB_bonRequisition_AspNetUsers">
+    <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="0..1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="TB_bonRequisition" Type="Self.TB_bonRequisition" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AspNetUsers">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="TB_bonRequisition">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TB_detail_requisition_TB_articles">
+    <End Role="TB_articles" Type="Self.TB_articles" Multiplicity="0..1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="TB_detail_requisition" Type="Self.TB_detail_requisition" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TB_articles">
+        <PropertyRef Name="Id_articles" />
+      </Principal>
+      <Dependent Role="TB_detail_requisition">
+        <PropertyRef Name="Id_articles" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TB_detail_requisition_TB_bonRequisition">
+    <End Role="TB_bonRequisition" Type="Self.TB_bonRequisition" Multiplicity="0..1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="TB_detail_requisition" Type="Self.TB_detail_requisition" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TB_bonRequisition">
+        <PropertyRef Name="Id_bon_requisition" />
+      </Principal>
+      <Dependent Role="TB_detail_requisition">
+        <PropertyRef Name="Id_bon_requisition" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TB_lot_entrestock_TB_articles">
+    <End Role="TB_articles" Type="Self.TB_articles" Multiplicity="0..1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="TB_lot_entrestock" Type="Self.TB_lot_entrestock" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TB_articles">
+        <PropertyRef Name="Id_articles" />
+      </Principal>
+      <Dependent Role="TB_lot_entrestock">
+        <PropertyRef Name="Id_articles" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TB_lot_entrestock_TB_bonEntre">
+    <End Role="TB_bonEntre" Type="Self.TB_bonEntre" Multiplicity="0..1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="TB_lot_entrestock" Type="Self.TB_lot_entrestock" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TB_bonEntre">
+        <PropertyRef Name="Id_bon_entrestock" />
+      </Principal>
+      <Dependent Role="TB_lot_entrestock">
+        <PropertyRef Name="Id_bon_entrestock" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="stockfaesdbModelStoreContainer">
+    <EntitySet Name="__MigrationHistory" EntityType="Self.__MigrationHistory" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="AspNetRoles" EntityType="Self.AspNetRoles" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="AspNetUserClaims" EntityType="Self.AspNetUserClaims" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="AspNetUserLogins" EntityType="Self.AspNetUserLogins" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="AspNetUserRoles" EntityType="Self.AspNetUserRoles" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="AspNetUsers" EntityType="Self.AspNetUsers" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="FileDetail" EntityType="Self.FileDetail" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="TB_articles" EntityType="Self.TB_articles" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="TB_bonEntre" EntityType="Self.TB_bonEntre" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="TB_bonRequisition" EntityType="Self.TB_bonRequisition" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="TB_bonSortie_stock" EntityType="Self.TB_bonSortie_stock" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="TB_categorie" EntityType="Self.TB_categorie" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="TB_detail_requisition" EntityType="Self.TB_detail_requisition" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="TB_detail_sortie" EntityType="Self.TB_detail_sortie" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="TB_direction" EntityType="Self.TB_direction" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="TB_employe" EntityType="Self.TB_employe" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="TB_livraison" EntityType="Self.TB_livraison" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="TB_lot_entrestock" EntityType="Self.TB_lot_entrestock" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="TB_mouvement_stock" EntityType="Self.TB_mouvement_stock" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="TB_stock" EntityType="Self.TB_stock" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK_AspNetUsers_TB_direction" Association="Self.FK_AspNetUsers_TB_direction">
+      <End Role="TB_direction" EntitySet="TB_direction" />
+      <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+    </AssociationSet>
+    <AssociationSet Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_User_Id" Association="Self.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_User_Id">
+      <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+      <End Role="AspNetUserClaims" EntitySet="AspNetUserClaims" />
+    </AssociationSet>
+    <AssociationSet Name="FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId">
+      <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+      <End Role="AspNetUserLogins" EntitySet="AspNetUserLogins" />
+    </AssociationSet>
+    <AssociationSet Name="FK_dbo_AspNetUserRoles_dbo_AspNetRoles_RoleId" Association="Self.FK_dbo_AspNetUserRoles_dbo_AspNetRoles_RoleId">
+      <End Role="AspNetRoles" EntitySet="AspNetRoles" />
+      <End Role="AspNetUserRoles" EntitySet="AspNetUserRoles" />
+    </AssociationSet>
+    <AssociationSet Name="FK_dbo_AspNetUserRoles_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserRoles_dbo_AspNetUsers_UserId">
+      <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+      <End Role="AspNetUserRoles" EntitySet="AspNetUserRoles" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TB_articles_TB_categorie" Association="Self.FK_TB_articles_TB_categorie">
+      <End Role="TB_categorie" EntitySet="TB_categorie" />
+      <End Role="TB_articles" EntitySet="TB_articles" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TB_bonEntre_TB_livraison" Association="Self.FK_TB_bonEntre_TB_livraison">
+      <End Role="TB_livraison" EntitySet="TB_livraison" />
+      <End Role="TB_bonEntre" EntitySet="TB_bonEntre" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TB_bonRequisition_AspNetUsers" Association="Self.FK_TB_bonRequisition_AspNetUsers">
+      <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+      <End Role="TB_bonRequisition" EntitySet="TB_bonRequisition" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TB_detail_requisition_TB_articles" Association="Self.FK_TB_detail_requisition_TB_articles">
+      <End Role="TB_articles" EntitySet="TB_articles" />
+      <End Role="TB_detail_requisition" EntitySet="TB_detail_requisition" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TB_detail_requisition_TB_bonRequisition" Association="Self.FK_TB_detail_requisition_TB_bonRequisition">
+      <End Role="TB_bonRequisition" EntitySet="TB_bonRequisition" />
+      <End Role="TB_detail_requisition" EntitySet="TB_detail_requisition" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TB_lot_entrestock_TB_articles" Association="Self.FK_TB_lot_entrestock_TB_articles">
+      <End Role="TB_articles" EntitySet="TB_articles" />
+      <End Role="TB_lot_entrestock" EntitySet="TB_lot_entrestock" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TB_lot_entrestock_TB_bonEntre" Association="Self.FK_TB_lot_entrestock_TB_bonEntre">
+      <End Role="TB_bonEntre" EntitySet="TB_bonEntre" />
+      <End Role="TB_lot_entrestock" EntitySet="TB_lot_entrestock" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

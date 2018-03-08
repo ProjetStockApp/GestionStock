@@ -1,0 +1,84 @@
+﻿@model IEnumerable<StockApp.Models.TB_detail_requisition>
+
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2 class="text-info">Liste articles soummit par <strong class="danger">@ViewBag.nomEmp </strong> </h2>
+
+@*<p>
+    <a href="/BonRequisition/Create" class="btn btn-primary btn-sm" data-toggle="tooltip" data-placement="top"
+       title="Requisitioner">
+        <span class="glyphicon glyphicon-plus-sign"></span> Nouvelle Requisition
+    </a>
+</p>*@
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Quantite)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Date_requisition)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.TB_articles.Nom_articles)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.TB_bonRequisition.Description)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Quantite)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Date_requisition)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TB_articles.Nom_articles)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TB_bonRequisition.Description)
+            </td>
+            <td>@Html.DisplayFor(modelItem => item.TB_bonRequisition.Id_bon_requisition)</td>
+           
+            @*<td>
+                <a href="@Url.Action("Edit", new { id=item.Id_details_requisition})" class="btn btn-primary btn-sm" data-toggle="tooltip" data-placement="top"
+                   title="Modifier">
+                    <span class="glyphicon glyphicon-edit"></span>
+                </a>
+                <a href="@Url.Action("Details", new { id = item.Id_details_requisition })" class="btn btn-info btn-sm" data-toggle="tooltip" data-placement="top"
+                   title="Afficher">
+                    <span class="glyphicon glyphicon-info-sign"></span>
+                </a>
+                <a href="@Url.Action("Delete", new { id = item.Id_details_requisition })" class="btn btn-danger btn-sm" data-toggle="tooltip" data-placement="top"
+                   title="supprimer">
+                    <span class="glyphicon glyphicon-trash"></span>
+                </a>
+            </td>*@
+        </tr>
+        
+
+    }
+
+</table>
+<div>
+    <a href="/BonRequisition/IndexSoumet" class="btn btn-info btn-sm" data-toggle="tooltip" data-placement="top"
+       title="Retour">
+        <span class="glyphicon glyphicon-arrow-left"></span> Retournez
+    </a> |
+
+   
+    <a href="/BonRequisition/UpdateValider/?id=@(ViewBag.code)" class="btn btn-warning btn-sm" name="soumettre" data-toggle="tooltip" data-placement="top"
+       title="Valider" id="soumettre">
+        <span class="glyphicon glyphicon-info-sign"></span> Valider
+    </a>
+    
+    
+</div>

@@ -1,0 +1,89 @@
+﻿@model StockApp.Models.TB_articles
+
+@{
+    ViewBag.Title = "Create";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2 class="text-info text-center">Ajouter Un Nouveau Article</h2>
+
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+       
+        <hr />
+        @Html.ValidationSummary(true)
+
+        <div class="form-group">
+
+            @*@foreach (var query in ViewBag.nom)
+            {
+
+                <input type="hidden" id="CreerPar" name="CreerPar" value="@query">
+
+
+            }*@
+            <label class="control-label col-md-2"> Nom Article</label>
+
+            <div class="col-md-10">
+                @Html.TextBoxFor(model => model.Nom_articles, new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.Nom_articles)
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="control-label col-md-2">Qte Alerte</label>
+
+            <div class="col-md-10">
+               @Html.TextBoxFor(model => model.Qte_alerte, new { @class = "form-control",@type="number" })
+                @*<input type="number" name="Qte_alerte" id="Qte_alerte" class="form-control" />*@
+                @Html.ValidationMessageFor(model => model.Qte_alerte)
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="control-label col-md-2">Description</label>
+
+            <div class="col-md-10">
+                @Html.TextAreaFor(model => model.Description, new { @class = "form-control input-sm", rows = 4 })
+                @Html.ValidationMessageFor(model => model.Description)
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="control-label col-md-2" for="Id_categorie">Categorie</label>
+            <div class="col-md-10">
+                @Html.DropDownList("Id_categorie", null, new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.Id_categorie)
+                
+            </div>
+            
+        </div>
+        
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <button type="submit" class="btn btn-primary btn-sm">
+                    <span class="glyphicon glyphicon-save"></span> Ajouter
+                </button>
+
+                <button type="reset" class="btn btn-primary btn-sm">
+                    <span class="glyphicon glyphicon-erase"></span> Reinitialiser
+                </button>
+
+            </div>
+        </div>
+    </div>
+}
+
+<div>
+    <a href="@Url.Action("Index")" class="btn btn-info">
+        <span class="glyphicon glyphicon-arrow-left"></span> Retourner a la liste
+    </a>
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

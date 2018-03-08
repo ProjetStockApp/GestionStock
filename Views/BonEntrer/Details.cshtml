@@ -1,0 +1,59 @@
+﻿@model StockApp.Models.TB_bonEntre
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>TB_bonEntre</h4>
+	<hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Date_entre)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Date_entre)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Description)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Description)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DateCreer)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DateCreer)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CreerPar)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CreerPar)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TB_livraison.Code_fiche)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TB_livraison.Code_fiche)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id_bon_entrestock }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

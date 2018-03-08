@@ -1,0 +1,153 @@
+﻿@model IEnumerable<StockApp.Models.TB_bonRequisition>
+
+@{
+    ViewBag.Title = "IndexSoumet";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2 class="text-info text-center">Liste requisition soumet</h2>
+
+
+
+@using (Html.BeginForm("IndexSoumet", "direction", FormMethod.Get))
+{
+
+    <p>
+        <div class="row">
+            
+                <a href="@Url.Action("Create")" class="btn btn-primary">
+                    <span class="glyphicon glyphicon-plus-sign"></span> Nouvelle Requisition
+                </a>
+
+        </div><!-- /.row -->
+    </p>
+
+}
+<table class=" table table-hover" id="myTable">
+    <thead>
+        <tr>
+            <th>
+                Description
+            </th>
+            <th>
+                Date requisition
+            </th>
+            <th>
+                Date Creer
+            </th>
+            <th>
+                Creer Par
+            </th>
+            <th>
+                Utilisateur
+            </th>
+            <th>
+                <a href="/BonRequisition/Index" class="btn btn-info btn-sm" data-toggle="tooltip" data-placement="top"
+                   title="Retour">
+                    <span class="glyphicon glyphicon-arrow-left"></span> Retournez
+                </a>
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Description)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Date_requisition)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DateCreer)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CreerPar)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.AspNetUser.UserName)
+                </td>
+                <td>
+                    @if (User.IsInRole("Utilisateur"))
+                    {
+                        <button type="button" class="btn btn-default btn-sm" name="soumettre" id="soumettre">
+                            <span class="glyphicon glyphicon-time"></span> En cour...
+                        </button>
+                    }
+                    else if (User.IsInRole("DirectUtilisateur"))
+                    {
+
+                        <a href="../DetailRequisition/IndexDetail/?id=@(item.Id_bon_requisition)" class="btn btn-info btn-sm" data-toggle="tooltip" data-placement="top"
+                           title="Details">
+                            <span class="glyphicon glyphicon-info-sign"></span> Details
+                        </a>
+
+                        <a href="/BonRequisition/UpdateValider/?id=@(item.Id_bon_requisition)" class="btn btn-warning btn-sm" name="soumettre" data-toggle="tooltip" data-placement="top"
+                           title="Valider" id="soumettre">
+                            <span class="glyphicon glyphicon-info-sign"></span> Valider
+                        </a>
+                    }
+
+
+                    @*<a href="../DetailRequisition/Index/?id=@(item.Id_bon_requisition)" class="btn btn-info btn-sm" data-toggle="tooltip" data-placement="top"
+                           title="Details">
+                            <span class="glyphicon glyphicon-info-sign"></span> Details
+                        </a>
+                        <a href="@Url.Action("Edit", new { id = item.Id_bon_requisition })" class="btn btn-primary btn-sm" data-toggle="tooltip" data-placement="top"
+                           title="Modifier">
+                            <span class="glyphicon glyphicon-edit"></span>
+                        </a>
+                        <a href="@Url.Action("Delete", new { id = item.Id_bon_requisition })" class="btn btn-danger btn-sm" data-toggle="tooltip" data-placement="top"
+                           title="supprimer">
+                            <span class="glyphicon glyphicon-trash"></span>
+                        </a>*@
+
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+@section scripts
+{
+    <script type="text/javascript">
+        $(function () {
+            $('[data-toggle="tooltip"]').tooltip()
+        })
+
+        $(document).ready(function () {
+
+            $("#myTable").DataTable({
+                "aLengthMenu": [[10, 15, 30, 60, 100, -1], [10, 15, 30, 60, 100, "All"]],
+                //"sPaginationType": "full_numbers",
+                "language": {
+                    "sProcessing": "Traitement en cours...",
+                    "sSearch": "Rechercher&nbsp;:",
+                    "sLengthMenu": "Afficher _MENU_ &eacute;l&eacute;ments par page",
+                    "sInfo": "Affichage de l'&eacute;l&eacute;ment _START_ &agrave; _END_ sur _TOTAL_ &eacute;l&eacute;ments",
+                    "sInfoEmpty": "Affichage de l'&eacute;l&eacute;ment 0 &agrave; 0 sur 0 &eacute;l&eacute;ment",
+                    "sInfoFiltered": "(filtr&eacute; de _MAX_ &eacute;l&eacute;ments au total)",
+                    "sInfoPostFix": "",
+                    "sLoadingRecords": "Chargement en cours...",
+                    "sZeroRecords": "Aucun &eacute;l&eacute;ment &agrave; afficher",
+                    "sEmptyTable": "Aucune donn&eacute;e disponible dans le tableau",
+
+                    "oPaginate": {
+                        "sFirst": "Premier",
+                        "sPrevious": "Pr&eacute;c&eacute;dent",
+                        "sNext": "Suivant",
+                        "sLast": "Dernier"
+                    },
+                    "oAria": {
+                        "sSortAscending": ": activer pour trier la colonne par ordre croissant",
+                        "sSortDescending": ": activer pour trier la colonne par ordre d&eacute;croissant"
+                    }
+                }
+
+            });
+        });
+    </script>
+
+
+}

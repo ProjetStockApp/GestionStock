@@ -1,0 +1,1185 @@
+﻿<h2>Create</h2>
+
+
+@using (Html.BeginForm()) 
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <h4>TB_bonEntre</h4>
+        <hr />
+        @Html.ValidationSummary(true)
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Date_entre, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Date_entre, new { HtmlAttributes = new { @class = "form-control orderDate", 
+               @id="orderDate" } })
+                @Html.ValidationMessageFor(model => model.Date_entre)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Description, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.TextAreaFor(model => model.Description, new { @class = "form-control", rows = 4 })
+                @Html.ValidationMessageFor(model => model.Description)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Id_livraison, "Code fiche livraison", new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownList("Id_livraison", null ,new{@class="form-control"})
+                @Html.ValidationMessageFor(model => model.Id_livraison)
+            </div>
+        </div>
+        @Html.DropDownList("Id_categorie",
+
+               new SelectList(ViewBag.Country as System.Collections.IEnumerable, "Id_categorie", "Nom_categorie"),
+
+"-- Select Categorie --", new { @id = "ldCategorie", @class = "pc form-control", @name = "cat' + rowCount + '" })
+        <div class="details">
+            <h2>
+                produit
+            </h2>
+            @*<table class="table" id="maintable">*@
+            <table class="table table-responsive" id="maintable">
+                <tr>
+                    <td>categorie</td>
+                    <td>Produit</td>
+                    <td>Quantite</td>
+                    @*<td>Rate</td>*@
+                    <td>&nbsp;</td>
+                </tr>
+                @* <tr class="mycontainer" id="mainrow">*@
+                <tr class="data-contact-person">
+                    <td>
+                        <select id="ldCategorie" class="pc form-control">
+                        <option>Select</option>
+                    </select>
+                    <span class="error">Select Category</span>
+                        <div id="categorie">
+                            <select id="ldCategorie" name="PolicyOrganisation">
+                                <option value="-1">Select</option>
+                                @foreach (var item in ViewBag.Country)
+                                {
+                                    <option value="@item.Id_categorie">@item.Nom_categorie</option>
+                                }
+                            </select>
+                            @*@Html.DropDownList("Id_categorie",
+
+               new SelectList(ViewBag.Country as System.Collections.IEnumerable, "Id_categorie", "Nom_categorie"),
+
+"-- Select Categorie --", new { @id = "ldCategorie", @class = "pc form-control", @name = "cat' + rowCount + '" })*@
+                        </div>
+                    </td>
+                    <td>
+                        @*@Html.DropDownList("Id_articles",
+
+                new SelectList(ViewBag.State as System.Collections.IEnumerable, "Id_articles", "Nom_articles"),
+
+  "-- Select Article --", new { @id = "ldArticle", @disabled = "disabled", @class = "product form-control", @name = "at' + rowCount + '" })*@
+                        <select id="ldArticle" class="product form-control">
+                        <option>Select</option>
+                    </select>
+                    <span class="error">Select product</span>
+                        <style>
+                            #ldArticle {
+                                color: red;
+                            }
+                        </style>
+
+                    </td>
+
+
+                    <td>
+                        <input type="number" name="quant" id="quantity" class="quantity form-control" />
+                        @* <span class="error">Valid quantity required</span>*@
+                    </td>
+                    @*<td>
+                    <input type="text" id="rate" class="rate form-control" />
+                    <span class="error">Valid rate required</span>
+                </td>*@
+                    <td>
+                        <input type="button" id="add" value="add" style="width:80px" class="btn btn-success" />
+                        <button type="button" id="btnAdds" class="btn btn-xs btn-primary classAdds">Add More</button>
+                    </td>
+                </tr>
+
+            </table>
+            <div id="orderItems">
+                <table class="table table-responsive" id="orderdetailsItems"></table>
+               @* <span id="orderItemError" style="color:red"></span>*@
+            </div>
+            <div style="padding:10px 0; text-align:right">
+                <input id="submit" type="button" value="Save Order" class="btn btn-warning" style="padding:10px 20px" />
+            </div>
+        </div>
+    
+
+
+
+        @*<div class="form-group">
+            @Html.LabelFor(model => model.DateCreer, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.DateCreer)
+                @Html.ValidationMessageFor(model => model.DateCreer)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.CreerPar, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.CreerPar)
+                @Html.ValidationMessageFor(model => model.CreerPar)
+            </div>
+        </div>*@
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Create" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+}
+
+<link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+<link rel="stylesheet" href="~/Content/themes/base/jquery-ui.css" />
+<script src="//code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<script src="~/Scripts/MonScripts.js"></script>
+<script src="~/Scripts/jquery-ui-1.12.1.js"></script>
+<script type="text/javascript">
+    $(function () {
+        $('#orderDate').datepicker({
+            dateFormat: 'mm-dd-yy'
+        })
+    })
+</script>
+<style>
+    span.error {
+        display: block;
+        visibility: hidden;
+        color: red;
+        font-size: 90%;
+    }
+
+    tr.error {
+        background-color: rgba(255,0,0,0.35);
+    }
+</style>
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+@*<script type="text/javascript">
+    $(document).ready(function () {
+        $(document).on("click", ".classAdds", function () { //
+           var rowCount = $('.data-contact-person').length + 1;
+            var contactdiv = '<tr class="data-contact-person">' +
+                '<td> <select id="ldCategorie" name="Categorie"> <option value="-1"> Select</option>
+                                @foreach (var item in ViewBag.Country)
+            {
+                "<option value='" + @item.Id_categorie + "'>" + @item.Nom_categorie + "</option>";
+            }
+               </select> </td>' +
+                '<td><select id="ldArticle" class="product form-control"><option>Select</option></select></td>' +
+                '<td><input type="number" id="quantity" class="quantity form-control" /></td>' +
+                '<td><button type="button" id="btnAdds" class="btn btn-xs btn-primary classAdds">Add More</button>' +
+                '<button type="button" id="btnDelete" class="deleteContact btn btn btn-danger btn-xs">Remove</button></td>' +
+                '</tr>';
+            $('#maintable').append(contactdiv); // Adding these controls to Main table class
+        });
+    });
+</script>*@
+
+  
+
+<script>
+
+    var Categories = []
+    //fetch categories from database
+    function LoadCategory(element) {
+        if (Categories.length == 0) {
+            //ajax function for fetch data
+            $.ajax({
+                type: "GET",
+                url: "/BonEntrer/getProductCategories",
+                success: function (data) {
+                    Categories = data;
+                    //render catagory
+                    renderCategory(element);
+                }
+            })
+        }
+        else {
+            //render catagory to the element
+            renderCategory(element);
+        }
+    }
+
+    function renderCategory(element) {
+        var $ele = $(element);
+        $ele.empty();
+        $ele.append($('<option/>').val('0').text('Select'));
+        $.each(Categories, function (i, val) {
+            $ele.append($('<option/>').val(val.Id_categorie).text(val.Nom_categorie));
+        })
+    }
+
+    //fetch products
+    function LoadProduct(categoryDD) {
+        $.ajax({
+            type: "GET",
+            url: "/BonEntrer/getProducts",
+            data: { 'Id_categorie': $(categoryDD).val() },
+            success: function (data) {
+                //render products to appropriate dropdown
+                renderProduct($(categoryDD).parents('.mycontainer').find('select.product'), data);
+            },
+            error: function (error) {
+                console.log(error);
+            }
+        })
+    }
+
+    function renderProduct(element, data) {
+        //render product
+        var $ele = $(element);
+        $ele.empty();
+        $ele.append($('<option/>').val('0').text('Select'));
+        $.each(data, function (i, val) {
+            $ele.append($('<option/>').val(val.Id_articles).text(val.Nom_articles));
+        })
+    }
+
+    $(document).ready(function () {
+        //Add button click event
+        $('#add').click(function () {
+            //validation and add order items
+            var isAllValid = true;
+            if ($('#ldCategorie').val() == "0") {
+                isAllValid = false;
+                $('#ldCategorie').siblings('span.error').css('visibility', 'visible');
+            }
+            else {
+                $('#ldCategorie').siblings('span.error').css('visibility', 'hidden');
+            }
+
+            if ($('#ldArticle').val() == "0") {
+                isAllValid = false;
+                $('#ldArticle').siblings('span.error').css('visibility', 'visible');
+            }
+            else {
+                $('#ldArticle').siblings('span.error').css('visibility', 'hidden');
+            }
+
+            if (!($('#quantity').val().trim() != '' && (parseInt($('#quantity').val()) || 0))) {
+                isAllValid = false;
+                $('#quantity').siblings('span.error').css('visibility', 'visible');
+            }
+            else {
+                $('#quantity').siblings('span.error').css('visibility', 'hidden');
+            }
+
+            //if (!($('#rate').val().trim() != '' && !isNaN($('#rate').val().trim()))) {
+            //    isAllValid = false;
+            //    $('#rate').siblings('span.error').css('visibility', 'visible');
+            //}
+            //else {
+            //    $('#rate').siblings('span.error').css('visibility', 'hidden');
+            //}
+
+            if (isAllValid) {
+                var $newRow = $('#mainrow').clone().removeAttr('id');
+                $('.pc', $newRow).val($('#ldCategorie').val());
+                $('.product', $newRow).val($('#ldArticle').val());
+
+                //Replace add button with remove button
+                $('#add', $newRow).addClass('remove').val('Remove').removeClass('btn-success').addClass('btn-danger');
+
+                //remove id attribute from new clone row
+                $('#ldCategorie,#ldArticle,#quantity,#add', $newRow).removeAttr('id');
+                $('span.error', $newRow).remove();
+                //append clone row
+                $('#orderdetailsItems').append($newRow);
+
+                //clear select data
+                $('#ldCategorie,#ldArticle').val('0');
+                $('#quantity').val('');
+                $('#orderItemError').empty();
+            }
+
+        })
+
+        //remove button click event
+        $('#orderdetailsItems').on('click', '.remove', function () {
+            $(this).parents('tr').remove();
+        });
+
+        $('#submit').click(function () {
+            var isAllValid = true;
+
+            //validate order items
+            $('#orderItemError').text('');
+            var list = [];
+            var errorItemCount = 0;
+            $('#orderdetailsItems tbody tr').each(function (index, ele) {
+                if (
+                    $('select.product', this).val() == "0" ||
+                    (parseInt($('.quantity', this).val()) || 0) == 0
+
+                    //|| $('.rate', this).val() == "" ||
+                    //isNaN($('.rate', this).val())
+                    ) {
+                    errorItemCount++;
+                    $(this).addClass('error');
+                } else {
+                    var orderItem = {
+                        ProductID: $('select.product', this).val(),
+                        Quantity: parseInt($('.quantity', this).val()),
+                        //Rate: parseFloat($('.rate', this).val())
+                    }
+                    list.push(orderItem);
+                }
+            })
+
+            if (errorItemCount > 0) {
+                $('#orderItemError').text(errorItemCount + " invalid entry in order item list.");
+                isAllValid = false;
+            }
+
+            if (list.length == 0) {
+                $('#orderItemError').text('At least 1 order item required.');
+                isAllValid = false;
+            }
+
+            if ($('#orderNo').val().trim() == '') {
+                $('#orderNo').siblings('span.error').css('visibility', 'visible');
+                isAllValid = false;
+            }
+            else {
+                $('#orderNo').siblings('span.error').css('visibility', 'hidden');
+            }
+
+            if ($('#orderDate').val().trim() == '') {
+                $('#orderDate').siblings('span.error').css('visibility', 'visible');
+                isAllValid = false;
+            }
+            else {
+                $('#orderDate').siblings('span.error').css('visibility', 'hidden');
+            }
+
+            if (isAllValid) {
+                var data = {
+                    OrderNo: $('#orderNo').val().trim(),
+                    OrderDateString: $('#orderDate').val().trim(),
+                    Description: $('#description').val().trim(),
+                    OrderDetails: list
+                }
+
+                $(this).val('Please wait...');
+
+                $.ajax({
+                    type: 'POST',
+                    url: '/BonEntrerController/save',
+                    data: JSON.stringify(data),
+                    contentType: 'application/json',
+                    success: function (data) {
+                        if (data.status) {
+                            alert('Successfully saved');
+                            //here we will clear the form
+                            list = [];
+                            $('#orderNo,#orderDate,#description').val('');
+                            $('#orderdetailsItems').empty();
+                        }
+                        else {
+                            alert('Error');
+                        }
+                        $('#submit').val('Save');
+                    },
+                    error: function (error) {
+                        console.log(error);
+                        $('#submit').val('Save');
+                    }
+                });
+            }
+
+        });
+
+    });
+
+   // LoadCategory($('#productCategory'));
+</script>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+@Scripts.Render("~/Scripts/MonScripts.js")
+}
+
+@* 0000000000000000000000000000000000000000000 *@
+
+<script type="text/javascript">
+
+
+    $(document).ready(function () {
+
+        $("[id$=ldCategorie]").change(function () {
+
+            var CountryID = $(this).val();
+
+            var select = $("#ldArticle");
+
+            if (CountryID != "") {
+
+                $.getJSON("../BonEntrer/LoadStatesByCountryID", { CountryID: CountryID },
+
+
+                    function (StatesData) {
+
+
+                        select.removeAttr('disabled');
+
+
+                        select.empty();
+
+
+                        select.append($('<option/>', { value: 0, text: "-- Select Article --" }));
+
+
+                        $.each(StatesData, function (index, itemData) {
+
+
+                            select.append($('<option/>',
+
+
+                                {
+
+
+                                    value: itemData.Value,
+
+
+                                    text: itemData.Text
+
+
+                                }));
+
+
+                        });
+
+
+                    });
+
+
+            }
+
+
+            else {
+
+
+                select.attr('disabled', 'disabled');
+
+
+                select.val(0);
+
+
+                var State = $("#ddlCity");
+
+
+                State.attr('disabled', 'disabled');
+
+
+                State.val(0);
+
+
+            }
+
+
+        });
+
+
+    //    $("#ldArticle").change(function () {
+
+
+    //        var StateID = $(this).val();
+
+
+    //        var select = $("#ddlCity");
+
+
+    //        if (StateID != 0) {
+
+
+    //            $.getJSON("../BonEntrer/LoadCitiesByStateID", { StateID: StateID },
+
+
+    //                function (CitiesData) {
+
+
+    //                    select.removeAttr('disabled');
+
+
+    //                    select.empty();
+
+
+    //                    select.append($('<option/>', { value: 0, text: "-- Select City --" }));
+
+
+    //                    $.each(CitiesData, function (index, itemData) {
+
+
+    //                        select.append($('<option/>',
+
+
+    //                            {
+
+
+    //                                value: itemData.Value,
+
+
+    //                                text: itemData.Text
+
+
+    //                            }));
+
+
+    //                    });
+
+
+    //                });
+
+
+    //        }
+
+
+    //        else {
+
+
+    //            select.attr('disabled', 'disabled');
+
+
+    //            select.val(0);
+
+
+    //        }
+
+
+    //    });
+
+
+    });
+
+
+</script>
+
+
+
+    <div class="container">
+        <h2>Basic Table</h2>
+        <table class="table" id="maintable">
+            <thead>
+                <tr>
+                    <th>Firstname</th>
+                    <th>Lastname</th>
+                    <th>Email</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="data-contact-person">
+                    <td>
+                        <input type="text" name="f-name" class="form-control f-name01" />
+                    </td>
+                    <td>
+                        <input type="text" name="l-name" class="form-control l-name01" />
+                    </td>
+                    <td>
+                        <input type="text" name="email" class="form-control email01" />
+                    </td>
+                    <td>
+                        <button type="button" id="btnAdd" class="btn btn-xs btn-primary classAdd">Add More</button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <button type="button" id="btnSubmit" class="btn btn-primary btn-md pull-right btn-sm">Submit</button>
+    </div>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $(document).on("click", ".classAdd", function () { //
+            var rowCount = $('.data-contact-person').length + 1;
+            var contactdiv = '<tr class="data-contact-person">' +
+                '<td><input type="text" name="f-name' + rowCount + '" class="form-control f-name01" /></td>' +
+                '<td><input type="text" name="l-name' + rowCount + '" class="form-control l-name01" /></td>' +
+                '<td><input type="text" name="email' + rowCount + '" class="form-control email01" /></td>' +
+                '<td><button type="button" id="btnAdd" class="btn btn-xs btn-primary classAdd">Add More</button>' +
+                '<button type="button" id="btnDelete" class="deleteContact btn btn btn-danger btn-xs">Remove</button></td>' +
+                '</tr>';
+            $('#maintable').append(contactdiv); // Adding these controls to Main table class
+        });
+    });
+</script>  
+
+<script type="text/javascript">
+    $(function () {
+        var new_dialog = function (type, row) {
+            var dlg = $("#dialog-form").clone();
+            var fname = dlg.find(("#first-name")),
+        lname = dlg.find(("#last-name")),
+        email = dlg.find(("#email")),
+        password = dlg.find(("#password"));
+            type = type || 'Create';
+            var config = {
+                autoOpen: true,
+                height: 300,
+                width: 350,
+                modal: true,
+                buttons: {
+                    "Create an account": save_data,
+                    "Cancel": function () {
+                        dlg.dialog("close");
+                    }
+                },
+                close: function () {
+                    dlg.remove();
+                }
+            };
+            if (type === 'Edit') {
+                config.title = "Edit User";
+                get_data();
+                delete (config.buttons['Create an account']);
+                config.buttons['Edit account'] = function () {
+                    row.remove();
+                    save_data();
+                };
+            }
+            dlg.dialog(config);
+            function get_data() {
+                var _email = $(row.children().get(1)).text(),
+            _password = $(row.children().get(2)).text();
+                email.val(_email);
+                password.val(_password);
+            }
+            function save_data() {
+                $("#users tbody").append("<tr>" + "<td>" + (fname.find("option:selected").text() + ' ').concat(lname.find("option:selected").text()) + "</td>" + "<td>" + email.val() + "</td>" + "<td>" + password.val() + "</td>" + "<td><a href='' class='edit'>Edit</a></td>" + "<td><span class='delete'><a href=''>Delete</a></span></td>" + "</tr>");
+                dlg.dialog("close");
+            }
+        };
+        $(document).on('click', 'span.delete', function () {
+            $(this).closest('tr').find('td').fadeOut(1000,
+    function () {
+        // alert($(this).text());
+        $(this).parents('tr:first').remove();
+    });
+            return false;
+        });
+        $(document).on('click', 'td a.edit', function () {
+            new_dialog('Edit', $(this).parents('tr'));
+            return false;
+        });
+        $("#create-user").button().click(new_dialog);
+    });
+</script>
+<style type="text/css">
+    body {
+        /*//font-size: 62.5%;*/
+    }
+
+    label, input {
+        display: block;
+    }
+
+        input.text {
+            margin-bottom: 12px;
+            width: 95%;
+            padding: .4em;
+        }
+
+    fieldset {
+        padding: 0;
+        border: 0;
+        margin-top: 25px;
+    }
+
+    h1 {
+        font-size: 1.2em;
+        margin: .6em 0;
+    }
+
+    div#users-contain {
+        width: 350px;
+        margin: 20px 0;
+    }
+
+        div#users-contain table {
+            margin: 1em 0;
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+            div#users-contain table td, div#users-contain table th {
+                border: 1px solid #eee;
+                padding: .6em 10px;
+                text-align: left;
+            }
+
+    .ui-dialog .ui-state-error {
+        padding: .3em;
+    }
+
+    .validateTips {
+        border: 1px solid transparent;
+        padding: 0.3em;
+    }
+
+    #dialog-form {
+        display: none;
+    }
+</style>
+<body>
+    <div id="dialog-form" title="Create new user">
+        <p class="validateTips">
+            All form fields are required.
+        </p>
+        <form>
+            <fieldset>
+                <label for="first_name">
+                    First Name
+                </label>
+                @*<select id="first-name">
+                    <option value="1">Arun</option>
+                    <option value="2">Ganesh</option>
+                    <option value="3">Suresh</option>
+                    <option value="4">Sanganabasu</option>
+                </select>*@
+
+                @Html.DropDownList("Id_categorie",
+
+               new SelectList(ViewBag.Country as System.Collections.IEnumerable, "Id_categorie", "Nom_categorie"),
+
+"-- Select Categorie --", new { @id = "ldCategorie", @class = "pc form-control", @name = "cat' + rowCount + '" })
+                <label for="last_name">
+                    Last Name
+                </label>
+                @*<select id="last-name">
+                    <option value="1">Hulagabal</option>
+                    <option value="2">Cheemalamudi</option>
+                    <option value="3">Ganiger</option>
+                    <option value="4">Kattriguppe</option>
+                </select>*@
+
+                @Html.DropDownList("Id_articles",
+
+                new SelectList(ViewBag.State as System.Collections.IEnumerable, "Id_articles", "Nom_articles"),
+
+  "-- Select Article --", new { @id = "ldArticle", @disabled = "disabled", @class = "product form-control", @name = "at' + rowCount + '" })
+                <label for="email">
+                    Email
+                </label>
+                <input type="text" name="email" id="email" value="" class="text ui-widget-content ui-corner-all" />
+                <label for="password">
+                    Password
+                </label>
+                <input type="password" name="password" id="password" value="" class="text ui-widget-content ui-corner-all" />
+            </fieldset>
+        </form>
+    </div>
+    <div id="users-contain" class="ui-widget">
+        <h1>
+            Existing Users:
+        </h1>
+        <table id="users" class="ui-widget ui-widget-content">
+            <thead>
+                <tr class="ui-widget-header ">
+                    <th>Name </th>
+                    <th>Email </th>
+                    <th>Password</th>
+                    <th> Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td class="custom-name"> John Doe </td>
+                    <td>john.doe@example.com</td>
+                    <td>johndoe1 </td>
+                    <td><a class="edit" href="">Edit</a> </td>
+                    <td><span class="delete"><a href="">Delete</a></span>   </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <button id="create-user">
+        Create new user
+    </button>
+</body>
+
+000000000000000000000000000000000000000000000000000000000000000000
+
+@*]]]]]]]]]]]]]]]]]]]*@
+
+
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <div class="row">
+            <h2 class="panel-title pull-left">
+                Orders
+            </h2>
+            <button style="margin-right:5px" id="addNewItem" class="btn btn-primary pull-right">Add New</button>
+        </div>
+    </div>
+
+    <div class="panel-body">
+        <table id="ordersTable" class="table table-striped table-bordered">
+            <thead>
+                <tr>
+                    <th> Customer Name</th>
+                    <th>Address</th>
+                    <th>Date</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody></tbody>
+        </table>
+    </div>
+</div>
+
+
+<div id="newOrderModal" class="modal fade" tabindex="-1" role="dialog">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">New Order Information</h4>
+            </div>
+            <div class="modal-body">
+                <h3>
+                    Order Master
+                </h3>
+                <hr />
+                <div class="form-horizontal">
+                    <input type="hidden" id="orderMasterId" />
+                    <div class="form-group">
+                        <label class="control-label col-md-2">
+                            Customer Name
+                        </label>
+                        <div class="col-md-4">
+                            <input type="text" id="customerName" placeholder="Customer Name" class="form-control" />
+                        </div>
+                        <label class="control-label col-md-2">
+                            Address
+                        </label>
+                        <div class="col-md-4">
+                            <input type="text" id="address" placeholder="Customer Address" class="form-control" />
+                        </div>
+                    </div>
+                </div>
+
+                <h3 style="margin-top:10px">Order Details</h3>
+
+                <table id="detailsTable" class="table">
+                    <thead>
+                        <tr>
+                            <th style="width:35%">Product</th>
+                            <th style="width:20%">Unit Price</th>
+                            <th style="width:15%">Quantity</th>
+                            <th style="width:20%">Amount</th>
+                            <th style="width:10%"></th>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                    <tfoot>
+                        <tr>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td>
+                                <a class="btn btn-info" id="addMore">Add Detail</a>
+                            </td>
+                        </tr>
+                    </tfoot>
+                </table>
+
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <button id="saveOrder" type="button" class="btn btn-primary">Save Order</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div id="orderDetailsModal" class="modal fade" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">Order Details</h4>
+            </div>
+            <div class="modal-body">
+
+                <div class="form-horizontal">
+                    <div class="form-group">
+                        <input type="hidden" id="detailId" />
+                        <label class="control-label col-md-3">
+                            Product Name
+                        </label>
+                        <div class="col-md-9">
+                            <input type="text" id="productName" placeholder="Product Name" class="form-control" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label col-md-3">
+                            Price
+                        </label>
+                        <div class="col-md-4">
+                            <input type="text" id="price" placeholder="Product Price" class="form-control" />
+                        </div>
+                        <label class="control-label col-md-2">
+                            Quanity
+                        </label>
+                        <div class="col-md-3">
+                            <select class="form-control" id="quantity">
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                                <option value="4">4</option>
+                                <option value="5">5</option>
+                            </select>
+
+                            
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-md-3 col-lg-offset-9">
+                            <a id="addToList" class="btn btn-default">Add To List</a>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+</div>
+
+@section scripts{
+
+@Scripts.Render("~/bundles/jqueryval")
+@Scripts.Render("~/Scripts/MonScripts.js")
+
+@Scripts.Render("~/Content/jquery.dataTables.min.css")
+@Scripts.Render("~/Scripts/jquery.dataTables.min.js")
+@Scripts.Render("~/Content/themes/base/jquery-ui.css")
+@Scripts.Render("~/Scripts/jquery-ui-1.12.1.js")
+@Scripts.Render("~/Scripts/MonScripts.js")
+
+    <script>
+        $(function () {
+
+
+            var orderUrl = '@Url.Action("getOrders", "Home")';
+
+            var table = $("#ordersTable").DataTable({
+                "processing": true,
+                "serverSide": true,
+                "filter": false,
+                "orderMulti": false,
+                "ajax": {
+                    "url": orderUrl,
+                    "type": "POST",
+                    "datatype": "json"
+                },
+                "columns": [
+
+                    { "data": "customerName", "name": "customerName", "autoWidth": true },
+                    { "data": "address", "name": "address", "autoWidth": true },
+                    { "data": "orderDate", "name": "orderDate", "autoWidth": true },
+                    { "data": null, "name": "Action", "defaultContent": '<a href="#" class="editItem">Edit Order</a>', "autoWidth": true }
+
+                ]
+            });
+
+
+
+        var saveUrl = '@Url.Action("saveOrder", "Home", new { area=""})';
+            $("#addNewItem").click(function (e) {
+                e.preventDefault();
+                $("#customerName").val('');
+                $("#address").val('');
+                $("#orderMasterId").val('');
+                $("#detailsTable tbody tr").remove();
+                $("#saveOrder").html("Save Order");
+                $('#newOrderModal').modal('show');
+            });
+
+            $("#addMore").click(function (e) {
+                e.preventDefault();
+                $('#orderDetailsModal').modal('show');
+            });
+
+            $("#addToList").click(function (e) {
+                e.preventDefault();
+
+                //if ($.trim($("#productName").val()) == "" || $.trim($("#price").val()) == "" || $.trim($("#quantity").val()) == "") return;
+
+                var productName = $("#productName").val(),
+                    price = $("#price").val(),
+                    quantity = $("#quantity").val(),
+                    detailsTableBody = $("#detailsTable tbody");
+
+                var productItem = '<tr><td>' + productName + '</td><td>' + price + '</td><td>' + quantity + '</td><td>' + (parseFloat(price) * parseInt(quantity)) + '</td><td><a data-itemId="0" href="#" class="deleteItem">Remove</a></td></tr>';
+                detailsTableBody.append(productItem);
+                clearItem();
+            });
+
+
+
+            function clearItem() {
+                $("#productName").val('');
+                $("#price").val('');
+                $("#quantity").val('');
+            }
+
+            function saveOrder(data) {
+                return $.ajax({
+                    contentType: 'application/json; charset=utf-8',
+                    dataType: 'json',
+                    type: 'POST',
+                    url: saveUrl,
+                    data: data
+                });
+            }
+
+
+            function getOrder(id) {
+                return $.ajax({
+                    type: 'GET',
+                    url: '@Url.Action("getSingleOrder", "Home", new { area = "" })',
+                    data: "orderId=" + id
+                });
+            }
+
+        function getSingleOrderDetail(id) {
+            return $.ajax({
+                type: 'GET',
+                url: '@Url.Action("getSingleOrderDetail", "Home", new { area = "" })',
+                data: "id=" + id
+            });
+        }
+
+            function deleteOrderItem(id) {
+                return $.ajax({
+                    type: 'POST',
+                    url: '@Url.Action("deleteOrderItem", "Home", new { area = "" })',
+                    data: "id=" + id
+                });
+            }
+
+            $(document).on('click', 'a.deleteItem', function (e) {
+                e.preventDefault();
+                var $self = $(this);
+                if ($(this).attr('data-itemId') == "0") {
+                    $(this).parents('tr').css("background-color", "#FF3700").fadeOut(800, function () {
+                        $(this).remove();
+                    });
+                } else {
+                    $.when(deleteOrderItem($(this).attr('data-itemId'))).then(function (res) {
+                        $self.parents('tr').css("background-color", "#FF3700").fadeOut(800, function () {
+                            $(this).remove();
+                        });
+                    }).fail(function (err) {
+
+                    });
+                }
+            });
+
+
+
+
+            $("#saveOrder").click(function (e) {
+                e.preventDefault();
+
+                var orderArr = [];
+                orderArr.length = 0;
+
+                $.each($("#detailsTable tbody tr"), function () {
+                    orderArr.push({
+                        ProductName: $(this).find('td:eq(0)').html(),
+                        Quantity: $(this).find('td:eq(2)').html(),
+                        Amount: $(this).find('td:eq(1)').html()
+                    });
+                });
+
+                var data = JSON.stringify({
+                    CustomerName: $("#customerName").val(),
+                    Address: $("#address").val(),
+                    OrderDetails: orderArr
+                });
+
+                $.when(saveOrder(data)).then(function (response) {
+                    console.log(response);
+                }).fail(function (err) {
+                    console.log(err);
+                });
+            });
+
+
+
+
+            $(document).on("click", '.editItem', function (e) {
+                var data = table.row($(this).parents('tr')).data();
+                //console.log(data);
+                e.preventDefault();
+                var id = data.masterId;
+
+                $.when(getOrder(id)).then(function (res) {
+                    var detArr = [];
+                    $("#customerName").val(res.result.CustomerName);
+                    $("#address").val(res.result.Address);
+                    $("#orderMasterId").val(res.result.MasterId);
+
+                    $.each(res.result.OrderDetails, function (i, v) {
+                        detArr.push('<tr><td>' + v.ProductName + '</td><td>' + v.Amount + '</td><td>' + v.Quantity + '</td><td>' + (parseFloat(v.Amount) * parseInt(v.Quantity)) + '</td><td><a data-itemId="' + v.DetailId + '" href="#" class="deleteItem">Delete</a> | <a href="#" data-itemId="' + v.DetailId + '" class="editDetail">Edit</a></td></tr>')
+                    });
+                    $("#detailsTable tbody").append(detArr);
+                    $("#saveOrder").html("Save Update");
+                    $('#newOrderModal').modal('show');
+
+                }).fail(function (err) {
+                    console.log(err);
+                });
+            });
+
+
+            $(document).on("click", '.editDetail', function (e) {
+
+                e.preventDefault();
+                var id = $(this).attr("data-itemid");
+
+                $.when(getSingleOrderDetail(id)).then(function (res) {
+                    var detArr = [],
+                        data = res.result;
+                    $("#detailId").val(data.DetailId);
+                    $("#productName").val(data.ProductName);
+                    $("#price").val(data.Amount);
+                    $("#quantity").val(data.Quantity);
+
+                    $('#orderDetailsModal').modal('show');
+
+                }).fail(function (err) {
+                    console.log(err);
+                });
+            });
+
+
+
+        });
+
+
+    </script>
+}
+
+@* 0000000000000000000000000000000000000000000 *@

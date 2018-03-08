@@ -1,0 +1,9 @@
+Enterprise Manager Database Control URL - (orcl) :
+http://Modele-HP:1158/em
+
+Vos fichiers de configuration de base de données ont été installés dans C:\oracle\product\10.2.0, alors que dautres composants sélectionnés pour linstallation ont été installés dans C:\oracle\product\10.2.0\db_2. Veillez à ne pas supprimer ces fichiers de configuration.
+URL iSQL*Plus :
+http://Modele-HP:5560/isqlplus
+
+URL DBA iSQL*Plus :
+http://Modele-HP:5560/isqlplus/dba

@@ -1,0 +1,58 @@
+﻿@model StockApp.Models.TB_detail_requisition
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Details de l'article</h2>
+
+<div>
+
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            Quantite
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Quantite)
+        </dd>
+
+        <dt>
+            Date Requisition
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Date_requisition)
+        </dd>
+
+        <dt>
+            Nom articles
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TB_articles.Nom_articles)
+        </dd>
+
+        <dt>
+            Description
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TB_bonRequisition.Description)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    <a href="@Url.Action("Edit", new { id = Model.Id_details_requisition })" class="btn btn-primary">
+        <span class="glyphicon glyphicon-edit"></span> Editer
+    </a> |
+
+    <a href="/DetailRequisition/Index/?id=@(Model.Id_bon_requisition)" class="btn btn-info" data-toggle="tooltip" data-placement="top"
+       title="Retour">
+        <span class="glyphicon glyphicon-arrow-left"></span> Retournez
+    </a>
+
+</p>

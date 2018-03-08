@@ -1,0 +1,249 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="stockfaesdbModelStoreContainer" CdmEntityContainer="stockfaesdbEntities">
+    <EntitySetMapping Name="C__MigrationHistory">
+      <EntityTypeMapping TypeName="stockfaesdbModel.C__MigrationHistory">
+        <MappingFragment StoreEntitySet="__MigrationHistory">
+          <ScalarProperty Name="MigrationId" ColumnName="MigrationId" />
+          <ScalarProperty Name="ContextKey" ColumnName="ContextKey" />
+          <ScalarProperty Name="Model" ColumnName="Model" />
+          <ScalarProperty Name="ProductVersion" ColumnName="ProductVersion" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="AspNetRoles">
+      <EntityTypeMapping TypeName="stockfaesdbModel.AspNetRole">
+        <MappingFragment StoreEntitySet="AspNetRoles">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="AspNetUserClaims">
+      <EntityTypeMapping TypeName="stockfaesdbModel.AspNetUserClaim">
+        <MappingFragment StoreEntitySet="AspNetUserClaims">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="ClaimType" ColumnName="ClaimType" />
+          <ScalarProperty Name="ClaimValue" ColumnName="ClaimValue" />
+          <ScalarProperty Name="User_Id" ColumnName="User_Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="AspNetUserLogins">
+      <EntityTypeMapping TypeName="stockfaesdbModel.AspNetUserLogin">
+        <MappingFragment StoreEntitySet="AspNetUserLogins">
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
+          <ScalarProperty Name="LoginProvider" ColumnName="LoginProvider" />
+          <ScalarProperty Name="ProviderKey" ColumnName="ProviderKey" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="AspNetUsers">
+      <EntityTypeMapping TypeName="stockfaesdbModel.AspNetUser">
+        <MappingFragment StoreEntitySet="AspNetUsers">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="UserName" ColumnName="UserName" />
+          <ScalarProperty Name="NomComplet" ColumnName="NomComplet" />
+          <ScalarProperty Name="Id_direction" ColumnName="Id_direction" />
+          <ScalarProperty Name="PasswordHash" ColumnName="PasswordHash" />
+          <ScalarProperty Name="SecurityStamp" ColumnName="SecurityStamp" />
+          <ScalarProperty Name="Discriminator" ColumnName="Discriminator" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="FileDetails">
+      <EntityTypeMapping TypeName="stockfaesdbModel.FileDetail">
+        <MappingFragment StoreEntitySet="FileDetail">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="FileName" ColumnName="FileName" />
+          <ScalarProperty Name="Extension" ColumnName="Extension" />
+          <ScalarProperty Name="Idlivraison" ColumnName="Idlivraison" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="sysdiagrams">
+      <EntityTypeMapping TypeName="stockfaesdbModel.sysdiagram">
+        <MappingFragment StoreEntitySet="sysdiagrams">
+          <ScalarProperty Name="name" ColumnName="name" />
+          <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+          <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+          <ScalarProperty Name="version" ColumnName="version" />
+          <ScalarProperty Name="definition" ColumnName="definition" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TB_articles">
+      <EntityTypeMapping TypeName="stockfaesdbModel.TB_articles">
+        <MappingFragment StoreEntitySet="TB_articles">
+          <ScalarProperty Name="Id_articles" ColumnName="Id_articles" />
+          <ScalarProperty Name="Nom_articles" ColumnName="Nom_articles" />
+          <ScalarProperty Name="Qte_alerte" ColumnName="Qte_alerte" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="Id_categorie" ColumnName="Id_categorie" />
+          <ScalarProperty Name="DateCreer" ColumnName="DateCreer" />
+          <ScalarProperty Name="CreerPar" ColumnName="CreerPar" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TB_bonEntre">
+      <EntityTypeMapping TypeName="stockfaesdbModel.TB_bonEntre">
+        <MappingFragment StoreEntitySet="TB_bonEntre">
+          <ScalarProperty Name="Id_bon_entrestock" ColumnName="Id_bon_entrestock" />
+          <ScalarProperty Name="Date_entre" ColumnName="Date_entre" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="Id_livraison" ColumnName="Id_livraison" />
+          <ScalarProperty Name="DateCreer" ColumnName="DateCreer" />
+          <ScalarProperty Name="CreerPar" ColumnName="CreerPar" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TB_bonRequisition">
+      <EntityTypeMapping TypeName="stockfaesdbModel.TB_bonRequisition">
+        <MappingFragment StoreEntitySet="TB_bonRequisition">
+          <ScalarProperty Name="Id_bon_requisition" ColumnName="Id_bon_requisition" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
+          <ScalarProperty Name="Date_requisition" ColumnName="Date_requisition" />
+          <ScalarProperty Name="DateCreer" ColumnName="DateCreer" />
+          <ScalarProperty Name="CreerPar" ColumnName="CreerPar" />
+          <ScalarProperty Name="IsSoumettre" ColumnName="IsSoumettre" />
+          <ScalarProperty Name="Validate" ColumnName="Validate" />
+          <ScalarProperty Name="Date_aprouver" ColumnName="Date_aprouver" />
+          <ScalarProperty Name="Date_validation" ColumnName="Date_validation" />
+          <ScalarProperty Name="Administrateur" ColumnName="Administrateur" />
+          <ScalarProperty Name="Directeur" ColumnName="Directeur" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TB_bonSortie_stock">
+      <EntityTypeMapping TypeName="stockfaesdbModel.TB_bonSortie_stock">
+        <MappingFragment StoreEntitySet="TB_bonSortie_stock">
+          <ScalarProperty Name="Id_bon_sortiestock" ColumnName="Id_bon_sortiestock" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="Id_employe" ColumnName="Id_employe" />
+          <ScalarProperty Name="Date_sortie" ColumnName="Date_sortie" />
+          <ScalarProperty Name="DateCreer" ColumnName="DateCreer" />
+          <ScalarProperty Name="CreerPar" ColumnName="CreerPar" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TB_categorie">
+      <EntityTypeMapping TypeName="stockfaesdbModel.TB_categorie">
+        <MappingFragment StoreEntitySet="TB_categorie">
+          <ScalarProperty Name="Id_categorie" ColumnName="Id_categorie" />
+          <ScalarProperty Name="Nom_categorie" ColumnName="Nom_categorie" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="DateCreer" ColumnName="DateCreer" />
+          <ScalarProperty Name="CreerPar" ColumnName="CreerPar" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TB_detail_requisition">
+      <EntityTypeMapping TypeName="stockfaesdbModel.TB_detail_requisition">
+        <MappingFragment StoreEntitySet="TB_detail_requisition">
+          <ScalarProperty Name="Id_details_requisition" ColumnName="Id_details_requisition" />
+          <ScalarProperty Name="Id_bon_requisition" ColumnName="Id_bon_requisition" />
+          <ScalarProperty Name="Id_articles" ColumnName="Id_articles" />
+          <ScalarProperty Name="Quantite" ColumnName="Quantite" />
+          <ScalarProperty Name="Date_requisition" ColumnName="Date_requisition" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TB_detail_sortie">
+      <EntityTypeMapping TypeName="stockfaesdbModel.TB_detail_sortie">
+        <MappingFragment StoreEntitySet="TB_detail_sortie">
+          <ScalarProperty Name="Id_details_sortie" ColumnName="Id_details_sortie" />
+          <ScalarProperty Name="Id_bonsortie" ColumnName="Id_bonsortie" />
+          <ScalarProperty Name="Id_lot_entrestock" ColumnName="Id_lot_entrestock" />
+          <ScalarProperty Name="Quantite" ColumnName="Quantite" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TB_direction">
+      <EntityTypeMapping TypeName="stockfaesdbModel.TB_direction">
+        <MappingFragment StoreEntitySet="TB_direction">
+          <ScalarProperty Name="Id_direction" ColumnName="Id_direction" />
+          <ScalarProperty Name="Nom_direction" ColumnName="Nom_direction" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="DateCreer" ColumnName="DateCreer" />
+          <ScalarProperty Name="CreerPar" ColumnName="CreerPar" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TB_employe">
+      <EntityTypeMapping TypeName="stockfaesdbModel.TB_employe">
+        <MappingFragment StoreEntitySet="TB_employe">
+          <ScalarProperty Name="Id_employe" ColumnName="Id_employe" />
+          <ScalarProperty Name="Nom" ColumnName="Nom" />
+          <ScalarProperty Name="Prenom" ColumnName="Prenom" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="Telephone" ColumnName="Telephone" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="Id_direction" ColumnName="Id_direction" />
+          <ScalarProperty Name="DateCreer" ColumnName="DateCreer" />
+          <ScalarProperty Name="CreerPar" ColumnName="CreerPar" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TB_livraison">
+      <EntityTypeMapping TypeName="stockfaesdbModel.TB_livraison">
+        <MappingFragment StoreEntitySet="TB_livraison">
+          <ScalarProperty Name="Id_livraison" ColumnName="Id_livraison" />
+          <ScalarProperty Name="Code_fiche" ColumnName="Code_fiche" />
+          <ScalarProperty Name="Date" ColumnName="Date" />
+          <ScalarProperty Name="Image_fiche" ColumnName="Image_fiche" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="DateCreer" ColumnName="DateCreer" />
+          <ScalarProperty Name="CreerPar" ColumnName="CreerPar" />
+          <ScalarProperty Name="ImageUrl" ColumnName="ImageUrl" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TB_lot_entrestock">
+      <EntityTypeMapping TypeName="stockfaesdbModel.TB_lot_entrestock">
+        <MappingFragment StoreEntitySet="TB_lot_entrestock">
+          <ScalarProperty Name="Id_lot_entrestock" ColumnName="Id_lot_entrestock" />
+          <ScalarProperty Name="Date_entrer" ColumnName="Date_entrer" />
+          <ScalarProperty Name="Id_articles" ColumnName="Id_articles" />
+          <ScalarProperty Name="Id_bon_entrestock" ColumnName="Id_bon_entrestock" />
+          <ScalarProperty Name="Quantite" ColumnName="Quantite" />
+          <ScalarProperty Name="Total" ColumnName="Total" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TB_mouvement_stock">
+      <EntityTypeMapping TypeName="stockfaesdbModel.TB_mouvement_stock">
+        <MappingFragment StoreEntitySet="TB_mouvement_stock">
+          <ScalarProperty Name="Id_mouvement" ColumnName="Id_mouvement" />
+          <ScalarProperty Name="DateCreer" ColumnName="DateCreer" />
+          <ScalarProperty Name="Type_mouvement" ColumnName="Type_mouvement" />
+          <ScalarProperty Name="Quantite" ColumnName="Quantite" />
+          <ScalarProperty Name="CreerPar" ColumnName="CreerPar" />
+          <ScalarProperty Name="Id_article" ColumnName="Id_article" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TB_stock">
+      <EntityTypeMapping TypeName="stockfaesdbModel.TB_stock">
+        <MappingFragment StoreEntitySet="TB_stock">
+          <ScalarProperty Name="Id_stock" ColumnName="Id_stock" />
+          <ScalarProperty Name="Stock_initial" ColumnName="Stock_initial" />
+          <ScalarProperty Name="Qte_entre" ColumnName="Qte_entre" />
+          <ScalarProperty Name="Qte_sortie" ColumnName="Qte_sortie" />
+          <ScalarProperty Name="Qte_reste" ColumnName="Qte_reste" />
+          <ScalarProperty Name="Id_articles" ColumnName="Id_articles" />
+          <ScalarProperty Name="DateCreer" ColumnName="DateCreer" />
+          <ScalarProperty Name="CreerPar" ColumnName="CreerPar" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <AssociationSetMapping Name="AspNetUserRoles" TypeName="stockfaesdbModel.AspNetUserRoles" StoreEntitySet="AspNetUserRoles">
+      <EndProperty Name="AspNetRoles">
+        <ScalarProperty Name="Id" ColumnName="RoleId" />
+      </EndProperty>
+      <EndProperty Name="AspNetUsers">
+        <ScalarProperty Name="Id" ColumnName="UserId" />
+      </EndProperty>
+    </AssociationSetMapping>
+  </EntityContainerMapping>
+</Mapping>

@@ -1,0 +1,74 @@
+﻿@model StockApp.Models.TB_detail_requisition
+
+@{
+    ViewBag.Title = "Edit";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Edit</h2>
+
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <h4>TB_detail_requisition</h4>
+        <hr />
+        @Html.ValidationSummary(true)
+        @Html.HiddenFor(model => model.Id_details_requisition)
+
+        @*<div class="form-group">
+                @Html.LabelFor(model => model.Id_bon_requisition, "Id_bon_requisition", new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.DropDownList("Id_bon_requisition", String.Empty)
+                    @Html.ValidationMessageFor(model => model.Id_bon_requisition)
+                </div>
+            </div>*@
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Id_articles, "Nom article", new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownList("Id_articles", null, new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.Id_articles)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Quantite, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Quantite, new { HtmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Quantite)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Date_requisition, "Date Requisition", new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Date_requisition, new { HtmlAttributes = new { @class = "form-control", @ReadOnly = "ReadOnly" } })
+                @Html.ValidationMessageFor(model => model.Date_requisition)
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <button type="submit" class="btn btn-primary">
+
+                    <span class="glyphicon glyphicon-save"></span> Ajouter
+                </button>
+            </div>
+        </div>
+    </div>
+}
+
+<div>
+    @*@Html.ActionLink("Back to List", "Index")*@
+    <a href="/DetailRequisition/Index/?id=@(Model.Id_bon_requisition)" class="btn btn-info btn-sm" data-toggle="tooltip" data-placement="top"
+       title="Retour">
+        <span class="glyphicon glyphicon-arrow-left"></span> Retourner a la liste
+    </a>
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

@@ -1,0 +1,125 @@
+﻿@model StockApp.Models.RegisterViewModel
+@{
+    ViewBag.Title = "Register";
+}
+
+<h2>@ViewBag.Title.</h2>
+
+@using (Html.BeginForm("Register", "Account", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+{
+    @Html.AntiForgeryToken()
+    <h4>Creer un nouveau compte.</h4>
+    <hr />
+    @Html.ValidationSummary(true)
+
+    <div class="panel panel-default">
+
+        <div class="panel-heading">Creer un nouveau Compte</div>
+        <div class="panel-body">
+            <fieldset id="flinfo" class="info">
+                <legend class="bg-info">Info personel </legend>
+                <div class="panel panel-default">
+                    <div class="panel-body">
+                        <div class="form-group">
+                            <label class="control-label col-md-2"> Nom Complet</label>
+                            <div class="col-md-10">
+                                @Html.TextBoxFor(m => m.NomComplet, new { @class = "form-control" })
+                            </div>
+                        </div>
+
+                        @*<div class="form-group">
+                                @Html.LabelFor(m => m.Prenom, new { @class = "col-md-2 control-label" })
+                                <div class="col-md-10">
+                                    @Html.TextBoxFor(m => m.Prenom, new { @class = "form-control" })
+                                </div>
+                            </div>*@
+
+                        <div class="form-group">
+                            @Html.LabelFor(m => m.Id_direction, "Nom Direction", new { @class = "control-label col-md-2" })
+                            <div class="col-md-10">
+                                @Html.DropDownListFor(m=>m.Id_direction , ViewData["Id_direction"] as IEnumerable<SelectListItem>)
+                                    @* @Html.DropDownListFor(m=>m.Id_direction, (SelectList) ViewBag.Id_direction, new Dictionary<string,object> {{ "class", "form-control" }})*@
+                                    @Html.ValidationMessageFor(m => m.Id_direction)
+
+                                    @*@Html.DropDownList("Direction",
+            new SelectList(ViewBag.Direction as System.Collections.IEnumerable, "Id_direction","Nom_direction"),
+                            "-- Select Livraison --", new { @id = "ldDirection", @class = "pc form-control" })*@
+</div>
+                        </div>
+                    </div>
+                </div>
+            </fieldset>
+        </div>
+        @*<div class="form-group">
+                @Html.LabelFor(m => m.Id_direction, "Nom Direction", new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.DropDownList("Id_direction",null, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(m => m.Id_direction)
+                </div>
+            </div>*@
+        <div class="panel-body">
+            <fieldset id="flcompte" class="">
+                <legend class="bg-info">Compte </legend>
+                <div class="panel panel-default">
+                    <div class="panel-body">
+
+                        <div class="form-group">
+                            @Html.LabelFor(m => m.UserName, new { @class = "col-md-2 control-label" })
+                            <div class="col-md-10">
+                                @Html.TextBoxFor(m => m.UserName, new { @class = "form-control" })
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            @Html.LabelFor(m => m.Password, new { @class = "col-md-2 control-label" })
+                            <div class="col-md-10">
+                                @Html.PasswordFor(m => m.Password, new { @class = "form-control" })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            @Html.LabelFor(m => m.ConfirmPassword, new { @class = "col-md-2 control-label" })
+                            <div class="col-md-10">
+                                @Html.PasswordFor(m => m.ConfirmPassword, new { @class = "form-control" })
+                            </div>
+                        </div>
+
+                        <!--Selectionner le Role d'utilisateur-->
+                        <div class="form-group">
+                            @Html.Label("Type d'utilisateur", new { @class = "col-md-2 control-label" })
+                            <div class="col-md-10">
+                                @Html.DropDownList("Name", null, new { @class = "form-control" })
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </fieldset>
+        </div>
+    </div>
+
+
+
+    <!--Fin-->
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" class="btn btn-default" value="Register" />
+        </div>
+    </div>
+
+}
+
+<style>
+    #flinfo {
+    }
+</style>
+
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/Scripts/MonScripts.js")
+    @Scripts.Render("~/Scripts/datepicker-fr.js")
+    @Scripts.Render("~/Content/jquery.dataTables.min.css")
+    @Scripts.Render("~/Scripts/jquery.dataTables.min.js")
+
+    <link href="~/Content/MonStyle.css" rel="stylesheet" type="text/css" />
+}

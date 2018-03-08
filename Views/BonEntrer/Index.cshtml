@@ -1,0 +1,124 @@
+﻿@model IEnumerable<StockApp.Models.TB_bonEntre>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2 class="text-center text-info">Liste des articles en stock</h2>
+
+<p>
+    <a href="@Url.Action("Create")" class="btn btn-primary">
+        <span class="glyphicon glyphicon-plus-sign"></span> Ajouter en Stock
+    </a>
+
+</p>
+<table class="table" id="datatable1">
+    <thead>
+        <tr class="info text-center">
+            <th>
+                Date Entrer
+            </th>
+            <th>
+                Description
+            </th>
+            <th>
+                DateCreer
+
+            </th>
+            <th>
+                CreerPar
+
+            </th>
+            <th>
+                Code fiche Livraison
+            </th>
+            <th>
+                Action |
+                <a href="@Url.Action("Create")" class="btn btn-primary btn-sm" data-toggle="tooltip" data-placement="top" title="Ajouter">
+                    <span class="glyphicon glyphicon-plus"></span>
+                </a>
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Date_entre)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Description)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DateCreer)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CreerPar)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TB_livraison.Code_fiche)
+                </td>
+                <td>
+                    <a href="../LotEntrer/Index/?id=@(item.Id_bon_entrestock)" class="btn btn-info btn-sm" data-toggle="tooltip" data-placement="top"
+                       title="Detail">
+                        <span class="glyphicon glyphicon-info-sign"></span> Details
+                    </a>
+                    <a href="@Url.Action("Edit", new { id=item.Id_bon_entrestock})" class="btn btn-primary btn-sm" data-toggle="tooltip" data-placement="top"
+                       title="Modifier">
+                        <span class="glyphicon glyphicon-edit"></span>
+                    </a>
+                    <a href="@Url.Action("Delete", new { id=item.Id_bon_entrestock})" class="btn btn-danger btn-sm" data-toggle="tooltip" data-placement="top"
+                       title="supprimer">
+                        <span class="glyphicon glyphicon-trash"></span>
+                    </a>
+
+                </td>
+            </tr>
+
+        }
+    </tbody>
+</table>
+@section Scripts
+{
+    <script type="text/javascript">
+        $(function () {
+            $('[data-toggle="tooltip"]').tooltip()
+        })
+
+        $(document).ready(function () {
+
+            $("#datatable1").DataTable({
+                "aLengthMenu": [[10, 15, 30, 60, 100, -1], [10, 15, 30, 60, 100, "All"]],
+                //"sPaginationType": "full_numbers",
+                "language": {
+                    "sProcessing": "Traitement en cours...",
+                    "sSearch": "Rechercher&nbsp;:",
+                    "sLengthMenu": "Afficher _MENU_ &eacute;l&eacute;ments par page",
+                    "sInfo": "Affichage de l'&eacute;l&eacute;ment _START_ &agrave; _END_ sur _TOTAL_ &eacute;l&eacute;ments",
+                    "sInfoEmpty": "Affichage de l'&eacute;l&eacute;ment 0 &agrave; 0 sur 0 &eacute;l&eacute;ment",
+                    "sInfoFiltered": "(filtr&eacute; de _MAX_ &eacute;l&eacute;ments au total)",
+                    "sInfoPostFix": "",
+                    "sLoadingRecords": "Chargement en cours...",
+                    "sZeroRecords": "Aucun &eacute;l&eacute;ment &agrave; afficher",
+                    "sEmptyTable": "Aucune donn&eacute;e disponible dans le tableau",
+
+                    "oPaginate": {
+                        "sFirst": "Premier",
+                        "sPrevious": "Pr&eacute;c&eacute;dent",
+                        "sNext": "Suivant",
+                        "sLast": "Dernier"
+                    },
+                    "oAria": {
+                        "sSortAscending": ": activer pour trier la colonne par ordre croissant",
+                        "sSortDescending": ": activer pour trier la colonne par ordre d&eacute;croissant"
+                    }
+                }
+
+            });
+        });
+    </script>
+
+}

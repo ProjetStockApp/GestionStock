@@ -1,0 +1,107 @@
+﻿@model StockApp.Models.TB_bonRequisition
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>TB_bonRequisition</h4>
+	<hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Description)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Description)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Date_requisition)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Date_requisition)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DateCreer)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DateCreer)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CreerPar)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CreerPar)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.IsSoumettre)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.IsSoumettre)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Validate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Validate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Date_aprouver)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Date_aprouver)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Date_validation)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Date_validation)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Administrateur)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Administrateur)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Directeur)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Directeur)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.AspNetUser.Email)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.AspNetUser.Email)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id_bon_requisition }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

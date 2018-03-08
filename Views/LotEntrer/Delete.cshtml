@@ -1,0 +1,64 @@
+﻿@model StockApp.Models.TB_lot_entrestock
+
+@{
+    ViewBag.Title = "Delete";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2 class="text-info text-center">Supression</h2>
+
+<h4 class="text-danger">Voulez vous vraiment supprimer cet article?</h4>
+<div>
+
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            Date Entrer stock
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Date_entrer)
+        </dd>
+
+        <dt>
+            Quantite
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Quantite)
+        </dd>
+
+        <dt>
+            Nom articles
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TB_articles.Nom_articles)
+        </dd>
+
+        <dt>
+            Description
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TB_bonEntre.Description)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <button type="submit" class="btn btn-danger" data-toggle="tooltip" data-placement="top"
+                    title="Supprimer">
+                <span class="glyphicon glyphicon-remove"></span> Supprimer
+            </button> |
+            <a href="/LotEntrer/Index/?id=@(Model.Id_bon_entrestock)" class="btn btn-info" data-toggle="tooltip" data-placement="top"
+               title="Retour">
+                <span class="glyphicon glyphicon-arrow-left"></span> Retourner
+            </a>
+        </div>
+    }
+</div>

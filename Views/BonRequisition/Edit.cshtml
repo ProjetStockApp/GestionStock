@@ -1,0 +1,85 @@
+﻿@model StockApp.Models.TB_bonRequisition
+
+@{
+    ViewBag.Title = "Edit";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Edit</h2>
+
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <h4>TB_bonRequisition</h4>
+        <hr />
+        @Html.ValidationSummary(true)
+        @Html.HiddenFor(model => model.Id_bon_requisition)
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Date_requisition, "Date Requisition", new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.TextBoxFor(model => model.Date_requisition,new { @class = "form-control", ReadOnly = "ReadOnly" })
+                @Html.ValidationMessageFor(model => model.Date_requisition)
+            </div>
+        </div>
+
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Description, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.TextAreaFor(model => model.Description, new { @class = "form-control", rows = 4 })
+                @Html.ValidationMessageFor(model => model.Description)
+            </div>
+        </div>
+
+        @*<div class="form-group">
+                @Html.LabelFor(model => model.UserId, "UserId", new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.DropDownList("UserId", String.Empty)
+                    @Html.ValidationMessageFor(model => model.UserId)
+                </div>
+            </div>*@
+
+
+
+        @if (User.IsInRole("Administrateur"))
+        {
+            <div class="form-group">
+                @Html.LabelFor(model => model.DateCreer, "Date Creer", new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.TextBoxFor(model => model.DateCreer, new { @class = "form-control", ReadOnly = "ReadOnly" })
+                    @Html.ValidationMessageFor(model => model.DateCreer)
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.CreerPar, "Creer Par", new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.TextBoxFor(model => model.CreerPar, new { @class = "form-control", ReadOnly = "ReadOnly" })
+                    @Html.ValidationMessageFor(model => model.CreerPar)
+                </div>
+            </div>
+        }
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <button type="submit" class="btn btn-primary">
+                    <span class="glyphicon glyphicon-save"></span> Ajouter
+                </button>
+            </div>
+        </div>
+    </div>
+}
+
+<div>
+    <a href="@Url.Action("Index")" class="btn btn-info">
+        <span class="glyphicon glyphicon-arrow-left"></span> Retournez
+    </a>
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

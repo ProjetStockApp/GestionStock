@@ -1,0 +1,59 @@
+﻿@model StockApp.Models.TB_categorie
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2 class="text-info text-center">Details de la Categorie <strong> @Model.Nom_categorie </strong></h2>
+
+<div>
+    
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            Nom Categorie
+
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Nom_categorie)
+        </dd>
+
+        <dt>
+            Description
+
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Description)
+        </dd>
+
+        <dt>
+            Date Creer
+
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DateCreer)
+        </dd>
+
+        <dt>
+            Creer Par
+
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CreerPar)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    <a href="@Url.Action("Edit", new { id = Model.Id_categorie })" class="btn btn-primary btn-sm">
+        <span class="glyphicon glyphicon-edit"></span> Modifier
+    </a>
+    <a href="@Url.Action("Index")" class="btn btn-info btn-sm">
+        <span class="glyphicon glyphicon-arrow-left"></span> Retourner a la liste
+    </a>
+</p>

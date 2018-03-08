@@ -1,0 +1,454 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="stockfaesdbModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="C__MigrationHistory">
+    <Key>
+      <PropertyRef Name="MigrationId" />
+      <PropertyRef Name="ContextKey" />
+    </Key>
+    <Property Name="MigrationId" Type="String" MaxLength="150" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="ContextKey" Type="String" MaxLength="300" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Model" Type="Binary" MaxLength="Max" FixedLength="false" Nullable="false" />
+    <Property Name="ProductVersion" Type="String" MaxLength="32" FixedLength="false" Unicode="true" Nullable="false" />
+  </EntityType>
+  <EntityType Name="AspNetRole">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="AspNetUsers" Relationship="Self.AspNetUserRoles" FromRole="AspNetRoles" ToRole="AspNetUsers" />
+  </EntityType>
+  <EntityType Name="AspNetUserClaim">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ClaimType" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="ClaimValue" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="User_Id" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="AspNetUser" Relationship="Self.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_User_Id" FromRole="AspNetUserClaims" ToRole="AspNetUsers" />
+  </EntityType>
+  <EntityType Name="AspNetUserLogin">
+    <Key>
+      <PropertyRef Name="UserId" />
+      <PropertyRef Name="LoginProvider" />
+      <PropertyRef Name="ProviderKey" />
+    </Key>
+    <Property Name="UserId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="LoginProvider" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="ProviderKey" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="AspNetUser" Relationship="Self.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" FromRole="AspNetUserLogins" ToRole="AspNetUsers" />
+  </EntityType>
+  <EntityType Name="AspNetUser">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="UserName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="NomComplet" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Id_direction" Type="Int32" />
+    <Property Name="PasswordHash" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="SecurityStamp" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Discriminator" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="AspNetUserClaims" Relationship="Self.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_User_Id" FromRole="AspNetUsers" ToRole="AspNetUserClaims" />
+    <NavigationProperty Name="AspNetUserLogins" Relationship="Self.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" FromRole="AspNetUsers" ToRole="AspNetUserLogins" />
+    <NavigationProperty Name="TB_direction" Relationship="Self.FK_AspNetUsers_TB_direction" FromRole="AspNetUsers" ToRole="TB_direction" />
+    <NavigationProperty Name="TB_bonRequisition" Relationship="Self.FK_TB_bonRequisition_AspNetUsers" FromRole="AspNetUsers" ToRole="TB_bonRequisition" />
+    <NavigationProperty Name="AspNetRoles" Relationship="Self.AspNetUserRoles" FromRole="AspNetUsers" ToRole="AspNetRoles" />
+  </EntityType>
+  <EntityType Name="FileDetail">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Guid" Nullable="false" />
+    <Property Name="FileName" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="Extension" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="Idlivraison" Type="Int32" />
+  </EntityType>
+  <EntityType Name="sysdiagram">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="principal_id" Type="Int32" Nullable="false" />
+    <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="version" Type="Int32" />
+    <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+  </EntityType>
+  <EntityType Name="TB_articles">
+    <Key>
+      <PropertyRef Name="Id_articles" />
+    </Key>
+    <Property Name="Id_articles" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Nom_articles" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="Qte_alerte" Type="Int32" />
+    <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="Id_categorie" Type="Int32" />
+    <Property Name="DateCreer" Type="DateTime" Precision="3" />
+    <Property Name="CreerPar" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="TB_categorie" Relationship="Self.FK_TB_articles_TB_categorie" FromRole="TB_articles" ToRole="TB_categorie" />
+    <NavigationProperty Name="TB_detail_requisition" Relationship="Self.FK_TB_detail_requisition_TB_articles" FromRole="TB_articles" ToRole="TB_detail_requisition" />
+    <NavigationProperty Name="TB_lot_entrestock" Relationship="Self.FK_TB_lot_entrestock_TB_articles" FromRole="TB_articles" ToRole="TB_lot_entrestock" />
+  </EntityType>
+  <EntityType Name="TB_bonEntre">
+    <Key>
+      <PropertyRef Name="Id_bon_entrestock" />
+    </Key>
+    <Property Name="Id_bon_entrestock" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Date_entre" Type="DateTime" Precision="0" />
+    <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="Id_livraison" Type="Int32" />
+    <Property Name="DateCreer" Type="DateTime" Precision="3" />
+    <Property Name="CreerPar" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="TB_livraison" Relationship="Self.FK_TB_bonEntre_TB_livraison" FromRole="TB_bonEntre" ToRole="TB_livraison" />
+    <NavigationProperty Name="TB_lot_entrestock" Relationship="Self.FK_TB_lot_entrestock_TB_bonEntre" FromRole="TB_bonEntre" ToRole="TB_lot_entrestock" />
+  </EntityType>
+  <EntityType Name="TB_bonRequisition">
+    <Key>
+      <PropertyRef Name="Id_bon_requisition" />
+    </Key>
+    <Property Name="Id_bon_requisition" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="UserId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="Date_requisition" Type="DateTime" Precision="0" />
+    <Property Name="DateCreer" Type="DateTime" Precision="3" />
+    <Property Name="CreerPar" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="IsSoumettre" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Validate" Type="String" MaxLength="5" FixedLength="false" Unicode="true" />
+    <Property Name="Date_aprouver" Type="DateTime" Precision="3" />
+    <Property Name="Date_validation" Type="DateTime" Precision="3" />
+    <Property Name="Administrateur" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="Directeur" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="AspNetUser" Relationship="Self.FK_TB_bonRequisition_AspNetUsers" FromRole="TB_bonRequisition" ToRole="AspNetUsers" />
+    <NavigationProperty Name="TB_detail_requisition" Relationship="Self.FK_TB_detail_requisition_TB_bonRequisition" FromRole="TB_bonRequisition" ToRole="TB_detail_requisition" />
+  </EntityType>
+  <EntityType Name="TB_bonSortie_stock">
+    <Key>
+      <PropertyRef Name="Id_bon_sortiestock" />
+    </Key>
+    <Property Name="Id_bon_sortiestock" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="Id_employe" Type="Int32" />
+    <Property Name="Date_sortie" Type="DateTime" Precision="0" />
+    <Property Name="DateCreer" Type="DateTime" Precision="3" />
+    <Property Name="CreerPar" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="TB_categorie">
+    <Key>
+      <PropertyRef Name="Id_categorie" />
+    </Key>
+    <Property Name="Id_categorie" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Nom_categorie" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="DateCreer" Type="DateTime" Precision="3" />
+    <Property Name="CreerPar" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="TB_articles" Relationship="Self.FK_TB_articles_TB_categorie" FromRole="TB_categorie" ToRole="TB_articles" />
+  </EntityType>
+  <EntityType Name="TB_detail_requisition">
+    <Key>
+      <PropertyRef Name="Id_details_requisition" />
+    </Key>
+    <Property Name="Id_details_requisition" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Id_bon_requisition" Type="Int32" />
+    <Property Name="Id_articles" Type="Int32" />
+    <Property Name="Quantite" Type="Int32" />
+    <Property Name="Date_requisition" Type="DateTime" Precision="3" />
+    <NavigationProperty Name="TB_articles" Relationship="Self.FK_TB_detail_requisition_TB_articles" FromRole="TB_detail_requisition" ToRole="TB_articles" />
+    <NavigationProperty Name="TB_bonRequisition" Relationship="Self.FK_TB_detail_requisition_TB_bonRequisition" FromRole="TB_detail_requisition" ToRole="TB_bonRequisition" />
+  </EntityType>
+  <EntityType Name="TB_detail_sortie">
+    <Key>
+      <PropertyRef Name="Id_details_sortie" />
+    </Key>
+    <Property Name="Id_details_sortie" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Id_bonsortie" Type="Int32" />
+    <Property Name="Id_lot_entrestock" Type="Int32" />
+    <Property Name="Quantite" Type="Int32" />
+  </EntityType>
+  <EntityType Name="TB_direction">
+    <Key>
+      <PropertyRef Name="Id_direction" />
+    </Key>
+    <Property Name="Id_direction" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Nom_direction" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="DateCreer" Type="DateTime" Precision="3" />
+    <Property Name="CreerPar" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="AspNetUsers" Relationship="Self.FK_AspNetUsers_TB_direction" FromRole="TB_direction" ToRole="AspNetUsers" />
+  </EntityType>
+  <EntityType Name="TB_employe">
+    <Key>
+      <PropertyRef Name="Id_employe" />
+    </Key>
+    <Property Name="Id_employe" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Nom" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="Prenom" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="Email" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="Telephone" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Id_direction" Type="Int32" />
+    <Property Name="DateCreer" Type="DateTime" Precision="3" />
+    <Property Name="CreerPar" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="TB_livraison">
+    <Key>
+      <PropertyRef Name="Id_livraison" />
+    </Key>
+    <Property Name="Id_livraison" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Code_fiche" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Date" Type="DateTime" Precision="0" />
+    <Property Name="Image_fiche" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="DateCreer" Type="DateTime" Precision="3" />
+    <Property Name="CreerPar" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="ImageUrl" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="TB_bonEntre" Relationship="Self.FK_TB_bonEntre_TB_livraison" FromRole="TB_livraison" ToRole="TB_bonEntre" />
+  </EntityType>
+  <EntityType Name="TB_lot_entrestock">
+    <Key>
+      <PropertyRef Name="Id_lot_entrestock" />
+    </Key>
+    <Property Name="Id_lot_entrestock" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Date_entrer" Type="DateTime" Precision="3" />
+    <Property Name="Id_articles" Type="Int32" />
+    <Property Name="Id_bon_entrestock" Type="Int32" />
+    <Property Name="Quantite" Type="Int32" />
+    <Property Name="Total" Type="Int64" />
+    <NavigationProperty Name="TB_articles" Relationship="Self.FK_TB_lot_entrestock_TB_articles" FromRole="TB_lot_entrestock" ToRole="TB_articles" />
+    <NavigationProperty Name="TB_bonEntre" Relationship="Self.FK_TB_lot_entrestock_TB_bonEntre" FromRole="TB_lot_entrestock" ToRole="TB_bonEntre" />
+  </EntityType>
+  <EntityType Name="TB_mouvement_stock">
+    <Key>
+      <PropertyRef Name="Id_mouvement" />
+    </Key>
+    <Property Name="Id_mouvement" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="DateCreer" Type="DateTime" Precision="3" />
+    <Property Name="Type_mouvement" Type="Int32" />
+    <Property Name="Quantite" Type="Int32" />
+    <Property Name="CreerPar" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="Id_article" Type="Int32" />
+  </EntityType>
+  <EntityType Name="TB_stock">
+    <Key>
+      <PropertyRef Name="Id_stock" />
+    </Key>
+    <Property Name="Id_stock" Type="Int32" Nullable="false" />
+    <Property Name="Stock_initial" Type="Int32" />
+    <Property Name="Qte_entre" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Qte_sortie" Type="Int32" />
+    <Property Name="Qte_reste" Type="Int32" />
+    <Property Name="Id_articles" Type="Int32" />
+    <Property Name="DateCreer" Type="DateTime" Precision="3" />
+    <Property Name="CreerPar" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <Association Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_User_Id">
+    <End Role="AspNetUsers" Type="Self.AspNetUser" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="AspNetUserClaims" Type="Self.AspNetUserClaim" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AspNetUsers">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="AspNetUserClaims">
+        <PropertyRef Name="User_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId">
+    <End Role="AspNetUsers" Type="Self.AspNetUser" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="AspNetUserLogins" Type="Self.AspNetUserLogin" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AspNetUsers">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="AspNetUserLogins">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_AspNetUsers_TB_direction">
+    <End Role="TB_direction" Type="Self.TB_direction" Multiplicity="0..1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="AspNetUsers" Type="Self.AspNetUser" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TB_direction">
+        <PropertyRef Name="Id_direction" />
+      </Principal>
+      <Dependent Role="AspNetUsers">
+        <PropertyRef Name="Id_direction" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TB_bonRequisition_AspNetUsers">
+    <End Role="AspNetUsers" Type="Self.AspNetUser" Multiplicity="0..1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="TB_bonRequisition" Type="Self.TB_bonRequisition" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AspNetUsers">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="TB_bonRequisition">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TB_articles_TB_categorie">
+    <End Role="TB_categorie" Type="Self.TB_categorie" Multiplicity="0..1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="TB_articles" Type="Self.TB_articles" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TB_categorie">
+        <PropertyRef Name="Id_categorie" />
+      </Principal>
+      <Dependent Role="TB_articles">
+        <PropertyRef Name="Id_categorie" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TB_detail_requisition_TB_articles">
+    <End Role="TB_articles" Type="Self.TB_articles" Multiplicity="0..1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="TB_detail_requisition" Type="Self.TB_detail_requisition" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TB_articles">
+        <PropertyRef Name="Id_articles" />
+      </Principal>
+      <Dependent Role="TB_detail_requisition">
+        <PropertyRef Name="Id_articles" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TB_lot_entrestock_TB_articles">
+    <End Role="TB_articles" Type="Self.TB_articles" Multiplicity="0..1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="TB_lot_entrestock" Type="Self.TB_lot_entrestock" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TB_articles">
+        <PropertyRef Name="Id_articles" />
+      </Principal>
+      <Dependent Role="TB_lot_entrestock">
+        <PropertyRef Name="Id_articles" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TB_bonEntre_TB_livraison">
+    <End Role="TB_livraison" Type="Self.TB_livraison" Multiplicity="0..1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="TB_bonEntre" Type="Self.TB_bonEntre" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TB_livraison">
+        <PropertyRef Name="Id_livraison" />
+      </Principal>
+      <Dependent Role="TB_bonEntre">
+        <PropertyRef Name="Id_livraison" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TB_lot_entrestock_TB_bonEntre">
+    <End Role="TB_bonEntre" Type="Self.TB_bonEntre" Multiplicity="0..1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="TB_lot_entrestock" Type="Self.TB_lot_entrestock" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TB_bonEntre">
+        <PropertyRef Name="Id_bon_entrestock" />
+      </Principal>
+      <Dependent Role="TB_lot_entrestock">
+        <PropertyRef Name="Id_bon_entrestock" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TB_detail_requisition_TB_bonRequisition">
+    <End Role="TB_bonRequisition" Type="Self.TB_bonRequisition" Multiplicity="0..1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="TB_detail_requisition" Type="Self.TB_detail_requisition" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TB_bonRequisition">
+        <PropertyRef Name="Id_bon_requisition" />
+      </Principal>
+      <Dependent Role="TB_detail_requisition">
+        <PropertyRef Name="Id_bon_requisition" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="AspNetUserRoles">
+    <End Role="AspNetRoles" Type="Self.AspNetRole" Multiplicity="*" />
+    <End Role="AspNetUsers" Type="Self.AspNetUser" Multiplicity="*" />
+  </Association>
+  <EntityContainer Name="stockfaesdbEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="C__MigrationHistory" EntityType="Self.C__MigrationHistory" />
+    <EntitySet Name="AspNetRoles" EntityType="Self.AspNetRole" />
+    <EntitySet Name="AspNetUserClaims" EntityType="Self.AspNetUserClaim" />
+    <EntitySet Name="AspNetUserLogins" EntityType="Self.AspNetUserLogin" />
+    <EntitySet Name="AspNetUsers" EntityType="Self.AspNetUser" />
+    <EntitySet Name="FileDetails" EntityType="Self.FileDetail" />
+    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagram" />
+    <EntitySet Name="TB_articles" EntityType="Self.TB_articles" />
+    <EntitySet Name="TB_bonEntre" EntityType="Self.TB_bonEntre" />
+    <EntitySet Name="TB_bonRequisition" EntityType="Self.TB_bonRequisition" />
+    <EntitySet Name="TB_bonSortie_stock" EntityType="Self.TB_bonSortie_stock" />
+    <EntitySet Name="TB_categorie" EntityType="Self.TB_categorie" />
+    <EntitySet Name="TB_detail_requisition" EntityType="Self.TB_detail_requisition" />
+    <EntitySet Name="TB_detail_sortie" EntityType="Self.TB_detail_sortie" />
+    <EntitySet Name="TB_direction" EntityType="Self.TB_direction" />
+    <EntitySet Name="TB_employe" EntityType="Self.TB_employe" />
+    <EntitySet Name="TB_livraison" EntityType="Self.TB_livraison" />
+    <EntitySet Name="TB_lot_entrestock" EntityType="Self.TB_lot_entrestock" />
+    <EntitySet Name="TB_mouvement_stock" EntityType="Self.TB_mouvement_stock" />
+    <EntitySet Name="TB_stock" EntityType="Self.TB_stock" />
+    <AssociationSet Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_User_Id" Association="Self.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_User_Id">
+      <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+      <End Role="AspNetUserClaims" EntitySet="AspNetUserClaims" />
+    </AssociationSet>
+    <AssociationSet Name="FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId">
+      <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+      <End Role="AspNetUserLogins" EntitySet="AspNetUserLogins" />
+    </AssociationSet>
+    <AssociationSet Name="FK_AspNetUsers_TB_direction" Association="Self.FK_AspNetUsers_TB_direction">
+      <End Role="TB_direction" EntitySet="TB_direction" />
+      <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TB_bonRequisition_AspNetUsers" Association="Self.FK_TB_bonRequisition_AspNetUsers">
+      <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+      <End Role="TB_bonRequisition" EntitySet="TB_bonRequisition" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TB_articles_TB_categorie" Association="Self.FK_TB_articles_TB_categorie">
+      <End Role="TB_categorie" EntitySet="TB_categorie" />
+      <End Role="TB_articles" EntitySet="TB_articles" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TB_detail_requisition_TB_articles" Association="Self.FK_TB_detail_requisition_TB_articles">
+      <End Role="TB_articles" EntitySet="TB_articles" />
+      <End Role="TB_detail_requisition" EntitySet="TB_detail_requisition" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TB_lot_entrestock_TB_articles" Association="Self.FK_TB_lot_entrestock_TB_articles">
+      <End Role="TB_articles" EntitySet="TB_articles" />
+      <End Role="TB_lot_entrestock" EntitySet="TB_lot_entrestock" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TB_bonEntre_TB_livraison" Association="Self.FK_TB_bonEntre_TB_livraison">
+      <End Role="TB_livraison" EntitySet="TB_livraison" />
+      <End Role="TB_bonEntre" EntitySet="TB_bonEntre" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TB_lot_entrestock_TB_bonEntre" Association="Self.FK_TB_lot_entrestock_TB_bonEntre">
+      <End Role="TB_bonEntre" EntitySet="TB_bonEntre" />
+      <End Role="TB_lot_entrestock" EntitySet="TB_lot_entrestock" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TB_detail_requisition_TB_bonRequisition" Association="Self.FK_TB_detail_requisition_TB_bonRequisition">
+      <End Role="TB_bonRequisition" EntitySet="TB_bonRequisition" />
+      <End Role="TB_detail_requisition" EntitySet="TB_detail_requisition" />
+    </AssociationSet>
+    <AssociationSet Name="AspNetUserRoles" Association="Self.AspNetUserRoles">
+      <End Role="AspNetRoles" EntitySet="AspNetRoles" />
+      <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

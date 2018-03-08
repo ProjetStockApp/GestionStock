@@ -1,0 +1,60 @@
+﻿@model StockApp.Models.TB_direction
+
+@{
+    ViewBag.Title = "Edit";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2 class="text-info text-center"> Direction <strong>@Model.Nom_direction</strong> est editer</h2>
+
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <h4 class="text-danger">Voulez vous modifier la Direction <strong>@Model.Nom_direction</strong></h4>
+        <hr />
+        @Html.ValidationSummary(true)
+        @Html.HiddenFor(model => model.Id_direction)
+
+        <div class="form-group">
+            <label class="control-label col-md-2"> Nom Direction</label>
+            <div class="col-md-10">
+                @Html.TextBoxFor(model => model.Nom_direction, new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.Nom_direction)
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="control-label col-md-2">Descrition</label>
+            <div class="col-md-10">
+                @Html.TextAreaFor(model => model.Description, new { @class = "form-control", rows = 4 })
+                @Html.ValidationMessageFor(model => model.Description)
+            </div>
+        </div>
+
+       
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <button class="btn btn-primary btn-sm" type="submit">
+                    <span class="glyphicon glyphicon-saved"></span> Enregistrer la Modification
+                </button>
+
+                <a href="@Url.Action("Index")" class="btn btn-primary btn-sm">
+                    <span class="glyphicon glyphicon-remove-circle"></span> Annuler
+                </a>
+            </div>
+        </div>
+    </div>
+}
+
+<div>
+   
+    <a href="@Url.Action("Index")" class="btn btn-info">
+        <span class="glyphicon glyphicon-arrow-left"></span> Retourner a la liste
+    </a>
+</div>
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

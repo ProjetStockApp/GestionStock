@@ -1,0 +1,43 @@
+﻿
+        fieldset {
+            border: 1px solid #ddd !important;
+            margin: 0;
+            /*xmin-width: 0;*/
+            padding: 10px;
+            position: relative;
+            border-radius: 4px;
+            background-color: #f5f5f5;
+            padding-left: 10px !important;
+            padding-right: 10px !important;
+        }
+
+        legend {
+            font-size: 14px;
+            font-weight: bold;
+            margin-bottom: 0px;
+            width: 35%;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            padding: 5px 5px 5px 10px;
+           text-align:center;
+           background-color:rgba(58, 135, 173, 0.41)
+            /*background-color: #ffffff;*/
+            /*background-color:azure;*/
+        }
+   span.error {
+        display: block;
+        visibility: hidden;
+        color: red;
+        font-size: 90%;
+    }
+
+    tr.error {
+        background-color: rgba(255,0,0,0.35);
+    }
+
+    #tbdetail tr th{
+
+        text-align:center;
+    }
+
+    

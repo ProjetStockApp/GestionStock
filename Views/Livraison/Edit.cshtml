@@ -1,0 +1,141 @@
+﻿@model StockApp.Models.TB_livraison
+
+@{
+    ViewBag.Title = "Edit";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2 class="text-info text-center"> Fiche Livraison <strong>@Model.Code_fiche </strong> est editer</h2>
+
+
+@using (Html.BeginForm("Edit", "Livraison", null, FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <h4 class="text-danger">Voulez vous modifier La fiche <strong>@Model.Code_fiche</strong></h4>
+        <hr />
+        @Html.ValidationSummary(true)
+        @Html.HiddenFor(model => model.Id_livraison)
+        @Html.HiddenFor(model => model.Image_fiche)
+        @Html.HiddenFor(model => model.ImageUrl)
+
+        <div class="form-group">
+
+            @*@foreach (var query in ViewBag.nom)
+            {
+
+                <input type="hidden" id="CreerPar" name="CreerPar" value="@query">
+
+
+            }*@
+            <label class="control-label col-md-2">Code de la Fiche</label>
+            <div class="col-md-10">
+                @Html.TextBoxFor(model => model.Code_fiche, new { @class = " form-control" })
+                @Html.ValidationMessageFor(model => model.Code_fiche)
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="control-label col-md-2">Date livraison</label>
+            <div class="col-md-10 demo-section k-content">
+                @Html.TextBoxFor(model => model.Date,new { @class = "form-control ", @id = "date-picker" })
+                @Html.ValidationMessageFor(model => model.Date)
+            </div>
+            
+        </div>
+
+        <div id="modifier" style="display: none" class="form-group">
+
+            <label class="control-label col-md-2">Fiche livraison</label>
+
+            <div class="col-md-10">
+                <input type="file" name="file" multiple="multiple" class="form-control btn-info" />
+                @Html.ValidationMessageFor(model => model.Image_fiche)
+            </div>
+
+        </div>
+        <div id="non_modifier" style="display: block" class="form-group">
+
+            <label class="control-label col-md-2">Fiche livraison</label>
+
+            <div class="col-md-10">
+                <input type="text" name="files" multiple="multiple" value="@Model.Image_fiche" readonly="readonly" class="form-control btn-info" />
+                @Html.ValidationMessageFor(model => model.Image_fiche)
+            </div>
+
+        </div>
+
+
+        <div class="form-group">
+            <label class="col-md-2"></label>
+            <div class="col-md-10">
+                @Html.CheckBox("Remenber", false, new { onclick = "ShowHideDiv(this)" }) <label>Modifier la fiche</label>
+                @*<input id="Remember" name="Remember" type="checkbox" value="true" onclick="ShowHideDiv(this)" /> <label class="control-label">Fiche livraison</label>*@
+            </div>
+        </div>
+
+
+      
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Description, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.TextAreaFor(model => model.Description, new { @class = " form-control", rows = 4 })
+                @Html.ValidationMessageFor(model => model.Description)
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <button type="submit" class="btn btn-primary btn-sm">
+                    <span class="glyphicon glyphicon-save"></span> Enregistrer la modification
+                </button>
+
+                <a href="@Url.Action("Index")" class="btn btn-primary btn-sm">
+                    <span class="glyphicon glyphicon-remove-circle"></span> Annuler
+                </a>
+
+            </div>
+        </div>
+
+    </div>
+}
+
+<div>
+    <a href="@Url.Action("Index")" class="btn btn-info">
+        <span class="glyphicon glyphicon-arrow-left"></span> Retourner a la liste
+    </a>
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+
+
+<script type="text/javascript">
+
+    // Script gestion Datepicker
+    $(document).ready(function () {
+        $("#date-picker").datepicker({
+
+        });
+    });
+
+    // script pour gestion checkBox
+    function ShowHideDiv(Remember) {
+        var dvPassport = document.getElementById("modifier");
+        var dvPassport2 = document.getElementById("non_modifier");
+
+        if (Remember.checked) {
+            dvPassport.style.display = "block";
+            dvPassport2.style.display = "none";
+        }
+        else {
+            dvPassport.style.display = "none";
+            dvPassport2.style.display = "block";
+        }
+
+    }
+</script>
+
+}

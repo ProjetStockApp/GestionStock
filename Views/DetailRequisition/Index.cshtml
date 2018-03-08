@@ -1,0 +1,76 @@
+﻿@model IEnumerable<StockApp.Models.TB_detail_requisition>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2 class="text-info text-center">Liste des produits requisitioner</h2>
+
+<p>
+    <a href="/BonRequisition/Create" class="btn btn-primary btn-sm" data-toggle="tooltip" data-placement="top"
+       title="Requisitioner">
+        <span class="glyphicon glyphicon-plus-sign"></span> Nouvelle Requisition
+    </a>
+</p>
+<table class="table">
+
+    <thead>
+        <tr>
+
+            <th>
+                Date Requisition
+            </th>
+            <th>
+                Nom articles
+            </th>
+            <th>
+                Quantite
+            </th>
+            @*<th>
+                    Description
+                </th>*@
+            <th>
+                <a href="/BonRequisition/Index" class="btn btn-info btn-sm" data-toggle="tooltip" data-placement="top"
+                   title="Retour">
+                    <span class="glyphicon glyphicon-arrow-left"></span> Retourner
+                </a>
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+
+                <td>
+                    @Html.DisplayFor(modelItem => item.Date_requisition)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TB_articles.Nom_articles)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Quantite)
+                </td>
+
+                @*<td>
+                        @Html.DisplayFor(modelItem => item.TB_bonRequisition.Description)
+                    </td>*@
+                <td>
+                    <a href="@Url.Action("Edit", new { id=item.Id_details_requisition})" class="btn btn-primary btn-sm" data-toggle="tooltip" data-placement="top"
+                       title="Modifier">
+                        <span class="glyphicon glyphicon-edit"></span>
+                    </a>
+                    <a href="@Url.Action("Details", new { id = item.Id_details_requisition })" class="btn btn-info btn-sm" data-toggle="tooltip" data-placement="top"
+                       title="Afficher">
+                        <span class="glyphicon glyphicon-info-sign"></span>
+                    </a>
+                    <a href="@Url.Action("Delete", new { id = item.Id_details_requisition })" class="btn btn-danger btn-sm" data-toggle="tooltip" data-placement="top"
+                       title="supprimer">
+                        <span class="glyphicon glyphicon-trash"></span>
+                    </a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

@@ -1,0 +1,76 @@
+﻿@model StockApp.Models.TB_categorie
+
+@{
+    ViewBag.Title = "Edit";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2 class="text-info">Categorie <strong>@Model.Nom_categorie</strong> est editer</h2>
+
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <h4 class="text-danger">Voulez vous modifier Categorie <strong>@Model.Nom_categorie</strong></h4>
+        <hr />
+        @Html.ValidationSummary(true)
+        @Html.HiddenFor(model => model.Id_categorie)
+
+        <div class="form-group">
+            <label class="control-label col-md-2"> Nom categorie</label>
+            <div class="col-md-10">
+                @Html.TextBoxFor(model => model.Nom_categorie, new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.Nom_categorie)
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="control-label col-md-2"> Description </label>
+            <div class="col-md-10">
+                @Html.TextAreaFor(model => model.Description, new { @class = "form-control input-sm", rows = 4 })
+                @Html.ValidationMessageFor(model => model.Description)
+            </div>
+        </div>
+
+        @*<div class="form-group">
+                    @Html.LabelFor(model => model.DateCreer, new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.DateCreer)
+                        @Html.ValidationMessageFor(model => model.DateCreer)
+                    </div>
+                </div>
+
+                <div class="form-group">
+                @Html.LabelFor(model => model.CreerPar, new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.CreerPar)
+                    @Html.ValidationMessageFor(model => model.CreerPar)
+                </div>
+            </div>*@
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <button class="btn btn-primary btn-sm" type="submit">
+                    <span class="glyphicon glyphicon-saved"></span> Enregistrer la Modification
+                </button>
+
+                <a href="@Url.Action("Index")" class="btn btn-primary btn-sm">
+                    <span class="glyphicon glyphicon-remove-circle"></span> Annuler
+                </a>
+            </div>
+        </div>
+    </div>
+}
+
+<div>
+    @*@Html.ActionLink("Retourner a la liste", "Index", null, new { @class = "btn btn-primary" })*@
+    <a href="@Url.Action("Index")" class="btn btn-info">
+        <span class="glyphicon glyphicon-arrow-left"></span> Retourner a la liste
+    </a>
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

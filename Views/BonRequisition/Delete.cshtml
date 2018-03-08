@@ -1,0 +1,65 @@
+﻿@model StockApp.Models.TB_bonRequisition
+
+@{
+    ViewBag.Title = "Delete";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Supprimer</h2>
+
+<h4 class="text-danger">Voulez vous vraiment supprimer cette requisition?</h4>
+<div>
+
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            Description
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Description)
+        </dd>
+
+        <dt>
+            Date requisition
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Date_requisition)
+        </dd>
+
+        <dt>
+            Date Creer
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DateCreer)
+        </dd>
+
+        <dt>
+            Creer par
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CreerPar)
+        </dd>
+
+
+
+    </dl>
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <button type="submit" class="btn btn-danger" data-toggle="tooltip" data-placement="top"
+                    title="Supprimer">
+                <span class="glyphicon glyphicon-remove"></span> Supprimer
+            </button> |
+            <a href="@Url.Action("Index")" class="btn btn-info">
+                <span class="glyphicon glyphicon-arrow-left"></span> Retournez
+            </a>
+        </div>
+    }
+</div>

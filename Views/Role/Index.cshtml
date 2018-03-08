@@ -1,0 +1,78 @@
+﻿@model IEnumerable<Microsoft.AspNet.Identity.EntityFramework.IdentityRole>
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2 class="text-info text-center">Liste Role</h2>
+
+@*@Html.ActionLink("Create Role", "Create", "Role")*@
+
+@using (Html.BeginForm("Index", "Role", FormMethod.Get))
+{
+
+    <p>
+        <div class="row">
+            <div class="col-md-8">
+                <a href="@Url.Action("Create")" class="btn btn-primary">
+                    <span class="glyphicon glyphicon-plus-sign"></span> Nouvelle Role
+                </a>
+
+            </div>
+
+         </div><!-- /.row -->
+    </p>
+
+}
+
+<table class="table table-hover " id="myTable">
+    <tr class="info text-center">
+        <th>
+           
+            Nom Role
+        </th>
+        <th>
+            Descrition
+
+        </th>
+        
+       
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+
+            <td></td>
+            
+        </tr>
+    }
+
+</table>
+
+
+
+@*<style type="text/css">
+    #tbrole, .c {
+        border: double;
+    }
+</style>*@
+
+@*<table id="tbrole">
+    <tr>
+        <td class="c">
+            Role Name
+        </td>
+    </tr>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td class="c">
+                @item.Name
+                @Html.DisplayFor(modelItem => item.Users)
+            </td>
+        </tr>
+    }
+</table>*@
