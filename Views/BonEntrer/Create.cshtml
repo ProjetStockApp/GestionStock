@@ -41,7 +41,9 @@ Layout = "~/Views/Shared/_Layout.cshtml";
 
                         }*@
 
-                         <input type="hidden" id="User" name="User" value="@ViewBag.nom">
+                       
+
+                         <input type="hidden" id="User" name="User" value="@ViewBag.nomComplet">
 
                         <div class="form-horizontal">
 
@@ -50,19 +52,10 @@ Layout = "~/Views/Shared/_Layout.cshtml";
                                 @Html.LabelFor(model => model.Date_entre,"Date d'entrer", new { @class = "control-label col-md-2" })
                                 <div class="col-md-10">
                                      @Html.TextBoxFor(model => model.Date_entre, new { @class = "form-control", @id = "dateEntrer", placeholder = @DateTime.Now })
-                                        
-                                    @*<div class="input-group">
-                                        <span class="input-group-addon">
-                                            <i class="glyphicon glyphicon-calendar"></i>
-                                        </span>
-
-                                        <input class="form-control" placeholder="@DateTime.Now" name="Date_entre" id="Date_entre">
-
-                                                                                      
-                                    </div>*@
-
-                                    @Html.ValidationMessageFor(model => model.Date_entre)
+                                     @Html.ValidationMessageFor(model => model.Date_entre)
                                 </div>
+
+                                
 
                                 @*<div class="input-group">          
                                 <span class="input-group-addon"></span>          
@@ -85,6 +78,8 @@ Layout = "~/Views/Shared/_Layout.cshtml";
                                     @Html.DropDownList("Id_livraison",
                                     new SelectList(ViewBag.Livraison as System.Collections.IEnumerable, "Id_livraison", "Code_fiche"),
                                         "-- Select Livraison --", new { @id = "ldLivraison", @class = "pc form-control" })
+
+                                    
                                 </div>
                             </div>
 
@@ -214,6 +209,7 @@ Layout = "~/Views/Shared/_Layout.cshtml";
                             <tbody>
                                 @if (Model != null)
                                 {
+                                    
                                     foreach (var item in Model.TB_lot_entrestock)
                                     {
                                         <tr>
@@ -241,7 +237,7 @@ Layout = "~/Views/Shared/_Layout.cshtml";
                                 }
 
                             </tbody>
-
+                           
                         </table>
                         <br />
                         <button class="btn btn-primary " value="Enregistrer" onclick="BonEntrer_save()" type="button"><span class="glyphicon glyphicon-saved"></span> Enregistrer</button>
@@ -298,9 +294,7 @@ function BonEntrer_save() {
 
     // Getting Table Data from where we will fetch lot entrer Record
     var oTable = $('.tbl').dataTable().fnGetData();
-
-
-
+    
     for (var i = 0; i < oTable.length; i++) {
 
         // IF This view is for edit then it will read SalesId from Hidden field

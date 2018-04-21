@@ -32,11 +32,15 @@
                 @Html.ValidationMessageFor(model => model.Description)
             </div>
         </div>
+       @*// @Html.HiddenFor(model => model.CreerPar)*@
+        <input type="hidden" id="CreerPar" name="CreerPar" value="@ViewBag.nomComplet">
+       
 
-        @*<div class="form-group">
+
+                @*<div class="form-group">
             @Html.LabelFor(model => model.DateCreer, new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.TextBoxFor(model => model.DateCreer)
+                 @Html.HiddenFor(model => model.DateCreer)
                 @Html.ValidationMessageFor(model => model.DateCreer)
             </div>
         </div>
@@ -44,7 +48,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.CreerPar, new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.TextBoxFor(model => model.CreerPar)
+
                 @Html.ValidationMessageFor(model => model.CreerPar)
             </div>
         </div>*@

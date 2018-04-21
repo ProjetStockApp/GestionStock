@@ -14,6 +14,7 @@
     <EntitySetMapping Name="AspNetRoles">
       <EntityTypeMapping TypeName="stockfaesdbModel.AspNetRole">
         <MappingFragment StoreEntitySet="AspNetRoles">
+          <ScalarProperty Name="Description" ColumnName="Description" />
           <ScalarProperty Name="Id" ColumnName="Id" />
           <ScalarProperty Name="Name" ColumnName="Name" />
         </MappingFragment>
@@ -41,6 +42,8 @@
     <EntitySetMapping Name="AspNetUsers">
       <EntityTypeMapping TypeName="stockfaesdbModel.AspNetUser">
         <MappingFragment StoreEntitySet="AspNetUsers">
+          <ScalarProperty Name="DateCreer" ColumnName="DateCreer" />
+          <ScalarProperty Name="CreerPar" ColumnName="CreerPar" />
           <ScalarProperty Name="Id" ColumnName="Id" />
           <ScalarProperty Name="UserName" ColumnName="UserName" />
           <ScalarProperty Name="NomComplet" ColumnName="NomComplet" />

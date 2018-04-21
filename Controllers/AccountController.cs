@@ -62,7 +62,7 @@ namespace StockApp.Controllers
                 }
                 else
                 {
-                    ModelState.AddModelError("", "Nom utilisateur ou mot de Pass est Incorect.");
+                    ModelState.AddModelError("", "Nom utilisateur ou mot de Passe est Incorect.");
                 }
             }
 
@@ -76,18 +76,34 @@ namespace StockApp.Controllers
             ViewBag.Id_direction = new SelectList(RegisterQuery, "Id_direction", "Nom_direction", selectedDirection);
         }
 
+        public void AfficherNomComplet()
+        {
+
+            var UserID = User.Identity.GetUserId();
+            var userNom = from u in db.AspNetUsers
+                          where u.Id == UserID
+                          select u.NomComplet;
+            ViewBag.nomComplet = userNom.FirstOrDefault();
+        }
+
+        
         //
         // GET: /Account/Register
         [AllowAnonymous]
         public ActionResult Register()
         {
+
+            AfficherNomComplet();
             ViewBag.Name = new SelectList(context.Roles.ToList(), "Name", "Name");
             //ViewBag.Id_direction = new SelectList(db.TB_direction, "Id_direction", "Nom_direction");
             // var tb_register = db.AspNetUsers.Include(t => t.TB_direction);    
             IEnumerable<SelectListItem> Id_direction = new SelectList(db.TB_direction.ToList(), "Id_direction", "Nom_direction");
             ViewData["Id_direction"] = Id_direction;
 
-            PopulateDirectionDropDownList();
+            //IEnumerable<SelectListItem> Id_direction = db.TB_direction.Select(b => new SelectListItem { Value = b.Id_direction, Text = b.Nom_direction });
+            //ViewData["Id_direction"] = Id_direction;
+
+            //PopulateDirectionDropDownList();
             ViewBag.Direction = db.TB_direction.ToList();
             return View();
 
@@ -107,16 +123,20 @@ namespace StockApp.Controllers
 
                     UserName = model.UserName,
                     NomComplet = model.NomComplet,
+                    CreerPar=model.CreerPar,
+                    DateCreer=model.DateCreer,
                     Id_direction = model.Id_direction
+
                 };
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
                     //Assign Role to user Here 
                     await this.UserManager.AddToRoleAsync(user.Id, model.Name);
+                    
                     //Ends Here
-                    await SignInAsync(user, isPersistent: false);
-                    return RedirectToAction("Index", "Home");
+                   //// await SignInAsync(user, isPersistent: false);///
+                    ////return RedirectToAction("Index", "Home");///
                     ///
                     //await SignInAsync(user, isPersistent: false, rememberBrowser: false);
 
@@ -124,11 +144,16 @@ namespace StockApp.Controllers
                 }
                 else
                 {
+                   
                     AddErrors(result);
                 }
             }
-
+            
+            //model.Id_direction = 
             // If we got this far, something failed, redisplay form
+            ViewBag.Name = new SelectList(context.Roles.ToList(), "Name", "Name");
+            IEnumerable<SelectListItem> Id_direction = new SelectList(db.TB_direction.ToList(), "Id_direction", "Nom_direction");
+            ViewData["Id_direction"] = Id_direction;
             return View(model);
         }
 
@@ -156,7 +181,7 @@ namespace StockApp.Controllers
         public ActionResult Manage(ManageMessageId? message)
         {
             ViewBag.StatusMessage =
-                message == ManageMessageId.ChangePasswordSuccess ? "Your password has been changed."
+                message == ManageMessageId.ChangePasswordSuccess ? "Votre mot de passe a ete modifie avec succes"
                 : message == ManageMessageId.SetPasswordSuccess ? "Your password has been set."
                 : message == ManageMessageId.RemoveLoginSuccess ? "The external login was removed."
                 : message == ManageMessageId.Error ? "An error has occurred."

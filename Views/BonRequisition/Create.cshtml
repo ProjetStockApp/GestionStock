@@ -39,13 +39,7 @@
 
                                 }
 
-
-                                @*@foreach (var query in ViewBag.nom)
-                                    {
-
-                                        <input type="hidden" id="User" name="User" value="@query">
-
-                                    }*@
+                                <input type="hidden" id="CreerPar" name="CreerPar" value="@ViewBag.nomComplet">
 
                                 <div class="form-horizontal">
 
@@ -337,7 +331,7 @@
                         bon_entrer.Description = $("#Description").val();
                         bon_entrer.UserId = $("#UserId").val();
                         bon_entrer.DateCreer = $("#Date").val();
-                        bon_entrer.CreerPar = $("#User").val();
+                        bon_entrer.CreerPar = $("#CreerPar").val();
                         bon_entrer.IsSoumettre = ("NON");
                         bon_entrer.Validate = ("0");
 

@@ -18,7 +18,7 @@ namespace StockApp.Controllers
         // GET: /BonEntrer/
         public ActionResult Index()
         {
-            var tb_bonentre = db.TB_bonEntre.Include(t => t.TB_livraison);
+            var tb_bonentre = db.TB_bonEntre.OrderByDescending(t=>t.DateCreer).Include(t => t.TB_livraison);
             return View(tb_bonentre.ToList());
         }
 
@@ -42,7 +42,7 @@ namespace StockApp.Controllers
         {
 
             PopulateLivraisonDropDownList();
-
+            //AfficherNomComplet();
             // PopulateCategorieDropDownList1();
 
             ViewBag.Livraison = db.TB_livraison.ToList();
@@ -55,11 +55,8 @@ namespace StockApp.Controllers
                           where u.Id == UserID
                           select u.NomComplet;
 
-           var utilisateur = userNom.FirstOrDefault();
-
-
-
-           ViewBag.nom = utilisateur;
+            var utilisateur = userNom.FirstOrDefault();
+             ViewBag.nomComplet = utilisateur;
 
             //ViewBag.Id_livraison = new SelectList(db.TB_livraison, "Id_livraison", "Code_fiche");
             return View();
@@ -147,6 +144,15 @@ namespace StockApp.Controllers
 
         }
 
+        public void AfficherNomComplet()
+        {
+
+            var UserID = User.Identity.GetUserId();
+            var userNom = from u in db.AspNetUsers
+                          where u.Id == UserID
+                          select u.NomComplet;
+            ViewBag.nomComplet = userNom.First();
+        }
 
         //=====================fin de tous les methodes=====================\\
 

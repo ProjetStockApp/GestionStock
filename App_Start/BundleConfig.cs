@@ -26,14 +26,14 @@ namespace StockApp
                      "~/Scripts/datepicker-fr.js",
                      "~/Scripts/datepicker.bootstrap.js",
                     "~/Scripts/DataTables/jquery.dataTables.js",
-                  //"~/Scripts/DataTables/dataTables.bootstrap.js",
+                  //"~/Scripts/DataTables/dataTables.bootstrap4.js",
                 //"~/Scripts/DataTables/dataTables.foundation.min.js",
                       
                       "~/Scripts/respond.js"));
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap.css",
-                      //"~/Content/DataTables/css/dataTables.bootstrap.css",
+                     // "~/Content/DataTables/css/dataTables.bootstrap4.css",
                       "~/Content/DataTables/css/jquery.dataTables.min.css",
                        "~/Content/themes/base/jquery-ui.css",
                      // "~/Content/DataTables/css/foundation.min.css",

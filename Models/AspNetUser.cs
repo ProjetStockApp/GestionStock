@@ -29,6 +29,8 @@ namespace StockApp.Models
         public string PasswordHash { get; set; }
         public string SecurityStamp { get; set; }
         public string Discriminator { get; set; }
+        public string CreerPar { get; set; }
+        public Nullable<System.DateTime> DateCreer { get; set; }
     
         public virtual ICollection<AspNetUserClaim> AspNetUserClaims { get; set; }
         public virtual ICollection<AspNetUserLogin> AspNetUserLogins { get; set; }

@@ -3,23 +3,28 @@
     ViewBag.Title = "Register";
 }
 
-<h2>@ViewBag.Title.</h2>
+@*<h2>@ViewBag.Title.</h2>*@
+<h2 class="text-info text-center">Creer un nouveau compte.</h2>
 
 @using (Html.BeginForm("Register", "Account", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
 {
     @Html.AntiForgeryToken()
-    <h4>Creer un nouveau compte.</h4>
-    <hr />
+   
+    @*<hr />*@
     @Html.ValidationSummary(true)
 
+    <br />
     <div class="panel panel-default">
 
-        <div class="panel-heading">Creer un nouveau Compte</div>
+        <div class="panel-heading"> </div>
         <div class="panel-body">
             <fieldset id="flinfo" class="info">
-                <legend class="bg-info">Info personel </legend>
+                <legend class="bg-info">Information personele </legend>
                 <div class="panel panel-default">
                     <div class="panel-body">
+
+                        <input type="hidden"id="CreerPar" name="CreerPar" value="@ViewBag.nomComplet" />
+                        <input type="hidden" id="DateCreer" name="DateCreer" value="@DateTime.Now" />
                         <div class="form-group">
                             <label class="control-label col-md-2"> Nom Complet</label>
                             <div class="col-md-10">
@@ -27,39 +32,22 @@
                             </div>
                         </div>
 
-                        @*<div class="form-group">
-                                @Html.LabelFor(m => m.Prenom, new { @class = "col-md-2 control-label" })
-                                <div class="col-md-10">
-                                    @Html.TextBoxFor(m => m.Prenom, new { @class = "form-control" })
-                                </div>
-                            </div>*@
-
                         <div class="form-group">
                             @Html.LabelFor(m => m.Id_direction, "Nom Direction", new { @class = "control-label col-md-2" })
                             <div class="col-md-10">
-                                @Html.DropDownListFor(m=>m.Id_direction , ViewData["Id_direction"] as IEnumerable<SelectListItem>)
-                                    @* @Html.DropDownListFor(m=>m.Id_direction, (SelectList) ViewBag.Id_direction, new Dictionary<string,object> {{ "class", "form-control" }})*@
-                                    @Html.ValidationMessageFor(m => m.Id_direction)
-
-                                    @*@Html.DropDownList("Direction",
-            new SelectList(ViewBag.Direction as System.Collections.IEnumerable, "Id_direction","Nom_direction"),
-                            "-- Select Livraison --", new { @id = "ldDirection", @class = "pc form-control" })*@
-</div>
+                          @Html.DropDownListFor(m => m.Id_direction, ViewData["Id_direction"] as IEnumerable<SelectListItem>, new {@class="form-control" })
+                          @Html.ValidationMessageFor(m => m.Id_direction)
+                  
+                         </div>
                         </div>
                     </div>
                 </div>
             </fieldset>
         </div>
-        @*<div class="form-group">
-                @Html.LabelFor(m => m.Id_direction, "Nom Direction", new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    @Html.DropDownList("Id_direction",null, new { @class = "form-control" })
-                    @Html.ValidationMessageFor(m => m.Id_direction)
-                </div>
-            </div>*@
+        
         <div class="panel-body">
             <fieldset id="flcompte" class="">
-                <legend class="bg-info">Compte </legend>
+                <legend class="bg-info">Information sur le Compte </legend>
                 <div class="panel panel-default">
                     <div class="panel-body">
 
@@ -90,20 +78,28 @@
                                 @Html.DropDownList("Name", null, new { @class = "form-control" })
                             </div>
                         </div>
+                        <br />
+                        <!--Fin-->
+                        <div class="form-group">
+                            <div class="col-md-offset-2 col-md-10">
+                            <button type="submit" class="btn btn-primary">
+                                    <span class="glyphicon glyphicon-save"></span> Creer Compte
+                                </button>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </fieldset>
+
+            
+
         </div>
+       
     </div>
 
 
 
-    <!--Fin-->
-    <div class="form-group">
-        <div class="col-md-offset-2 col-md-10">
-            <input type="submit" class="btn btn-default" value="Register" />
-        </div>
-    </div>
+    
 
 }
 

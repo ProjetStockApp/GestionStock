@@ -20,9 +20,18 @@ namespace StockApp.Models
 
         // public virtual TB_direction TB_direction { get; set; }
         public string NomComplet { get; set; }
-        //public string Description { get; set; }
+        public string CreerPar { get; set; }
+        public Nullable<System.DateTime> DateCreer { get; set; }
         public Nullable<int> Id_direction { get; set; }
     }
+
+
+    //public class ApplicationRole : IdentityRole
+    //{
+    //    //public ApplicationRole() : base() { }
+
+    //    public virtual string Description { get; set; }
+    //}
 
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {
@@ -31,4 +40,6 @@ namespace StockApp.Models
         {
         }
     }
+
+    
 }

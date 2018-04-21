@@ -16,6 +16,7 @@
     </Key>
     <Property Name="Id" Type="nvarchar" MaxLength="128" Nullable="false" />
     <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Description" Type="nvarchar(max)" />
   </EntityType>
   <EntityType Name="AspNetUserClaims">
     <Key>
@@ -54,6 +55,8 @@
     <Property Name="Id_direction" Type="int" />
     <Property Name="PasswordHash" Type="nvarchar(max)" />
     <Property Name="SecurityStamp" Type="nvarchar(max)" />
+    <Property Name="CreerPar" Type="nvarchar(max)" />
+    <Property Name="DateCreer" Type="datetime" />
     <Property Name="Discriminator" Type="nvarchar" MaxLength="128" Nullable="false" />
   </EntityType>
   <EntityType Name="FileDetail">

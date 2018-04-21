@@ -6,30 +6,30 @@ namespace StockApp.Models
     public class ExternalLoginConfirmationViewModel
     {
         [Required]
-        [Display(Name = "User name")]
+        [Display(Name = "Nom utilisateur")]
         public string UserName { get; set; }
     }
 
     public class ManageUserViewModel
     {
         [Required]
-        [Display(Name = "User name")]
+        [Display(Name = "Nom utilisateur")]
         public string UserName { get; set; }
 
         [Required]
         [DataType(DataType.Password)]
-        [Display(Name = "Current password")]
+        [Display(Name = "Mot de passe courant")]
         public string OldPassword { get; set; }
 
         [Required]
         [StringLength(100, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 6)]
         [DataType(DataType.Password)]
-        [Display(Name = "New password")]
+        [Display(Name = "Nouveau mot de passe")]
         public string NewPassword { get; set; }
 
         [DataType(DataType.Password)]
-        [Display(Name = "Confirm new password")]
-        [Compare("NewPassword", ErrorMessage = "The new password and confirmation password do not match.")]
+        [Display(Name = "Confirmer le nouveau mot de passe")]
+        [Compare("NewPassword", ErrorMessage = "la confirmation de votre mot de passe est incorect.")]
         public string ConfirmPassword { get; set; }
     }
 
@@ -51,30 +51,31 @@ namespace StockApp.Models
     public class RegisterViewModel
     {
         [Required]
-        [Display(Name = "Name")]
+        [Display(Name = "Role de l'utilisateur")]
         public string Name { get; set; }
 
         [Required]
-        [Display(Name = "User name")]
+        [Display(Name = "Nom Utilisateur")]
         public string UserName { get; set; }
 
         [Required]
-        [Display(Name = "Nom Complet")]
+        [Display(Name = "Le nom Complet")]
         public string NomComplet { get; set; }
-        
-        
+        public string CreerPar { get; set; }
+        public Nullable<System.DateTime> DateCreer { get; set; }
+       
         public Nullable<int> Id_direction { get; set; }
        
 
         [Required]
         [StringLength(100, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 6)]
         [DataType(DataType.Password)]
-        [Display(Name = "Password")]
+        [Display(Name = "Mot de passe")]
         public string Password { get; set; }
 
         [DataType(DataType.Password)]
-        [Display(Name = "Confirm password")]
-        [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
+        [Display(Name = "Confirmer mot de passe")]
+        [Compare("Password", ErrorMessage = "la confirmation de votre mot de passe est incorect.")]
         public string ConfirmPassword { get; set; }
     }
 }

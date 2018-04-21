@@ -17,6 +17,7 @@
     <Property Name="Id" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
     <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
     <NavigationProperty Name="AspNetUsers" Relationship="Self.AspNetUserRoles" FromRole="AspNetRoles" ToRole="AspNetUsers" />
+    <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
   </EntityType>
   <EntityType Name="AspNetUserClaim">
     <Key>
@@ -55,6 +56,8 @@
     <NavigationProperty Name="TB_direction" Relationship="Self.FK_AspNetUsers_TB_direction" FromRole="AspNetUsers" ToRole="TB_direction" />
     <NavigationProperty Name="TB_bonRequisition" Relationship="Self.FK_TB_bonRequisition_AspNetUsers" FromRole="AspNetUsers" ToRole="TB_bonRequisition" />
     <NavigationProperty Name="AspNetRoles" Relationship="Self.AspNetUserRoles" FromRole="AspNetUsers" ToRole="AspNetRoles" />
+    <Property Name="CreerPar" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="DateCreer" Type="DateTime" Precision="3" />
   </EntityType>
   <EntityType Name="FileDetail">
     <Key>

@@ -7,133 +7,118 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using StockApp.Models;
-using Microsoft.AspNet.Identity;
+
 namespace StockApp.Controllers
 {
-    public class DirectionController : Controller
+    public class AspNetUsersController : Controller
     {
         private stockfaesdbEntities db = new stockfaesdbEntities();
 
-        // GET: /Direction/
+        // GET: /AspNetUsers/
         public ActionResult Index()
         {
-            var tb_direction = db.TB_direction.OrderBy(t => t.DateCreer);
-            return View(tb_direction .ToList());
+            var aspnetusers = db.AspNetUsers.Include(a => a.TB_direction);
+            return View(aspnetusers.ToList());
         }
 
-        // GET: /Direction/Details/5
-        public ActionResult Details(int? id)
+        // GET: /AspNetUsers/Details/5
+        public ActionResult Details(string id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            TB_direction tb_direction = db.TB_direction.Find(id);
-            if (tb_direction == null)
+            AspNetUser aspnetuser = db.AspNetUsers.Find(id);
+            if (aspnetuser == null)
             {
                 return HttpNotFound();
             }
-            return View(tb_direction);
+            return View(aspnetuser);
         }
 
-        // GET: /Direction/Create
+        // GET: /AspNetUsers/Create
         public ActionResult Create()
         {
-            AfficherNomComplet();
+            ViewBag.Id_direction = new SelectList(db.TB_direction, "Id_direction", "Nom_direction");
             return View();
         }
 
-        // POST: /Direction/Create
+        // POST: /AspNetUsers/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include="Id_direction,Nom_direction,Description,DateCreer,CreerPar")] TB_direction tb_direction)
+        public ActionResult Create([Bind(Include="Id,UserName,NomComplet,Id_direction,PasswordHash,SecurityStamp,Discriminator,CreerPar,DateCreer")] AspNetUser aspnetuser)
         {
             if (ModelState.IsValid)
             {
-                tb_direction.DateCreer = DateTime.Now;
-                db.TB_direction.Add(tb_direction);
+                db.AspNetUsers.Add(aspnetuser);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
-            return View(tb_direction);
+            ViewBag.Id_direction = new SelectList(db.TB_direction, "Id_direction", "Nom_direction", aspnetuser.Id_direction);
+            return View(aspnetuser);
         }
 
-        // GET: /Direction/Edit/5
-        public ActionResult Edit(int? id)
+        // GET: /AspNetUsers/Edit/5
+        public ActionResult Edit(string id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-
-            AfficherNomComplet();
-            TB_direction tb_direction = db.TB_direction.Find(id);
-            if (tb_direction == null)
+            AspNetUser aspnetuser = db.AspNetUsers.Find(id);
+            if (aspnetuser == null)
             {
                 return HttpNotFound();
             }
-            return View(tb_direction);
+            ViewBag.Id_direction = new SelectList(db.TB_direction, "Id_direction", "Nom_direction", aspnetuser.Id_direction);
+            return View(aspnetuser);
         }
 
-        // POST: /Direction/Edit/5
+        // POST: /AspNetUsers/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include="Id_direction,Nom_direction,Description,DateCreer,CreerPar")] TB_direction tb_direction)
+        public ActionResult Edit([Bind(Include="Id,UserName,NomComplet,Id_direction,PasswordHash,SecurityStamp,Discriminator,CreerPar,DateCreer")] AspNetUser aspnetuser)
         {
             if (ModelState.IsValid)
             {
-                tb_direction.DateCreer = DateTime.Now;
-                db.Entry(tb_direction).State = EntityState.Modified;
+                db.Entry(aspnetuser).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            return View(tb_direction);
+            ViewBag.Id_direction = new SelectList(db.TB_direction, "Id_direction", "Nom_direction", aspnetuser.Id_direction);
+            return View(aspnetuser);
         }
 
-        // GET: /Direction/Delete/5
-        public ActionResult Delete(int? id)
+        // GET: /AspNetUsers/Delete/5
+        public ActionResult Delete(string id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            TB_direction tb_direction = db.TB_direction.Find(id);
-            if (tb_direction == null)
+            AspNetUser aspnetuser = db.AspNetUsers.Find(id);
+            if (aspnetuser == null)
             {
                 return HttpNotFound();
             }
-            return View(tb_direction);
+            return View(aspnetuser);
         }
 
-        // POST: /Direction/Delete/5
+        // POST: /AspNetUsers/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(int id)
+        public ActionResult DeleteConfirmed(string id)
         {
-            TB_direction tb_direction = db.TB_direction.Find(id);
-            db.TB_direction.Remove(tb_direction);
+            AspNetUser aspnetuser = db.AspNetUsers.Find(id);
+            db.AspNetUsers.Remove(aspnetuser);
             db.SaveChanges();
             return RedirectToAction("Index");
         }
-
-        //============ Mes Methodes ================//
-        public void AfficherNomComplet()
-        {
-
-            var UserID = User.Identity.GetUserId();
-            var userNom = from u in db.AspNetUsers
-                          where u.Id == UserID
-                          select u.NomComplet;
-            ViewBag.nomComplet = userNom.FirstOrDefault();
-        }
-
-        //==========Fin de mes Methodes ==========//
-
 
         protected override void Dispose(bool disposing)
         {

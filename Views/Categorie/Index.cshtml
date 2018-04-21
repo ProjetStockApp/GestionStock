@@ -43,15 +43,16 @@
             </th>
         </tr>
     </thead>
-    @foreach (var item in Model)
-    {
-        <tbody>
+    <tbody>
+        @foreach (var item in Model)
+        {
+
             <tr>
                 <td>
-                    @Html.DisplayFor(modelItem => item.Nom_categorie)
+                    @Razor_Methode.Truncate(item.Nom_categorie, 20)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.Description)
+                    @Razor_Methode.Truncate(item.Description,20)
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.DateCreer)
@@ -74,9 +75,8 @@
                     </a>
                 </td>
             </tr>
-        </tbody>
-    }
-
+        }
+    </tbody>
 </table>
 @section Scripts
 {

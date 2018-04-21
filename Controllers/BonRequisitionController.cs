@@ -22,7 +22,7 @@ namespace StockApp.Controllers
         {
 
             var UserID = User.Identity.GetUserId();
-            var tb_bonrequisition = db.TB_bonRequisition.Where(t => t.UserId == UserID && t.IsSoumettre == "NON" && t.Validate == "0").Include(t => t.AspNetUser);
+            var tb_bonrequisition = db.TB_bonRequisition.Where(t => t.UserId == UserID && t.IsSoumettre == "NON" && t.Validate == "0").OrderBy(t=>t.DateCreer).Include(t => t.AspNetUser);
 
             var qteCour = (from row in db.TB_bonRequisition
                            where row.UserId == UserID && row.IsSoumettre == "OUI" && (row.Validate == "0" || row.Validate == "1")
@@ -53,7 +53,7 @@ namespace StockApp.Controllers
             var Direction = from u in db.AspNetUsers
                             where u.Id == UserID
                             select u.Id_direction;
-            var dir = Direction.First();
+            var dir = Direction.FirstOrDefault();
 
             int direct = Convert.ToInt32(dir);
 
@@ -108,7 +108,7 @@ namespace StockApp.Controllers
             var Direction = from u in db.AspNetUsers
                             where u.Id == UserID
                             select u.Id_direction;
-            var dir = Direction.First();
+            var dir = Direction.FirstOrDefault();
 
             int direct = Convert.ToInt32(dir);
 
@@ -166,43 +166,15 @@ namespace StockApp.Controllers
 
         public ActionResult Create()
         {
-            //ViewBag.UserId = new SelectList(db.AspNetUsers, "Id", "Email");
-            //return View();
 
-            //ViewBag.roles = Roles.GetRolesForUser(User.Identity.Name);
-
-            var UserID = User.Identity.GetUserId();
-            //var userRoles = db.AspNetRoles.Include(r => r.AspNetUsers).ToList();
-
-
-            var userNom = from u in db.AspNetUsers
-                          where u.Id == UserID
-                          select u.NomComplet;
-
-            //var userPrenom = from u in db.AspNetUsers
-            //                 where u.Id == UserID
-            //                 select new { u.Prenom, u.Nom };
-
-            // var cities = db.AspNetUsers.Where(c => c.Id == UserID);
-
-            ViewBag.nom = userNom;
-           // ViewBag.prenom = userPrenom;
-
-            //ViewBag.fullName = ViewBag.nom + " " + ViewBag.prenom;
-
-            //ViewBag.current_user_role = Roles.GetRolesForUser(User.Identity.Name);
-
+            AfficherNomComplet();
+           
             ViewBag.Categorie = db.TB_categorie.ToList();
             ViewBag.Articles = new SelectList(db.TB_articles
                             .Where(c => c.Id_articles == 0), "Id_articles", "Nom_articles").ToList();
             return View();
         }
-        //public ActionResult Create()
-        //{
-        //    ViewBag.UserId = new SelectList(db.AspNetUsers, "Id", "Email");
-        //    return View();
-        //}
-
+        
         //// POST: /BonRequisition/Create
         //// To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         //// more details see http://go.microsoft.com/fwlink/?LinkId=317598.
@@ -295,8 +267,8 @@ namespace StockApp.Controllers
 
             try
             {
-                //if (ModelState.IsValid)
-                //{
+                if (ModelState.IsValid)
+                {
 
                 db.TB_bonRequisition.Add(tb_bonentre);
 
@@ -304,7 +276,7 @@ namespace StockApp.Controllers
 
                 return Json(new { Success = 1, BonentrerID = tb_bonentre.Id_bon_requisition, ex = "" });
 
-                //}
+                }
             }
             catch (Exception ex)
             {
@@ -312,7 +284,7 @@ namespace StockApp.Controllers
                 return Json(new { Success = 0, ex = ex.Message.ToString() });
             }
 
-            //return Json(new { Success = 0, ex = new Exception("les informations ne sont enregistrer").Message.ToString() });
+            return Json(new { Success = 0, ex = new Exception("les informations ne sont enregistrer").Message.ToString() });
 
         }
 
@@ -363,7 +335,7 @@ namespace StockApp.Controllers
                           where u.Id == UserID
                           select u.NomComplet;
 
-            var nomDirect = userNom.First();
+            var nomDirect = userNom.FirstOrDefault();
             // var Nomdirect = Convert.ToString(nomDirect);
 
             var requisition = from c in db.TB_bonRequisition where c.Id_bon_requisition == id select c;
@@ -383,6 +355,16 @@ namespace StockApp.Controllers
             //    ViewBag.soum = Soumetre;
             return RedirectToAction("IndexSoumet");
             //soumettre.
+        }
+
+        public void AfficherNomComplet()
+        {
+
+            var UserID = User.Identity.GetUserId();
+            var userNom = from u in db.AspNetUsers
+                          where u.Id == UserID
+                          select u.NomComplet;
+            ViewBag.nomComplet = userNom.FirstOrDefault();
         }
 
         // ============ fin des Methodes suplementaires==================\\

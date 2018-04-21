@@ -21,6 +21,7 @@ namespace StockApp.Models
     
         public string Id { get; set; }
         public string Name { get; set; }
+        public string Description { get; set; }
     
         public virtual ICollection<AspNetUser> AspNetUsers { get; set; }
     }

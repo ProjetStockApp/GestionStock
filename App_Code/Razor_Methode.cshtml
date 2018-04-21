@@ -1,17 +1,24 @@
 ﻿@*@using PagedList.Mvc;*@
 @using System.Security.Policy;
 
-    @helper Truncate(string input, int length)
+    @helper Truncate(string input, int length=0)
 {
-
-    if (input.Length <= length)
+    try
     {
+
+        if (input.Length <= length)
+        {
         @input
-    }
+        }
 
-    else
-    {
+        else
+        {
         @input.Substring(0, length)<text>...</text>
+        }
+    }
+    catch (Exception ex)
+    { 
+      
     }
 }
 

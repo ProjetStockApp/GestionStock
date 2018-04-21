@@ -7,6 +7,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using StockApp.Models;
+using Microsoft.AspNet.Identity;
 
 namespace StockApp.Controllers
 {
@@ -17,7 +18,7 @@ namespace StockApp.Controllers
         // GET: /Articles/
         public ActionResult Index()
         {
-            var tb_articles = db.TB_articles.Include(t => t.TB_categorie);
+            var tb_articles = db.TB_articles.OrderByDescending(t=>t.DateCreer).Include(t => t.TB_categorie);
             return View(tb_articles.ToList());
         }
 
@@ -39,6 +40,7 @@ namespace StockApp.Controllers
         // GET: /Articles/Create
         public ActionResult Create()
         {
+            AfficherNomComplet();
             ViewBag.Id_categorie = new SelectList(db.TB_categorie, "Id_categorie", "Nom_categorie");
             return View();
         }
@@ -52,6 +54,7 @@ namespace StockApp.Controllers
         {
             if (ModelState.IsValid)
             {
+                tb_articles.DateCreer = DateTime.Now;
                 db.TB_articles.Add(tb_articles);
                 db.SaveChanges();
                 return RedirectToAction("Index");
@@ -68,6 +71,7 @@ namespace StockApp.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
+            AfficherNomComplet();
             TB_articles tb_articles = db.TB_articles.Find(id);
             if (tb_articles == null)
             {
@@ -86,6 +90,7 @@ namespace StockApp.Controllers
         {
             if (ModelState.IsValid)
             {
+                tb_articles.DateCreer = DateTime.Now;
                 db.Entry(tb_articles).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
@@ -119,6 +124,20 @@ namespace StockApp.Controllers
             db.SaveChanges();
             return RedirectToAction("Index");
         }
+
+
+        //============ Mes Methodes ================//
+        public void AfficherNomComplet()
+        {
+
+            var UserID = User.Identity.GetUserId();
+            var userNom = from u in db.AspNetUsers
+                          where u.Id == UserID
+                          select u.NomComplet;
+            ViewBag.nomComplet = userNom.FirstOrDefault();
+        }
+
+        //==========Fin de mes Methodes ==========//
 
         protected override void Dispose(bool disposing)
         {

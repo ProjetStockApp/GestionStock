@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="stockfaesdbModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="stockfaesdbModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="__MigrationHistory">
           <Key>
             <PropertyRef Name="MigrationId" />
@@ -21,6 +21,7 @@
           </Key>
           <Property Name="Id" Type="nvarchar" MaxLength="128" Nullable="false" />
           <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Description" Type="nvarchar(max)" />
         </EntityType>
         <EntityType Name="AspNetUserClaims">
           <Key>
@@ -59,6 +60,8 @@
           <Property Name="Id_direction" Type="int" />
           <Property Name="PasswordHash" Type="nvarchar(max)" />
           <Property Name="SecurityStamp" Type="nvarchar(max)" />
+          <Property Name="CreerPar" Type="nvarchar(max)" />
+          <Property Name="DateCreer" Type="datetime" />
           <Property Name="Discriminator" Type="nvarchar" MaxLength="128" Nullable="false" />
         </EntityType>
         <EntityType Name="FileDetail">
@@ -471,8 +474,7 @@
             <End Role="TB_lot_entrestock" EntitySet="TB_lot_entrestock" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="stockfaesdbModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -493,6 +495,7 @@
           <Property Name="Id" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
           <NavigationProperty Name="AspNetUsers" Relationship="Self.AspNetUserRoles" FromRole="AspNetRoles" ToRole="AspNetUsers" />
+          <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="AspNetUserClaim">
           <Key>
@@ -531,6 +534,8 @@
           <NavigationProperty Name="TB_direction" Relationship="Self.FK_AspNetUsers_TB_direction" FromRole="AspNetUsers" ToRole="TB_direction" />
           <NavigationProperty Name="TB_bonRequisition" Relationship="Self.FK_TB_bonRequisition_AspNetUsers" FromRole="AspNetUsers" ToRole="TB_bonRequisition" />
           <NavigationProperty Name="AspNetRoles" Relationship="Self.AspNetUserRoles" FromRole="AspNetUsers" ToRole="AspNetRoles" />
+          <Property Name="CreerPar" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="DateCreer" Type="DateTime" Precision="3" />
         </EntityType>
         <EntityType Name="FileDetail">
           <Key>
@@ -946,6 +951,7 @@
           <EntitySetMapping Name="AspNetRoles">
             <EntityTypeMapping TypeName="stockfaesdbModel.AspNetRole">
               <MappingFragment StoreEntitySet="AspNetRoles">
+                <ScalarProperty Name="Description" ColumnName="Description" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
               </MappingFragment>
@@ -973,6 +979,8 @@
           <EntitySetMapping Name="AspNetUsers">
             <EntityTypeMapping TypeName="stockfaesdbModel.AspNetUser">
               <MappingFragment StoreEntitySet="AspNetUsers">
+                <ScalarProperty Name="DateCreer" ColumnName="DateCreer" />
+                <ScalarProperty Name="CreerPar" ColumnName="CreerPar" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="UserName" ColumnName="UserName" />
                 <ScalarProperty Name="NomComplet" ColumnName="NomComplet" />

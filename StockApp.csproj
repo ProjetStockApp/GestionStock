@@ -165,8 +165,10 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
+    <Compile Include="ClassUtil\Util.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\ArticlesController.cs" />
+    <Compile Include="Controllers\AspNetUsersController.cs" />
     <Compile Include="Controllers\BonEntrerController.cs" />
     <Compile Include="Controllers\BonRequisitionController.cs" />
     <Compile Include="Controllers\CategorieController.cs" />
@@ -682,6 +684,11 @@
     <Content Include="Views\BonRequisition\IndexApprouver.cshtml" />
     <Content Include="Views\BonRequisition\IndexSoumet.cshtml" />
     <Content Include="Views\DetailRequisition\IndexDetail.cshtml" />
+    <Content Include="Views\AspNetUsers\Create.cshtml" />
+    <Content Include="Views\AspNetUsers\Delete.cshtml" />
+    <Content Include="Views\AspNetUsers\Details.cshtml" />
+    <Content Include="Views\AspNetUsers\Edit.cshtml" />
+    <Content Include="Views\AspNetUsers\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
